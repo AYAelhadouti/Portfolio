@@ -171,7 +171,7 @@
     /* ── ABOUT ── */
     .about-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
     @media (max-width: 768px) { .about-row { grid-template-columns: 1fr; text-align: center; } }
-    .about-img { width: 100%; max-width: 320px; aspect-ratio: 1; border-radius: 50%; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 8rem; color: rgba(255,255,255,.85); margin: 0 auto; }
+    .about-img { width: 100%; max-width: 320px; aspect-ratio: 1; border-radius: 50%; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 8rem; color: rgba(255,255,255,.85); margin: 0 auto; overflow: hidden; }
     .about-text p { font-size: 1rem; color: var(--text); margin-bottom: 1.5rem; text-align: justify; }
     .about-stats { display: flex; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
     @media (max-width: 768px) { .about-stats { justify-content: center; } }
@@ -352,9 +352,8 @@
         <h1 class="hero-name fade-b">I'm Aya<br>El Hadouti</h1>
         <p class="hero-role fade-a" data-en="Computer Engineering · CO-OP Student" data-fr="Génie informatique · Étudiante CO-OP">Computer Engineering · CO-OP Student</p>
         <p class="hero-desc fade-c"
-           data-en="Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specialising in cybersecurity. Seeking new opportunities to build secure, impactful software."
-           data-fr="Actuellement en licence de génie informatique à l'Université d'Ottawa, avec une spécialisation en cybersécurité. À la recherche de nouvelles opportunités pour concevoir des logiciels sécurisés et impactants.">
-          Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specialising in cybersecurity. Seeking new opportunities to build secure, impactful software.
+           data-en="Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specializing in cybersecurity. Seeking new opportunities to contribute to secure, impactful technology solutions and innovative projects."
+           data-fr="Actuellement étudiante en baccalauréat en génie informatique à l'Université d'Ottawa, avec une spécialisation en cybersécurité. À la recherche de nouvelles opportunités pour contribuer à des solutions technologiques sécurisées et innovantes ayant un impact concret.">
         </p>
         <div class="fade-d" style="display:flex;gap:.8rem;flex-wrap:wrap;">
           <a href="#designs" class="btn-pink"        data-en="View My Work" data-fr="Voir mon travail">View My Work</a>
@@ -379,27 +378,21 @@
     </div>
     <div class="about-row reveal">
       <div style="display:flex;justify-content:center;align-items:center;">
-        <div class="about-img"><i class="bi bi-person-workspace"></i></div>
+        <div class="about-img">
+          <img src="Ottawa.jpg" alt="Ottawa" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"/>
+        </div>
       </div>
       <div class="about-text">
-        <p data-en="I'm <strong>Aya El Hadouti</strong>, a Computer Engineering (CO-OP) student at the University of Ottawa, with a microprogram in cybersecurity. I thrive at the intersection of hardware, software and data — whether designing FPGA circuits in VHDL, building Python automation pipelines, or crafting Power BI dashboards for senior stakeholders."
-           data-fr="Je suis <strong>Aya El Hadouti</strong>, étudiante en génie informatique (CO-OP) à l'Université d'Ottawa, avec un microprogramme en cybersécurité. J'excelle à l'intersection du matériel, du logiciel et des données — que ce soit en concevant des circuits FPGA en VHDL, en créant des pipelines d'automatisation Python ou en élaborant des tableaux de bord Power BI pour des parties prenantes de haut niveau.">
-          I'm <strong>Aya El Hadouti</strong>, a Computer Engineering (CO-OP) student at the University of Ottawa, with a microprogram in cybersecurity. I thrive at the intersection of hardware, software and data — whether designing FPGA circuits in VHDL, building Python automation pipelines, or crafting Power BI dashboards for senior stakeholders.
+        <p data-en="I'm <strong>Aya El Hadouti</strong>, a Computer Engineering student at the University of Ottawa, with a microprogram in cybersecurity. I thrive at the intersection of hardware, software and data. Whether designing FPGA circuits in VHDL, building Python automation pipelines or crafting Power BI dashboards for stakeholders."
+           data-fr="Je suis <strong>Aya El Hadouti</strong>, étudiante en génie informatique à l'Université d'Ottawa, avec un microprogramme en cybersécurité. Je m'épanouis à l'intersection du matériel, des logiciels et des données, que ce soit en concevant des circuits FPGA en VHDL, en développant des pipelines d'automatisation en Python ou en créant des tableaux de bord Power BI pour les parties prenantes.">
         </p>
-        <p data-en="During my co-ops at <strong>Nordion Inc.</strong> I led data engineering projects, built RPA frameworks and contributed to a medical-physics cloud platform, earning an Excellence Award. I also serve as Teaching Assistant for CEG3585 and Lead Reception Attendant at uOttawa Student Affairs."
-           data-fr="Lors de mes stages coopératifs chez <strong>Nordion Inc.</strong>, j'ai dirigé des projets d'ingénierie des données, développé des cadres RPA et contribué à une plateforme cloud de physique médicale, ce qui m'a valu un Prix d'excellence. Je suis également auxiliaire d'enseignement pour le cours CEG3585 et responsable principale à la réception des Affaires étudiantes de l'uOttawa.">
-          During my co-ops at <strong>Nordion Inc.</strong> I led data engineering projects, built RPA frameworks and contributed to a medical-physics cloud platform, earning an Excellence Award. I also serve as Teaching Assistant for CEG3585 and Lead Reception Attendant at uOttawa Student Affairs.
+        <p data-en="During my coops, I led data engineering projects, built RPA frameworks and contributed to a medical-physics cloud platform."
+           data-fr="Lors de mes stages coop, j'ai dirigé des projets d'ingénierie des données, développé des cadres RPA et contribué à une plateforme infonuagique en physique médicale.">
         </p>
         <div style="margin-bottom:1rem;">
           <span class="contact-chip"><i class="bi bi-geo-alt-fill"></i>Ottawa, ON <img src="CanadaLogo.png" alt="Canadian leaf" style="width:16px;height:auto;margin-left:4px;vertical-align:middle;"></span>
           <span class="contact-chip"><i class="bi bi-envelope-fill"></i>Aelha098@uOttawa.ca</span>
-          <span class="contact-chip"><i class="bi bi-translate"></i>FR · EN · AR · ES · DE</span>
-        </div>
-        <div class="about-stats">
-          <div class="stat-item"><div class="stat-num">3×</div><div class="stat-lbl" data-en="CO-OP Awards" data-fr="Prix CO-OP">CO-OP Awards</div></div>
-          <div class="stat-item"><div class="stat-num">6+</div><div class="stat-lbl" data-en="Certifications" data-fr="Certifications">Certifications</div></div>
-          <div class="stat-item"><div class="stat-num">20+</div><div class="stat-lbl" data-en="Projects" data-fr="Projets">Projects</div></div>
-          <div class="stat-item"><div class="stat-num">5</div><div class="stat-lbl" data-en="Languages spoken" data-fr="Langues parlées">Languages spoken</div></div>
+          <span class="contact-chip"><i class="bi bi-translate"></i>FR · EN · AR · ES </span>
         </div>
       </div>
     </div>
@@ -420,16 +413,16 @@
         <div class="hiw-card-icon"><i class="bi bi-lightbulb-fill"></i></div>
         <div class="hiw-card-title" data-en="My Approach" data-fr="Mon approche">My Approach</div>
         <ul class="approach-list">
-          <li data-en="User-centered design — I put the end-user's needs at the heart of every decision."
-              data-fr="Conception centrée sur l'utilisateur — les besoins de l'utilisateur final sont au cœur de chaque décision.">User-centered design — I put the end-user's needs at the heart of every decision.</li>
-          <li data-en="Secure-by-design mindset — security is built in, not bolted on."
-              data-fr="Sécurité dès la conception — la sécurité est intégrée, pas ajoutée après coup.">Secure-by-design mindset — security is built in, not bolted on.</li>
-          <li data-en="Structured problem solving — breaking complex challenges into clear, manageable steps."
-              data-fr="Résolution structurée des problèmes — décomposition des défis complexes en étapes claires et gérables.">Structured problem solving — breaking complex challenges into clear, manageable steps.</li>
-          <li data-en="Attention to UI/UX — polished interfaces that are both beautiful and intuitive."
-              data-fr="Attention à l'UI/UX — des interfaces soignées, à la fois esthétiques et intuitives.">Attention to UI/UX — polished interfaces that are both beautiful and intuitive.</li>
-          <li data-en="Automation &amp; efficiency — removing friction wherever possible with smart tooling."
-              data-fr="Automatisation et efficacité — réduction des frictions grâce à des outils intelligents.">Automation &amp; efficiency — removing friction wherever possible with smart tooling.</li>
+          <li data-en="User-centered design, I put the end-user's needs at the heart of every decision."
+              data-fr="Conception centrée sur l'utilisateur, les besoins de l'utilisateur final sont au cœur de chaque décision.">User-centered design — I put the end-user's needs at the heart of every decision.</li>
+          <li data-en="Secure-by-design mindset, security is built in, not bolted on."
+              data-fr="Sécurité dès la conception, la sécurité est intégrée, pas ajoutée après coup.">Secure-by-design mindset — security is built in, not bolted on.</li>
+          <li data-en="Structured problem solving, breaking complex challenges into clear, manageable steps."
+              data-fr="Résolution structurée des problèmes, décomposition des défis complexes en étapes claires et gérables.">Structured problem solving — breaking complex challenges into clear, manageable steps.</li>
+          <li data-en="Attention to UI/UX, polished interfaces that are both beautiful and intuitive."
+              data-fr="Attention à l'UI/UX, des interfaces soignées, à la fois esthétiques et intuitives.">Attention to UI/UX — polished interfaces that are both beautiful and intuitive.</li>
+          <li data-en="Automation &amp; efficiency, removing friction wherever possible with smart tooling."
+              data-fr="Automatisation et efficacité, réduction des frictions grâce à des outils intelligents.">Automation &amp; efficiency — removing friction wherever possible with smart tooling.</li>
         </ul>
       </div>
 
@@ -440,36 +433,36 @@
         <div class="step-connector">
           <div class="step-row"><div class="step-num">1</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Research" data-fr="Recherche">Research</strong>
-              <span data-en=" — understand context, users &amp; constraints" data-fr=" — comprendre le contexte, les utilisateurs et les contraintes"> — understand context, users &amp; constraints</span>
+              <strong style="color:var(--dark);" data-en="Research" data-fr="Recherche:">Research</strong>
+              <span data-en=" comprendre le contexte, les utilisateurs et les contraintes" data-fr="comprendre le contexte, les utilisateurs et les contraintes"> — understand context, users &amp; constraints</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">2</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Planning" data-fr="Planification">Planning</strong>
-              <span data-en=" — architecture, wireframes &amp; task breakdown" data-fr=" — architecture, maquettes et découpage des tâches"> — architecture, wireframes &amp; task breakdown</span>
+              <strong style="color:var(--dark);" data-en="Planning" data-fr="Planification:">Planning</strong>
+              <span data-en=" architecture, wireframes &amp; task breakdown" data-fr="architecture, maquettes et assignation des tâches"> — architecture, wireframes &amp; task breakdown</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">3</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Development" data-fr="Développement">Development</strong>
-              <span data-en=" — clean, documented, version-controlled code" data-fr=" — code propre, documenté et versionné"> — clean, documented, version-controlled code</span>
+              <strong style="color:var(--dark);" data-en="Development" data-fr="Développement:">Development</strong>
+              <span data-en=" clean, documented, version-controlled code" data-fr="code propre, documenté et versionné"> — clean, documented, version-controlled code</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">4</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Testing" data-fr="Tests">Testing</strong>
-              <span data-en=" — unit tests, security checks &amp; peer review" data-fr=" — tests unitaires, contrôles de sécurité et revue de code"> — unit tests, security checks &amp; peer review</span>
+              <strong style="color:var(--dark);" data-en="Testing" data-fr="Tests:"></strong>
+              <span data-en=" unit tests, security checks &amp; peer review" data-fr="tests unitaires, contrôles de sécurité et revue de code"> — unit tests, security checks &amp; peer review</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">5</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Deployment" data-fr="Déploiement">Deployment</strong>
-              <span data-en=" — CI/CD, monitoring &amp; iterative improvement" data-fr=" — CI/CD, surveillance et amélioration continue"> — CI/CD, monitoring &amp; iterative improvement</span>
+              <strong style="color:var(--dark);" data-en="Deployment" data-fr="Déploiement:">Deployment</strong>
+              <span data-en=" CI/CD, monitoring &amp; iterative improvement" data-fr="CI/CD, surveillance et amélioration continue"> — CI/CD, monitoring &amp; iterative improvement</span>
             </span>
           </div>
         </div>
@@ -646,43 +639,43 @@
   <div class="container">
     <div class="sec-head reveal">
       <h2 data-en="Portfolio" data-fr="Portfolio">Portfolio</h2>
-      <p data-en="Take a look at my recent designs." data-fr="Découvrez mes réalisations récentes.">Take a look at my recent designs.</p>
+      <p data-en="Take a look at my recent case studies." data-fr="Découvrez mes études de cas récents.">Take a look at my recent designs.</p>
     </div>
     <div class="portfolio-grid reveal">
       <a class="port-card" href="project1.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-1"><i class="bi bi-scissors"></i><span class="soon-pill" data-en="Coming Soon" data-fr="Bientôt">Coming Soon</span></div>
+        <div class="port-thumb pt-1"><i class="bi bi-scissors"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 01</div>
-          <div class="port-title" data-en="Service Business Website" data-fr="Site web pour prestataire de services">Service Business Website</div>
-          <div class="port-desc" data-en="A landing page for a local service provider with booking flow and clear information hierarchy." data-fr="Une page d'accueil pour un prestataire local avec un parcours de réservation et une hiérarchie d'information claire.">A landing page for a local service provider with booking flow and clear information hierarchy.</div>
-          <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">Bootstrap</span><span class="ptag">UX</span></div>
+          <div class="port-title" data-en="Service Website" data-fr="Site de service">Service Website</div>
+          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
       <a class="port-card" href="project2.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-2"><i class="bi bi-grid-3x3"></i><span class="soon-pill" data-en="Coming Soon" data-fr="Bientôt">Coming Soon</span></div>
+        <div class="port-thumb pt-2"><i class="bi bi-grid-3x3"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 02</div>
           <div class="port-title" data-en="Memory Game" data-fr="Jeu de mémoire">Memory Game</div>
-          <div class="port-desc" data-en="An interactive card-matching game with animations, difficulty levels, and accessible design." data-fr="Un jeu interactif d'association de cartes avec des animations, des niveaux de difficulté et un design accessible.">An interactive card-matching game with animations, difficulty levels, and accessible design.</div>
-          <div class="port-tags"><span class="ptag">JavaScript</span><span class="ptag">CSS</span><span class="ptag">A11y</span></div>
+          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
       <a class="port-card" href="project3.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-3"><i class="bi bi-shop"></i><span class="soon-pill" data-en="Coming Soon" data-fr="Bientôt">Coming Soon</span></div>
+        <div class="port-thumb pt-3"><i class="bi bi-shop"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 03</div>
-          <div class="port-title" data-en="E-Commerce Site" data-fr="Site E-Commerce">E-Commerce Site</div>
-          <div class="port-desc" data-en="A full storefront UI with product listings, cart and checkout — colour guiding the conversion flow." data-fr="Une interface de boutique complète avec catalogue produits, panier et paiement — la couleur guidant le flux de conversion.">A full storefront UI with product listings, cart and checkout — colour guiding the conversion flow.</div>
-          <div class="port-tags"><span class="ptag">React</span><span class="ptag">Bootstrap</span><span class="ptag">UI</span></div>
+          <div class="port-title" data-en="E-Commerce Site" data-fr="Site de commerce électronique">E-Commerce Site</div>
+          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
       <a class="port-card" href="project4.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-4"><i class="bi bi-bar-chart-line-fill"></i><span class="soon-pill" data-en="Coming Soon" data-fr="Bientôt">Coming Soon</span></div>
+        <div class="port-thumb pt-4"><i class="bi bi-bar-chart-line-fill"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 04</div>
-          <div class="port-title" data-en="Analytics Dashboard" data-fr="Tableau de bord analytique">Analytics Dashboard</div>
-          <div class="port-desc" data-en="A BI / data visualisation dashboard bringing my Power BI expertise into a web-native interface." data-fr="Un tableau de bord BI / visualisation de données qui transpose mon expertise Power BI dans une interface web native.">A BI / data visualisation dashboard bringing my Power BI expertise into a web-native interface.</div>
-          <div class="port-tags"><span class="ptag">Data Viz</span><span class="ptag">React</span><span class="ptag">Charts</span></div>
+          <div class="port-title" data-en="Bilingual analytics website" data-fr="Site d'analytique bilingue">Bilingual analytics website</div>
+          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
     </div>
@@ -729,7 +722,7 @@
       <span>Aya El Hadouti.</span>
       <img src="Uottawalogo.png" alt="uOttawa Logo" title="University of Ottawa" />
     </div>
-    <p style="font-size:.875rem;margin-bottom:1rem;" data-en="Computer Engineering" data-fr="Génie informatique">Computer Engineering</p>
+    <p style="font-size:.875rem;margin-bottom:1rem;" data-en="Computer Engineering" data-fr="Étudiante en génie informatique">Computer Engineering</p>
     <nav class="footer-nav">
       <a href="#about"          data-en="About"          data-fr="À propos">About</a>
       <a href="#how-i-work"     data-en="How I Work"     data-fr="Ma méthode">How I Work</a>
