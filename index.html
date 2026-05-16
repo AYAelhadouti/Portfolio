@@ -6,7 +6,7 @@
   <meta name="description" content="Aya El Hadouti — Computer Engineering portfolio showcasing cybersecurity, software development, and data analytics projects."/>
   <meta name="author" content="Aya El Hadouti"/>
   <meta name="keywords" content="Computer Engineering, Cybersecurity, Portfolio, uOttawa, Software Developer, Data Analytics"/>
-  <title>Aya El Hadouti — Portfolio | Computer Engineering</title>
+  <title>Aya El Hadouti Portfolio</title>
   <link rel="icon" type="image/png" href="Logo.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
@@ -85,7 +85,6 @@
     .nav-links a { font-size: .92rem; font-weight: 500; color: rgba(255,255,255,.75); transition: color .2s; text-decoration: none; white-space: nowrap; }
     .nav-links a:hover, .nav-links a.active { color: var(--pink); font-weight: 600; }
 
-    /* Nav controls: lang + dark toggle + hamburger */
     .nav-controls { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
 
     .lang-toggle {
@@ -145,8 +144,7 @@
     .btn-outline-pink:hover { background: var(--pink); color: #fff; }
 
     /* ── HERO ── */
-    #home { min-height: calc(100vh - 65px); display: flex; align-items: center; padding: 4rem 0; }
-    .hero-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
+    #home { min-height: calc(100vh - 65px); display: flex; align-items: center; padding: 6rem 0 4rem; }    .hero-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
     @media (max-width: 768px) { .hero-row { grid-template-columns: 1fr; text-align: center; } .hero-img-wrap { order: -1; } }
     .hero-role { font-size: 1.1rem; font-weight: 500; color: var(--pink); margin-bottom: .9rem; }
     .hero-name { font-size: 3.5rem; font-weight: 700; color: var(--dark); line-height: 1.1; margin-bottom: 1rem; }
@@ -171,7 +169,40 @@
     /* ── ABOUT ── */
     .about-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
     @media (max-width: 768px) { .about-row { grid-template-columns: 1fr; text-align: center; } }
-    .about-img { width: 100%; max-width: 320px; aspect-ratio: 1; border-radius: 50%; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 8rem; color: rgba(255,255,255,.85); margin: 0 auto; overflow: hidden; }
+
+    /* ── ABOUT DOUBLE-BLOB ── */
+    .about-blob-wrap {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      flex-shrink: 0;
+    }
+    /* back bubble — wider oval, offset bottom-left */
+    .about-blob-wrap::before {
+      content: '';
+      position: absolute;
+      width: 370px;
+      height: 255px;
+      background: var(--pink);
+      border-radius: 55% 45% 35% 65% / 55% 35% 65% 45%;
+      bottom: -22px;
+      left: -22px;
+      z-index: 0;
+    }
+    /* front bubble — wide oval containing the photo */
+    .about-img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 370px;
+      height: 255px;
+      border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%;
+      background: var(--pink);
+      overflow: hidden;
+      z-index: 1;
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .about-text p { font-size: 1rem; color: var(--text); margin-bottom: 1.5rem; text-align: justify; }
     .about-stats { display: flex; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
     @media (max-width: 768px) { .about-stats { justify-content: center; } }
@@ -329,13 +360,10 @@
     </ul>
 
     <div class="nav-controls">
-      <!-- Language toggle -->
       <button class="lang-toggle" id="langBtn" aria-label="Switch language">FR</button>
-      <!-- Dark mode toggle -->
       <button class="dark-toggle" id="darkBtn" aria-label="Toggle dark mode">
         <i class="bi bi-moon-stars-fill" id="darkIcon"></i>
       </button>
-      <!-- Hamburger -->
       <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
         <i class="bi bi-list"></i>
       </button>
@@ -349,15 +377,15 @@
   <div class="container">
     <div class="hero-row">
       <div>
-        <h1 class="hero-name fade-b">I'm Aya<br>El Hadouti</h1>
+        <h1 class="hero-name fade-b" data-en="I'm Aya<br>El Hadouti" data-fr="Je suis Aya<br>El Hadouti">I'm Aya<br>El Hadouti</h1>
         <p class="hero-role fade-a" data-en="Computer Engineering · CO-OP Student" data-fr="Génie informatique · Étudiante CO-OP">Computer Engineering · CO-OP Student</p>
         <p class="hero-desc fade-c"
            data-en="Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specializing in cybersecurity. Seeking new opportunities to contribute to secure, impactful technology solutions and innovative projects."
            data-fr="Actuellement étudiante en baccalauréat en génie informatique à l'Université d'Ottawa, avec une spécialisation en cybersécurité. À la recherche de nouvelles opportunités pour contribuer à des solutions technologiques sécurisées et innovantes ayant un impact concret.">
         </p>
         <div class="fade-d" style="display:flex;gap:.8rem;flex-wrap:wrap;">
-          <a href="#designs" class="btn-pink"        data-en="View My Work" data-fr="Voir mon travail">View My Work</a>
-          <a href="#about"   class="btn-outline-pink" data-en="About Me"    data-fr="À propos de moi">About Me</a>
+          <a href="#designs" class="btn-pink"         data-en="View My Work" data-fr="Voir mon travail">View My Work</a>
+          <a href="#about"   class="btn-outline-pink" data-en="About Me"     data-fr="À propos de moi">About Me</a>
         </div>
       </div>
       <div class="hero-img-wrap fade-e">
@@ -378,8 +406,10 @@
     </div>
     <div class="about-row reveal">
       <div style="display:flex;justify-content:center;align-items:center;">
-        <div class="about-img">
-          <img src="Ottawa.jpg" alt="Ottawa" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"/>
+        <div class="about-blob-wrap">
+          <div class="about-img">
+            <img src="Ottawa.jpg" alt="Ottawa"/>
+          </div>
         </div>
       </div>
       <div class="about-text">
@@ -433,36 +463,36 @@
         <div class="step-connector">
           <div class="step-row"><div class="step-num">1</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Research" data-fr="Recherche:">Research</strong>
-              <span data-en=" comprendre le contexte, les utilisateurs et les contraintes" data-fr="comprendre le contexte, les utilisateurs et les contraintes"> — understand context, users &amp; constraints</span>
+              <strong style="color:var(--dark);" data-en="Research:" data-fr="Recherche:">Research</strong>
+              <span data-en="understand context, users &amp; constraints" data-fr="comprendre le contexte, les utilisateurs et les contraintes"> — understand context, users &amp; constraints</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">2</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Planning" data-fr="Planification:">Planning</strong>
-              <span data-en=" architecture, wireframes &amp; task breakdown" data-fr="architecture, maquettes et assignation des tâches"> — architecture, wireframes &amp; task breakdown</span>
+              <strong style="color:var(--dark);" data-en="Planning:" data-fr="Planification:">Planning</strong>
+              <span data-en="architecture, wireframes &amp; task breakdown" data-fr="architecture, maquettes et assignation des tâches"> — architecture, wireframes &amp; task breakdown</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">3</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Development" data-fr="Développement:">Development</strong>
-              <span data-en=" clean, documented, version-controlled code" data-fr="code propre, documenté et versionné"> — clean, documented, version-controlled code</span>
+              <strong style="color:var(--dark);" data-en="Development:" data-fr="Développement:">Development</strong>
+              <span data-en="clean, documented, version-controlled code" data-fr="code propre, documenté et versionné"> — clean, documented, version-controlled code</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">4</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Testing" data-fr="Tests:"></strong>
-              <span data-en=" unit tests, security checks &amp; peer review" data-fr="tests unitaires, contrôles de sécurité et revue de code"> — unit tests, security checks &amp; peer review</span>
+              <strong style="color:var(--dark);" data-en="Testing:" data-fr="Tests:">Testing</strong>
+              <span data-en="unit tests, security checks &amp; peer review" data-fr="tests unitaires, contrôles de sécurité et revue de code"> — unit tests, security checks &amp; peer review</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
           <div class="step-row"><div class="step-num">5</div>
             <span style="font-size:.9rem;color:var(--text);">
-              <strong style="color:var(--dark);" data-en="Deployment" data-fr="Déploiement:">Deployment</strong>
-              <span data-en=" CI/CD, monitoring &amp; iterative improvement" data-fr="CI/CD, surveillance et amélioration continue"> — CI/CD, monitoring &amp; iterative improvement</span>
+              <strong style="color:var(--dark);" data-en="Deployment:" data-fr="Déploiement:">Deployment</strong>
+              <span data-en="CI/CD, monitoring &amp; iterative improvement" data-fr="CI/CD, surveillance et amélioration continue"> — CI/CD, monitoring &amp; iterative improvement</span>
             </span>
           </div>
         </div>
@@ -538,10 +568,10 @@
       <div class="cert-wrap">
         <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Google Project Management</span>
         <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Google Data Analytics</span>
-        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Power BI Associate — Microsoft</span>
+        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Power BI Associate Microsoft</span>
         <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Google Cybersecurity</span>
-        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>CCNA — Cisco</span>
-        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>EDA for ML — IBM</span>
+        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>CCNA Cisco</span>
+        <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>EDA for ML IBM</span>
       </div>
     </div>
   </div>
@@ -567,25 +597,18 @@
     <div class="tl-panel active" id="tab-edu">
       <div class="center-timeline reveal">
         <div class="ctl-item">
-          <div class="ctl-left">
-            <div class="ctl-title" data-en="BASc Computer Engineering (CO-OP)" data-fr="Baccalauréat en génie informatique (CO-OP)">BASc Computer Engineering (CO-OP)</div>
-            <div class="ctl-sub" data-en="University of Ottawa · Cybersecurity microprogram" data-fr="Université d'Ottawa · Microprogramme en cybersécurité">University of Ottawa · Cybersecurity microprogram</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> 2022 – <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
-          </div><div class="ctl-empty"></div>
-        </div>
-        <div class="ctl-item">
           <div class="ctl-empty"></div>
           <div class="ctl-right">
-            <div class="ctl-title" data-en="Dean's Honour List" data-fr="Liste d'honneur du doyen">Dean's Honour List</div>
+            <div class="ctl-title" data-en="Microprogram in Cybersecurity" data-fr="Microprogramme en Cybersécurité">Dean's Honour List</div>
             <div class="ctl-sub">University of Ottawa</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Winter &amp; Fall 2025" data-fr="Hiver &amp; Automne 2025">Winter &amp; Fall 2025</span></div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> Sept 2025 - <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
           </div>
         </div>
         <div class="ctl-item">
           <div class="ctl-left">
-            <div class="ctl-title" data-en="Excellence Award" data-fr="Prix d'excellence">Excellence Award</div>
-            <div class="ctl-sub" data-en="Nordion Inc. — Senior Software Developer" data-fr="Nordion Inc. — Développeur logiciel senior">Nordion Inc. — Senior Software Developer</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Dec" data-fr="Déc">Dec</span> 2024</div>
+            <div class="ctl-title" data-en="BASc Computer Engineering (CO-OP)" data-fr="Baccalauréat en génie informatique (CO-OP)">BASc Computer Engineering (CO-OP)</div>
+            <div class="ctl-sub" data-en="University of Ottawa " data-fr="Université d'Ottawa"></div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> Jan 2022 - <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
           </div><div class="ctl-empty"></div>
         </div>
       </div>
@@ -593,40 +616,33 @@
     <div class="tl-panel" id="tab-work">
       <div class="center-timeline reveal">
         <div class="ctl-item">
-          <div class="ctl-left">
-            <div class="ctl-title" data-en="Research Assistant — Responsible AI" data-fr="Assistante de recherche — IA responsable">Research Assistant — Responsible AI</div>
-            <div class="ctl-sub" data-en="University of Ottawa · Prof. Umar Ruhi" data-fr="Université d'Ottawa · Prof. Umar Ruhi">University of Ottawa · Prof. Umar Ruhi</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan 2026 – Present" data-fr="Jan 2026 – Présent">Jan 2026 – Present</span></div>
-          </div><div class="ctl-empty"></div>
-        </div>
-        <div class="ctl-item">
           <div class="ctl-empty"></div>
           <div class="ctl-right">
-            <div class="ctl-title" data-en="Teaching Assistant — CEG3585" data-fr="Auxiliaire d'enseignement — CEG3585">Teaching Assistant — CEG3585</div>
-            <div class="ctl-sub" data-en="University of Ottawa · Computer Networking" data-fr="Université d'Ottawa · Réseaux informatiques">University of Ottawa · Computer Networking</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan – May 2026" data-fr="Jan – Mai 2026">Jan – May 2026</span></div>
+            <div class="ctl-title" data-en="IT Asset Management & AI Systems QA" data-fr="Gestion des actifs TI & QA de systèmes d'IA">IT Research (IT Asset Management & AI Systems QA)</div>
+            <div class="ctl-sub" data-en="University of Ottawa · IT Research" data-fr="Université d'Ottawa · Recherche TI">University of Ottawa · IT Research</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="May 2025 – Present" data-fr="Mai 2025 – Présent">May 2025 – Present</span></div>
           </div>
         </div>
         <div class="ctl-item">
           <div class="ctl-left">
             <div class="ctl-title" data-en="Software Testing Specialist" data-fr="Spécialiste en tests logiciels">Software Testing Specialist</div>
-            <div class="ctl-sub" data-en="Nordion Inc. · Outstanding CO-OP" data-fr="Nordion Inc. · CO-OP exceptionnel">Nordion Inc. · Outstanding CO-OP</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Sep – Dec 2024" data-fr="Sep – Déc 2024">Sep – Dec 2024</span></div>
+            <div class="ctl-sub" data-en="Nordion Inc." data-fr="Nordion Inc.">Nordion Inc. · Outstanding CO-OP</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Sep - Dec 2024" data-fr="Sep - Déc 2024">Sep – Dec 2024</span></div>
           </div><div class="ctl-empty"></div>
         </div>
         <div class="ctl-item">
           <div class="ctl-empty"></div>
           <div class="ctl-right">
             <div class="ctl-title" data-en="Engineering PM &amp; Software Developer" data-fr="Chef de projet ingénierie &amp; Développeuse logiciel">Engineering PM &amp; Software Developer</div>
-            <div class="ctl-sub" data-en="Nordion Inc. · 2× Outstanding CO-OP" data-fr="Nordion Inc. · 2× CO-OP exceptionnel">Nordion Inc. · 2× Outstanding CO-OP</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan – Dec 2024" data-fr="Jan – Déc 2024">Jan – Dec 2024</span></div>
+            <div class="ctl-sub" data-en="Nordion Inc. " data-fr="Nordion Inc">Nordion Inc. · 2× Outstanding CO-OP</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan - Dec 2024" data-fr="Jan - Déc 2024">Jan – Dec 2024</span></div>
           </div>
         </div>
         <div class="ctl-item">
           <div class="ctl-left">
-            <div class="ctl-title" data-en="Lead Reception Attendant" data-fr="Responsable principale à la réception">Lead Reception Attendant</div>
-            <div class="ctl-sub" data-en="University of Ottawa — Student Affairs" data-fr="Université d'Ottawa — Affaires étudiantes">University of Ottawa — Student Affairs</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Aug 2022 – Present" data-fr="Août 2022 – Présent">Aug 2022 – Present</span></div>
+            <div class="ctl-title" data-en="Reception Attendant" data-fr="Réceptioniste">Lead Reception Attendant</div>
+            <div class="ctl-sub" data-en="University of Ottawa · Student Affairs" data-fr="Université d'Ottawa ·Affaires étudiantes">University of Ottawa — Student Affairs</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Aug 2022 - May 2026" data-fr="Août 2022 - Mai 2026">Aug 2022 – Present</span></div>
           </div><div class="ctl-empty"></div>
         </div>
       </div>
@@ -733,8 +749,7 @@
     </nav>
     <div class="social-row">
       <a href="mailto:Aelha098@uottawa.ca" class="social-btn" title="Email"><i class="bi bi-envelope-fill"></i></a>
-      <a href="https://github.com" target="_blank" rel="noopener" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>
-    </div>
+      <a href="https://github.com/AYAelhadouti" target="_blank" rel="noopener" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>    </div>
     <p class="footer-copy">© 2026 Aya El Hadouti · SEG3525 · All rights reserved </p>
   </div>
 </footer>
@@ -751,7 +766,6 @@ function setDark(on) {
 }
 
 darkBtn.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
-// Restore preference
 if (localStorage.getItem('darkMode') === '1') setDark(true);
 
 /* ─── LANGUAGE TOGGLE ─── */
@@ -764,13 +778,11 @@ function applyLang(lang) {
   langBtn.textContent = lang === 'en' ? 'FR' : 'EN';
   document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
 
-  // Elements with data-en / data-fr on their textContent
   document.querySelectorAll('[data-en]').forEach(el => {
     const val = el.getAttribute('data-' + lang);
     if (val !== null) el.innerHTML = val;
   });
 
-  // Input / textarea placeholders
   document.querySelectorAll('[data-en-placeholder]').forEach(el => {
     el.placeholder = el.getAttribute('data-' + lang + '-placeholder') || el.placeholder;
   });
