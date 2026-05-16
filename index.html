@@ -1,345 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <meta name="description" content="Aya El Hadouti — Computer Engineering portfolio showcasing cybersecurity, software development, and data analytics projects."/>
-  <meta name="author" content="Aya El Hadouti"/>
-  <meta name="keywords" content="Computer Engineering, Cybersecurity, Portfolio, uOttawa, Software Developer, Data Analytics"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Aya El Hadouti — Computer Engineering portfolio showcasing cybersecurity, software development, and data analytics projects.">
+  <meta name="author" content="Aya El Hadouti">
+  <meta name="keywords" content="Computer Engineering, Cybersecurity, Portfolio, uOttawa, Software Developer, Data Analytics">
   <title>Aya El Hadouti Portfolio</title>
-  <link rel="icon" type="image/png" href="Logo.png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="image/Monogram.png">
 
-  <style>
-    /* ── LIGHT THEME (default) ── */
-    :root {
-      --pink:    #dc267f;
-      --pink-lt: #fce8f3;
-      --pink-md: #b81e6b;
-      --dark:    #2b2d42;
-      --white:   #ffffff;
-      --off:     #f9f6f9;
-      --border:  #e8d5e8;
-      --text:    #454360;
-      --muted:   #888;
-      --font:    'Poppins', sans-serif;
-      --nav-bg:  #2b2d42;
-      --card-bg: #ffffff;
-      --input-bg:#ffffff;
-      --footer-bg:#2b2d42;
-    }
-
-    /* ── DARK THEME ── */
-    body.dark {
-      --white:   #12111a;
-      --off:     #1c1b27;
-      --border:  #3a3550;
-      --text:    #ccc8e8;
-      --muted:   #8880aa;
-      --dark:    #f0eeff;
-      --pink-lt: #2d1a2e;
-      --nav-bg:  #0e0d17;
-      --card-bg: #1c1b27;
-      --input-bg:#1c1b27;
-      --footer-bg:#0e0d17;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-      transition: background .3s, color .3s;
-    }
-
-    a { color: var(--pink); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--pink-md); }
-
-    .container { max-width: 968px; margin: 0 auto; padding: 0 2rem; width: 100%; }
-    section { padding: 5.5rem 0; }
-    .bg-off { background: var(--off); }
-
-    .sec-head { text-align: center; margin-bottom: 3.5rem; }
-    .sec-head h2 { font-size: 2.5rem; font-weight: 700; color: var(--dark); margin-bottom: .35rem; }
-    .sec-head p  { font-size: 1rem; color: var(--muted); }
-
-    /* ── NAVBAR ── */
-    .navbar {
-      background: var(--nav-bg);
-      padding: 1.1rem 0;
-      position: sticky; top: 0; z-index: 1000;
-      transition: background .3s, box-shadow .2s;
-    }
-    .navbar .container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .navbar-brand { font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: .04em; text-decoration: none; white-space: nowrap; }
-
-    .nav-links { display: flex; align-items: center; gap: .9rem; list-style: none; margin: 0; padding: 0; flex-wrap: nowrap; }
-    .nav-links a { font-size: .92rem; font-weight: 500; color: rgba(255,255,255,.75); transition: color .2s; text-decoration: none; white-space: nowrap; }
-    .nav-links a:hover, .nav-links a.active { color: var(--pink); font-weight: 600; }
-
-    .nav-controls { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
-
-    .lang-toggle {
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
-      color: #fff; font-family: var(--font); font-size: .75rem; font-weight: 600;
-      padding: .28rem .65rem; border-radius: 20px; cursor: pointer;
-      transition: background .2s, border-color .2s;
-      letter-spacing: .06em; white-space: nowrap;
-    }
-    .lang-toggle:hover { background: var(--pink); border-color: var(--pink); }
-
-    .dark-toggle {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
-      color: #fff; font-size: .9rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .2s, border-color .2s, transform .3s;
-      flex-shrink: 0;
-    }
-    .dark-toggle:hover { background: var(--pink); border-color: var(--pink); }
-    .dark-toggle i { transition: transform .4s ease; }
-    body.dark .dark-toggle i { transform: rotate(180deg); }
-
-    .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: #fff; cursor: pointer; flex-shrink: 0; }
-
-    @media (max-width: 1100px) {
-      .nav-links { gap: .65rem; }
-      .nav-links a { font-size: .86rem; }
-    }
-
-    @media (max-width: 860px) {
-      .nav-toggle { display: block; }
-      .nav-links {
-        display: none; flex-direction: column;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--nav-bg); border-top: 1px solid rgba(255,255,255,.1);
-        padding: 1.5rem 2rem; gap: 1.2rem; transition: background .3s;
-      }
-      .nav-links a { font-size: .97rem; }
-      .nav-links.open { display: flex; }
-    }
-
-    /* ── BUTTONS ── */
-    .btn-pink {
-      display: inline-block; background: var(--pink); color: #fff;
-      font-family: var(--font); font-size: 1rem; font-weight: 500;
-      padding: .8rem 1.8rem; border-radius: .5rem; border: none; cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .btn-pink:hover { background: var(--pink-md); color: #fff; transform: translateY(-2px); }
-    .btn-outline-pink {
-      display: inline-block; background: transparent; color: var(--pink);
-      font-family: var(--font); font-size: 1rem; font-weight: 500;
-      padding: .78rem 1.8rem; border-radius: .5rem; border: 2px solid var(--pink);
-      transition: background .2s, color .2s;
-    }
-    .btn-outline-pink:hover { background: var(--pink); color: #fff; }
-
-    /* ── HERO ── */
-    #home { min-height: calc(100vh - 65px); display: flex; align-items: center; padding: 6rem 0 4rem; }    .hero-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
-    @media (max-width: 768px) { .hero-row { grid-template-columns: 1fr; text-align: center; } .hero-img-wrap { order: -1; } }
-    .hero-role { font-size: 1.1rem; font-weight: 500; color: var(--pink); margin-bottom: .9rem; }
-    .hero-name { font-size: 3.5rem; font-weight: 700; color: var(--dark); line-height: 1.1; margin-bottom: 1rem; }
-    .hero-desc { font-size: 1rem; color: var(--text); margin-bottom: 2rem; max-width: 440px; }
-    @media (max-width: 768px) { .hero-desc { margin: 0 auto 2rem; } }
-    .hero-img-wrap { display: flex; justify-content: center; align-items: center; }
-    .hero-blob {
-      width: 340px; height: 340px;
-      border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
-      background: var(--pink); display: flex; align-items: center; justify-content: center;
-      font-size: 9rem; color: rgba(255,255,255,.85);
-      position: relative; overflow: hidden;
-      animation: blobFloat 6s ease-in-out infinite;
-    }
-    .hero-blob img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    @keyframes blobFloat {
-      0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
-      50%      { border-radius: 40% 60% 45% 55% / 55% 45% 60% 40%; }
-    }
-    @media (max-width: 768px) { .hero-blob { width: 260px; height: 260px; font-size: 7rem; } }
-
-    /* ── ABOUT ── */
-    .about-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
-    @media (max-width: 768px) { .about-row { grid-template-columns: 1fr; text-align: center; } }
-
-    /* ── ABOUT DOUBLE-BLOB ── */
-    .about-blob-wrap {
-      position: relative;
-      width: 400px;
-      height: 300px;
-      flex-shrink: 0;
-    }
-    /* back bubble — wider oval, offset bottom-left */
-    .about-blob-wrap::before {
-      content: '';
-      position: absolute;
-      width: 370px;
-      height: 255px;
-      background: var(--pink);
-      border-radius: 55% 45% 35% 65% / 55% 35% 65% 45%;
-      bottom: -22px;
-      left: -22px;
-      z-index: 0;
-    }
-    /* front bubble — wide oval containing the photo */
-    .about-img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 370px;
-      height: 255px;
-      border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%;
-      background: var(--pink);
-      overflow: hidden;
-      z-index: 1;
-    }
-    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .about-text p { font-size: 1rem; color: var(--text); margin-bottom: 1.5rem; text-align: justify; }
-    .about-stats { display: flex; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    @media (max-width: 768px) { .about-stats { justify-content: center; } }
-    .stat-num { font-size: 2rem; font-weight: 700; color: var(--dark); line-height: 1; }
-    .stat-lbl { font-size: .875rem; color: var(--muted); }
-    .contact-chip { display: inline-flex; align-items: center; gap: .4rem; font-size: .938rem; color: var(--muted); margin-right: 1rem; margin-bottom: .5rem; }
-    .contact-chip i { color: var(--pink); }
-
-    /* ── HOW I WORK ── */
-    #how-i-work { background: var(--white); }
-    .hiw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    @media (max-width: 900px) { .hiw-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .hiw-grid { grid-template-columns: 1fr; } }
-    .hiw-card {
-      border: 1.5px solid var(--border); border-radius: 1.2rem;
-      padding: 2rem 1.75rem 1.75rem; background: var(--card-bg);
-      position: relative; overflow: hidden;
-      transition: transform .25s, box-shadow .25s, border-color .25s, background .3s;
-    }
-    .hiw-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: var(--pink); border-radius: 1.2rem 1.2rem 0 0;
-      transform: scaleX(0); transform-origin: left; transition: transform .3s;
-    }
-    .hiw-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(220,38,127,.12); border-color: var(--pink); }
-    .hiw-card:hover::before { transform: scaleX(1); }
-    .hiw-card-icon { width: 52px; height: 52px; border-radius: .75rem; background: var(--pink-lt); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--pink); margin-bottom: 1.2rem; transition: background .25s; }
-    .hiw-card:hover .hiw-card-icon { background: var(--pink); color: #fff; }
-    .hiw-card-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 1.1rem; }
-    .approach-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
-    .approach-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: var(--text); line-height: 1.45; }
-    .approach-list li::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--pink); margin-top: .45rem; }
-    .step-connector { display: flex; flex-direction: column; gap: .45rem; }
-    .step-row { display: flex; align-items: center; gap: .8rem; }
-    .step-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--pink); color: #fff; font-size: .72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-    .tools-wrap { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .tool-chip { display: inline-flex; align-items: center; gap: .4rem; background: var(--off); border: 1px solid var(--border); border-radius: 6px; padding: .35rem .75rem; font-size: .8rem; font-weight: 500; color: var(--text); transition: background .2s, border-color .2s, color .2s; }
-    .tool-chip i { color: var(--pink); font-size: .85rem; }
-
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 4rem; }
-    @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
-    .skill-group { border-bottom: 1px solid var(--border); padding-bottom: 1.2rem; }
-    .skill-group-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: .6rem 0; }
-    .skill-group-left { display: flex; align-items: center; gap: .9rem; }
-    .skill-icon { font-size: 1.6rem; color: var(--pink); }
-    .skill-group-name { font-size: 1.05rem; font-weight: 600; color: var(--dark); }
-    .skill-group-exp  { font-size: .875rem; color: var(--muted); }
-    .skill-chevron { font-size: 1rem; color: var(--pink); transition: transform .25s; }
-    .skill-group.open .skill-chevron { transform: rotate(180deg); }
-    .skill-items { display: none; padding: .5rem 0 .3rem 3rem; }
-    .skill-group.open .skill-items { display: block; }
-    .skill-row { padding: .55rem 0; border-bottom: 1px solid var(--border); font-size: .938rem; color: var(--text); }
-    .skill-row:last-child { border-bottom: none; }
-    .cert-wrap { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; justify-content: center; }
-    .cert-badge { display: inline-flex; align-items: center; gap: .35rem; background: var(--pink-lt); border: 1px solid var(--border); border-radius: 6px; padding: .4rem .85rem; font-size: .813rem; font-weight: 500; color: var(--pink); }
-
-    /* ── QUALIFICATIONS TIMELINE ── */
-    .tl-tabs { display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; }
-    .tl-tab { font-size: 1rem; font-weight: 600; color: var(--muted); display: flex; align-items: center; gap: .5rem; cursor: pointer; padding-bottom: .4rem; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
-    .tl-tab.active { color: var(--pink); border-color: var(--pink); }
-    .tl-panel { display: none; }
-    .tl-panel.active { display: block; }
-    .center-timeline { position: relative; max-width: 700px; margin: 0 auto; }
-    .center-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--border); transform: translateX(-50%); }
-    .ctl-item { display: grid; grid-template-columns: 1fr 1fr; gap: 0; position: relative; margin-bottom: 2.5rem; align-items: start; }
-    .ctl-item::after { content: ''; position: absolute; left: 50%; top: .4rem; width: 14px; height: 14px; border-radius: 50%; background: var(--pink); border: 3px solid var(--white); transform: translateX(-50%); box-shadow: 0 0 0 2px var(--pink); z-index: 1; }
-    .ctl-left  { padding-right: 2.5rem; text-align: right; }
-    .ctl-right { padding-left:  2.5rem; text-align: left; }
-    .ctl-title { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: .2rem; }
-    .ctl-sub   { font-size: .875rem; color: var(--muted); margin-bottom: .4rem; }
-    .ctl-date  { font-size: .813rem; color: var(--muted); display: flex; align-items: center; gap: .3rem; }
-    .ctl-left .ctl-date { justify-content: flex-end; }
-    @media (max-width: 600px) {
-      .center-timeline::before { left: 14px; }
-      .ctl-item { grid-template-columns: 1fr; padding-left: 2.5rem; }
-      .ctl-item::after { left: 14px; }
-      .ctl-left { text-align: left; padding-right: 0; }
-      .ctl-left .ctl-date { justify-content: flex-start; }
-      .ctl-empty { display: none; }
-    }
-
-    /* ── PORTFOLIO ── */
-    .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    @media (max-width: 640px) { .portfolio-grid { grid-template-columns: 1fr; } }
-    .port-card { border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; background: var(--card-bg); transition: transform .25s, box-shadow .25s, background .3s; }
-    .port-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(220,38,127,.12); }
-    .port-thumb { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
-    .pt-1 { background: linear-gradient(135deg, #fce8f3, #f5c2df); color: var(--pink); }
-    .pt-2 { background: linear-gradient(135deg, #e8e6f5, #c8c8e8); color: #6b5b95; }
-    .pt-3 { background: linear-gradient(135deg, #e6f0f5, #c8dce8); color: #2d6a8a; }
-    .pt-4 { background: linear-gradient(135deg, #e6f5ec, #c8e8d4); color: #2d7a4f; }
-    .soon-pill { position: absolute; top: .75rem; right: .75rem; background: var(--pink); color: #fff; font-size: .688rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .7rem; border-radius: 20px; }
-    .port-body  { padding: 1.4rem 1.5rem; }
-    .port-num   { font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: .25rem; }
-    .port-title { font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-bottom: .4rem; }
-    .port-desc  { font-size: .875rem; color: var(--muted); margin-bottom: .9rem; }
-    .port-tags  { display: flex; flex-wrap: wrap; gap: .3rem; }
-    .ptag { background: var(--pink-lt); color: var(--pink); font-size: .7rem; font-weight: 600; padding: .18rem .7rem; border-radius: 20px; }
-
-    /* ── CTA ── */
-    .cta-box { text-align: center; padding: 4rem 2rem; background: var(--off); border-radius: 2rem; margin: 2rem 2rem 0; transition: background .3s; }
-    .cta-box h2 { font-size: 1.6rem; font-weight: 700; color: var(--dark); max-width: 540px; margin: 0 auto 1rem; line-height: 1.35; }
-    .cta-box p { font-size: 1rem; color: var(--muted); margin-bottom: 1.8rem; }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--off); }
-    .contact-form { max-width: 540px; margin: 0 auto; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; font-size: .875rem; font-weight: 500; color: var(--dark); margin-bottom: .4rem; }
-    .form-group input, .form-group textarea { width: 100%; font-family: var(--font); font-size: .938rem; color: var(--text); padding: .75rem 1rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--input-bg); transition: border-color .2s, box-shadow .2s, background .3s, color .3s; outline: none; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(220,38,127,.1); }
-    .contact-form .btn-pink { width: 100%; text-align: center; margin-top: .5rem; }
-
-    /* ── FOOTER ── */
-    footer { background: var(--footer-bg); color: rgba(255,255,255,.65); padding: 2.5rem 0 2rem; text-align: center; transition: background .3s; }
-    .footer-brand { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: .5rem; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .footer-brand img { height: 4.2rem; width: auto; border-radius: 8px; transition: transform .2s; filter: brightness(1.05); }
-    .footer-brand img:hover { transform: scale(1.05); }
-    .footer-nav { margin-bottom: 1.2rem; }
-    .footer-nav a { color: rgba(255,255,255,.55); font-size: .875rem; margin: 0 .8rem; transition: color .2s; text-decoration: none; }
-    .footer-nav a:hover { color: var(--pink); }
-    .social-row { margin-bottom: 1.2rem; }
-    .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.65); font-size: .95rem; margin: 0 .3rem; transition: background .2s, border-color .2s, color .2s; }
-    .social-btn:hover { background: var(--pink); border-color: var(--pink); color: #fff; }
-    .footer-copy { font-size: .75rem; color: rgba(255,255,255,.3); }
-
-    /* ── REVEAL ANIMATIONS ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .fade-a { opacity: 0; animation: fadeUp .6s .1s  ease forwards; }
-    .fade-b { opacity: 0; animation: fadeUp .6s .25s ease forwards; }
-    .fade-c { opacity: 0; animation: fadeUp .6s .4s  ease forwards; }
-    .fade-d { opacity: 0; animation: fadeUp .6s .55s ease forwards; }
-    .fade-e { opacity: 0; animation: fadeUp .6s .65s ease forwards; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
-  </style>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Portfolio styles -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -347,7 +24,7 @@
 <header class="navbar" id="navbar">
   <div class="container">
     <a class="navbar-brand" href="#home" aria-label="Aya El Hadouti — Home">
-      <img src="Monogram.png" alt="Aya El Hadouti monogram" style="height:2.4rem;width:auto;display:block;filter:brightness(1.1);">
+      <img src="image/Monogram.png" alt="Aya El Hadouti monogram" style="height:2.4rem;width:auto;display:block;filter:brightness(1.1);">
     </a>
 
     <ul class="nav-links" id="navLinks" role="navigation">
@@ -372,16 +49,18 @@
 </header>
 
 <main>
+
 <!-- ══════════════════════ HOME ══════════════════════ -->
 <section id="home">
   <div class="container">
     <div class="hero-row">
       <div>
-        <h1 class="hero-name fade-b" data-en="I'm Aya<br>El Hadouti" data-fr="Je suis Aya<br>El Hadouti">I'm Aya<br>El Hadouti</h1>
         <p class="hero-role fade-a" data-en="Computer Engineering · CO-OP Student" data-fr="Génie informatique · Étudiante CO-OP">Computer Engineering · CO-OP Student</p>
+        <h1 class="hero-name fade-b" data-en="I'm Aya<br>El Hadouti" data-fr="Je suis Aya<br>El Hadouti">I'm Aya<br>El Hadouti</h1>
         <p class="hero-desc fade-c"
            data-en="Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specializing in cybersecurity. Seeking new opportunities to contribute to secure, impactful technology solutions and innovative projects."
            data-fr="Actuellement étudiante en baccalauréat en génie informatique à l'Université d'Ottawa, avec une spécialisation en cybersécurité. À la recherche de nouvelles opportunités pour contribuer à des solutions technologiques sécurisées et innovantes ayant un impact concret.">
+          Currently pursuing a Bachelor's degree in Computer Engineering at the University of Ottawa, specializing in cybersecurity. Seeking new opportunities to contribute to secure, impactful technology solutions and innovative projects.
         </p>
         <div class="fade-d" style="display:flex;gap:.8rem;flex-wrap:wrap;">
           <a href="#designs" class="btn-pink"         data-en="View My Work" data-fr="Voir mon travail">View My Work</a>
@@ -390,7 +69,7 @@
       </div>
       <div class="hero-img-wrap fade-e">
         <div class="hero-blob">
-          <img src="AyaPic1.png" alt="Aya El Hadouti portrait"/>
+          <img src="image/AyaPic1.png" alt="Aya El Hadouti portrait">
         </div>
       </div>
     </div>
@@ -408,21 +87,26 @@
       <div style="display:flex;justify-content:center;align-items:center;">
         <div class="about-blob-wrap">
           <div class="about-img">
-            <img src="Ottawa.jpg" alt="Ottawa"/>
+            <img src="image/Ottawa.jpg" alt="Ottawa">
           </div>
         </div>
       </div>
       <div class="about-text">
         <p data-en="I'm <strong>Aya El Hadouti</strong>, a Computer Engineering student at the University of Ottawa, with a microprogram in cybersecurity. I thrive at the intersection of hardware, software and data. Whether designing FPGA circuits in VHDL, building Python automation pipelines or crafting Power BI dashboards for stakeholders."
            data-fr="Je suis <strong>Aya El Hadouti</strong>, étudiante en génie informatique à l'Université d'Ottawa, avec un microprogramme en cybersécurité. Je m'épanouis à l'intersection du matériel, des logiciels et des données, que ce soit en concevant des circuits FPGA en VHDL, en développant des pipelines d'automatisation en Python ou en créant des tableaux de bord Power BI pour les parties prenantes.">
+          I'm <strong>Aya El Hadouti</strong>, a Computer Engineering student at the University of Ottawa, with a microprogram in cybersecurity. I thrive at the intersection of hardware, software and data. Whether designing FPGA circuits in VHDL, building Python automation pipelines or crafting Power BI dashboards for stakeholders.
         </p>
         <p data-en="During my coops, I led data engineering projects, built RPA frameworks and contributed to a medical-physics cloud platform."
            data-fr="Lors de mes stages coop, j'ai dirigé des projets d'ingénierie des données, développé des cadres RPA et contribué à une plateforme infonuagique en physique médicale.">
+          During my coops, I led data engineering projects, built RPA frameworks and contributed to a medical-physics cloud platform.
         </p>
         <div style="margin-bottom:1rem;">
-          <span class="contact-chip"><i class="bi bi-geo-alt-fill"></i>Ottawa, ON <img src="CanadaLogo.png" alt="Canadian leaf" style="width:16px;height:auto;margin-left:4px;vertical-align:middle;"></span>
+          <span class="contact-chip">
+            <i class="bi bi-geo-alt-fill"></i>Ottawa, ON
+            <img src="image/CanadaLogo.png" alt="Canadian leaf" style="width:16px;height:auto;margin-left:4px;vertical-align:middle;">
+          </span>
           <span class="contact-chip"><i class="bi bi-envelope-fill"></i>Aelha098@uOttawa.ca</span>
-          <span class="contact-chip"><i class="bi bi-translate"></i>FR · EN · AR · ES </span>
+          <span class="contact-chip"><i class="bi bi-translate"></i>FR · EN · AR · ES</span>
         </div>
       </div>
     </div>
@@ -444,15 +128,20 @@
         <div class="hiw-card-title" data-en="My Approach" data-fr="Mon approche">My Approach</div>
         <ul class="approach-list">
           <li data-en="User-centered design, I put the end-user's needs at the heart of every decision."
-              data-fr="Conception centrée sur l'utilisateur, les besoins de l'utilisateur final sont au cœur de chaque décision.">User-centered design — I put the end-user's needs at the heart of every decision.</li>
+              data-fr="Conception centrée sur l'utilisateur, les besoins de l'utilisateur final sont au cœur de chaque décision.">
+            User-centered design — I put the end-user's needs at the heart of every decision.</li>
           <li data-en="Secure-by-design mindset, security is built in, not bolted on."
-              data-fr="Sécurité dès la conception, la sécurité est intégrée, pas ajoutée après coup.">Secure-by-design mindset — security is built in, not bolted on.</li>
+              data-fr="Sécurité dès la conception, la sécurité est intégrée, pas ajoutée après coup.">
+            Secure-by-design mindset — security is built in, not bolted on.</li>
           <li data-en="Structured problem solving, breaking complex challenges into clear, manageable steps."
-              data-fr="Résolution structurée des problèmes, décomposition des défis complexes en étapes claires et gérables.">Structured problem solving — breaking complex challenges into clear, manageable steps.</li>
+              data-fr="Résolution structurée des problèmes, décomposition des défis complexes en étapes claires et gérables.">
+            Structured problem solving — breaking complex challenges into clear, manageable steps.</li>
           <li data-en="Attention to UI/UX, polished interfaces that are both beautiful and intuitive."
-              data-fr="Attention à l'UI/UX, des interfaces soignées, à la fois esthétiques et intuitives.">Attention to UI/UX — polished interfaces that are both beautiful and intuitive.</li>
+              data-fr="Attention à l'UI/UX, des interfaces soignées, à la fois esthétiques et intuitives.">
+            Attention to UI/UX — polished interfaces that are both beautiful and intuitive.</li>
           <li data-en="Automation &amp; efficiency, removing friction wherever possible with smart tooling."
-              data-fr="Automatisation et efficacité, réduction des frictions grâce à des outils intelligents.">Automation &amp; efficiency — removing friction wherever possible with smart tooling.</li>
+              data-fr="Automatisation et efficacité, réduction des frictions grâce à des outils intelligents.">
+            Automation &amp; efficiency — removing friction wherever possible with smart tooling.</li>
         </ul>
       </div>
 
@@ -461,35 +150,40 @@
         <div class="hiw-card-icon"><i class="bi bi-diagram-3-fill"></i></div>
         <div class="hiw-card-title" data-en="Workflow" data-fr="Processus de travail">Workflow</div>
         <div class="step-connector">
-          <div class="step-row"><div class="step-num">1</div>
+          <div class="step-row">
+            <div class="step-num">1</div>
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Research:" data-fr="Recherche:">Research</strong>
               <span data-en="understand context, users &amp; constraints" data-fr="comprendre le contexte, les utilisateurs et les contraintes"> — understand context, users &amp; constraints</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
-          <div class="step-row"><div class="step-num">2</div>
+          <div class="step-row">
+            <div class="step-num">2</div>
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Planning:" data-fr="Planification:">Planning</strong>
               <span data-en="architecture, wireframes &amp; task breakdown" data-fr="architecture, maquettes et assignation des tâches"> — architecture, wireframes &amp; task breakdown</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
-          <div class="step-row"><div class="step-num">3</div>
+          <div class="step-row">
+            <div class="step-num">3</div>
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Development:" data-fr="Développement:">Development</strong>
               <span data-en="clean, documented, version-controlled code" data-fr="code propre, documenté et versionné"> — clean, documented, version-controlled code</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
-          <div class="step-row"><div class="step-num">4</div>
+          <div class="step-row">
+            <div class="step-num">4</div>
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Testing:" data-fr="Tests:">Testing</strong>
               <span data-en="unit tests, security checks &amp; peer review" data-fr="tests unitaires, contrôles de sécurité et revue de code"> — unit tests, security checks &amp; peer review</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
-          <div class="step-row"><div class="step-num">5</div>
+          <div class="step-row">
+            <div class="step-num">5</div>
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Deployment:" data-fr="Déploiement:">Deployment</strong>
               <span data-en="CI/CD, monitoring &amp; iterative improvement" data-fr="CI/CD, surveillance et amélioration continue"> — CI/CD, monitoring &amp; iterative improvement</span>
@@ -530,41 +224,91 @@
       <p data-en="Get familiar with my strengths." data-fr="Découvrez mes points forts.">Get familiar with my strengths.</p>
     </div>
     <div class="skills-grid reveal">
+
       <div class="skill-group open">
         <div class="skill-group-header" onclick="toggleSkill(this)">
-          <div class="skill-group-left"><i class="bi bi-code-slash skill-icon"></i>
-            <div><div class="skill-group-name" data-en="Software Development" data-fr="Développement logiciel">Software Development</div><div class="skill-group-exp">3+ <span data-en="years" data-fr="ans">years</span></div></div>
-          </div><i class="bi bi-chevron-up skill-chevron"></i>
+          <div class="skill-group-left">
+            <i class="bi bi-code-slash skill-icon"></i>
+            <div>
+              <div class="skill-group-name" data-en="Software Development" data-fr="Développement logiciel">Software Development</div>
+              <div class="skill-group-exp">3+ <span data-en="years" data-fr="ans">years</span></div>
+            </div>
+          </div>
+          <i class="bi bi-chevron-up skill-chevron"></i>
         </div>
-        <div class="skill-items"><div class="skill-row">Python</div><div class="skill-row">Java</div><div class="skill-row">C / C++</div><div class="skill-row">TypeScript / JavaScript</div><div class="skill-row">SQL · VHDL · ARM Assembly</div></div>
+        <div class="skill-items">
+          <div class="skill-row">Python</div>
+          <div class="skill-row">Java</div>
+          <div class="skill-row">C / C++</div>
+          <div class="skill-row">TypeScript / JavaScript</div>
+          <div class="skill-row">SQL · VHDL · ARM Assembly</div>
+        </div>
       </div>
+
       <div class="skill-group open">
         <div class="skill-group-header" onclick="toggleSkill(this)">
-          <div class="skill-group-left"><i class="bi bi-shield-lock-fill skill-icon"></i>
-            <div><div class="skill-group-name" data-en="Cybersecurity" data-fr="Cybersécurité">Cybersecurity</div><div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div></div>
-          </div><i class="bi bi-chevron-up skill-chevron"></i>
+          <div class="skill-group-left">
+            <i class="bi bi-shield-lock-fill skill-icon"></i>
+            <div>
+              <div class="skill-group-name" data-en="Cybersecurity" data-fr="Cybersécurité">Cybersecurity</div>
+              <div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div>
+            </div>
+          </div>
+          <i class="bi bi-chevron-up skill-chevron"></i>
         </div>
-        <div class="skill-items"><div class="skill-row">Wireshark · Nmap</div><div class="skill-row">Burp Suite · Snort</div><div class="skill-row">NIST CSF · ISO 27001</div><div class="skill-row">MITRE ATT&amp;CK · Splunk · ELK Stack</div></div>
+        <div class="skill-items">
+          <div class="skill-row">Wireshark · Nmap</div>
+          <div class="skill-row">Burp Suite · Snort</div>
+          <div class="skill-row">NIST CSF · ISO 27001</div>
+          <div class="skill-row">MITRE ATT&amp;CK · Splunk · ELK Stack</div>
+        </div>
       </div>
+
       <div class="skill-group open">
         <div class="skill-group-header" onclick="toggleSkill(this)">
-          <div class="skill-group-left"><i class="bi bi-globe skill-icon"></i>
-            <div><div class="skill-group-name" data-en="Web Development" data-fr="Développement Web">Web Development</div><div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div></div>
-          </div><i class="bi bi-chevron-up skill-chevron"></i>
+          <div class="skill-group-left">
+            <i class="bi bi-globe skill-icon"></i>
+            <div>
+              <div class="skill-group-name" data-en="Web Development" data-fr="Développement Web">Web Development</div>
+              <div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div>
+            </div>
+          </div>
+          <i class="bi bi-chevron-up skill-chevron"></i>
         </div>
-        <div class="skill-items"><div class="skill-row">HTML / CSS / Bootstrap</div><div class="skill-row">React · Next.js · Angular</div><div class="skill-row">Node.js · Express</div><div class="skill-row">PostgreSQL · MongoDB</div><div class="skill-row">Docker · GitHub Actions</div></div>
+        <div class="skill-items">
+          <div class="skill-row">HTML / CSS / Bootstrap</div>
+          <div class="skill-row">React · Next.js · Angular</div>
+          <div class="skill-row">Node.js · Express</div>
+          <div class="skill-row">PostgreSQL · MongoDB</div>
+          <div class="skill-row">Docker · GitHub Actions</div>
+        </div>
       </div>
+
       <div class="skill-group open">
         <div class="skill-group-header" onclick="toggleSkill(this)">
-          <div class="skill-group-left"><i class="bi bi-bar-chart-fill skill-icon"></i>
-            <div><div class="skill-group-name" data-en="Data &amp; BI" data-fr="Données &amp; BI">Data &amp; BI</div><div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div></div>
-          </div><i class="bi bi-chevron-up skill-chevron"></i>
+          <div class="skill-group-left">
+            <i class="bi bi-bar-chart-fill skill-icon"></i>
+            <div>
+              <div class="skill-group-name" data-en="Data &amp; BI" data-fr="Données &amp; BI">Data &amp; BI</div>
+              <div class="skill-group-exp">2+ <span data-en="years" data-fr="ans">years</span></div>
+            </div>
+          </div>
+          <i class="bi bi-chevron-up skill-chevron"></i>
         </div>
-        <div class="skill-items"><div class="skill-row">Power BI · Tableau</div><div class="skill-row">Power Automate · Power Apps</div><div class="skill-row">Pandas · NumPy · Matplotlib</div><div class="skill-row">scikit-learn · TensorFlow</div><div class="skill-row">SQL Server · SSRS · SSIS</div></div>
+        <div class="skill-items">
+          <div class="skill-row">Power BI · Tableau</div>
+          <div class="skill-row">Power Automate · Power Apps</div>
+          <div class="skill-row">Pandas · NumPy · Matplotlib</div>
+          <div class="skill-row">scikit-learn · TensorFlow</div>
+          <div class="skill-row">SQL Server · SSRS · SSIS</div>
+        </div>
       </div>
+
     </div>
+
     <div class="reveal" style="margin-top:3rem;text-align:center;">
-      <p style="font-size:.813rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;" data-en="Certifications" data-fr="Certifications">Certifications</p>
+      <p style="font-size:.813rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;"
+         data-en="Certifications" data-fr="Certifications">Certifications</p>
       <div class="cert-wrap">
         <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Google Project Management</span>
         <span class="cert-badge"><i class="bi bi-patch-check-fill"></i>Google Data Analytics</span>
@@ -584,6 +328,7 @@
       <h2 data-en="Qualifications" data-fr="Qualifications">Qualifications</h2>
       <p data-en="Discover my curriculum." data-fr="Découvrez mon parcours.">Discover my curriculum.</p>
     </div>
+
     <div class="tl-tabs reveal">
       <div class="tl-tab active" onclick="switchTab('edu', this)">
         <i class="bi bi-mortarboard-fill"></i>
@@ -594,6 +339,7 @@
         <span data-en="Work" data-fr="Expérience">Work</span>
       </div>
     </div>
+
     <div class="tl-panel active" id="tab-edu">
       <div class="center-timeline reveal">
         <div class="ctl-item">
@@ -601,24 +347,26 @@
           <div class="ctl-right">
             <div class="ctl-title" data-en="Microprogram in Cybersecurity" data-fr="Microprogramme en Cybersécurité">Dean's Honour List</div>
             <div class="ctl-sub">University of Ottawa</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> Sept 2025 - <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> Sept 2025 – <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
           </div>
         </div>
         <div class="ctl-item">
           <div class="ctl-left">
             <div class="ctl-title" data-en="BASc Computer Engineering (CO-OP)" data-fr="Baccalauréat en génie informatique (CO-OP)">BASc Computer Engineering (CO-OP)</div>
-            <div class="ctl-sub" data-en="University of Ottawa " data-fr="Université d'Ottawa"></div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> Jan 2022 - <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
-          </div><div class="ctl-empty"></div>
+            <div class="ctl-sub" data-en="University of Ottawa" data-fr="Université d'Ottawa">University of Ottawa</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> Jan 2022 – <span data-en="Dec" data-fr="Déc">Dec</span> 2026</div>
+          </div>
+          <div class="ctl-empty"></div>
         </div>
       </div>
     </div>
+
     <div class="tl-panel" id="tab-work">
       <div class="center-timeline reveal">
         <div class="ctl-item">
           <div class="ctl-empty"></div>
           <div class="ctl-right">
-            <div class="ctl-title" data-en="IT Asset Management & AI Systems QA" data-fr="Gestion des actifs TI & QA de systèmes d'IA">IT Research (IT Asset Management & AI Systems QA)</div>
+            <div class="ctl-title" data-en="IT Asset Management & AI Systems QA" data-fr="Gestion des actifs TI & QA de systèmes d'IA">IT Research (IT Asset Management &amp; AI Systems QA)</div>
             <div class="ctl-sub" data-en="University of Ottawa · IT Research" data-fr="Université d'Ottawa · Recherche TI">University of Ottawa · IT Research</div>
             <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="May 2025 – Present" data-fr="Mai 2025 – Présent">May 2025 – Present</span></div>
           </div>
@@ -627,26 +375,29 @@
           <div class="ctl-left">
             <div class="ctl-title" data-en="Software Testing Specialist" data-fr="Spécialiste en tests logiciels">Software Testing Specialist</div>
             <div class="ctl-sub" data-en="Nordion Inc." data-fr="Nordion Inc.">Nordion Inc. · Outstanding CO-OP</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Sep - Dec 2024" data-fr="Sep - Déc 2024">Sep – Dec 2024</span></div>
-          </div><div class="ctl-empty"></div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Sep – Dec 2024" data-fr="Sep – Déc 2024">Sep – Dec 2024</span></div>
+          </div>
+          <div class="ctl-empty"></div>
         </div>
         <div class="ctl-item">
           <div class="ctl-empty"></div>
           <div class="ctl-right">
             <div class="ctl-title" data-en="Engineering PM &amp; Software Developer" data-fr="Chef de projet ingénierie &amp; Développeuse logiciel">Engineering PM &amp; Software Developer</div>
-            <div class="ctl-sub" data-en="Nordion Inc. " data-fr="Nordion Inc">Nordion Inc. · 2× Outstanding CO-OP</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan - Dec 2024" data-fr="Jan - Déc 2024">Jan – Dec 2024</span></div>
+            <div class="ctl-sub" data-en="Nordion Inc." data-fr="Nordion Inc.">Nordion Inc. · 2× Outstanding CO-OP</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Jan – Dec 2024" data-fr="Jan – Déc 2024">Jan – Dec 2024</span></div>
           </div>
         </div>
         <div class="ctl-item">
           <div class="ctl-left">
             <div class="ctl-title" data-en="Reception Attendant" data-fr="Réceptioniste">Lead Reception Attendant</div>
-            <div class="ctl-sub" data-en="University of Ottawa · Student Affairs" data-fr="Université d'Ottawa ·Affaires étudiantes">University of Ottawa — Student Affairs</div>
-            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Aug 2022 - May 2026" data-fr="Août 2022 - Mai 2026">Aug 2022 – Present</span></div>
-          </div><div class="ctl-empty"></div>
+            <div class="ctl-sub" data-en="University of Ottawa · Student Affairs" data-fr="Université d'Ottawa · Affaires étudiantes">University of Ottawa — Student Affairs</div>
+            <div class="ctl-date"><i class="bi bi-calendar3"></i> <span data-en="Aug 2022 – Present" data-fr="Août 2022 – Présent">Aug 2022 – Present</span></div>
+          </div>
+          <div class="ctl-empty"></div>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -658,42 +409,47 @@
       <p data-en="Take a look at my recent case studies." data-fr="Découvrez mes études de cas récents.">Take a look at my recent designs.</p>
     </div>
     <div class="portfolio-grid reveal">
+
       <a class="port-card" href="project1.html" style="display:block;color:inherit;text-decoration:none;">
         <div class="port-thumb pt-1"><i class="bi bi-scissors"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 01</div>
           <div class="port-title" data-en="Service Website" data-fr="Site de service">Service Website</div>
-          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-desc"  data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
           <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
+
       <a class="port-card" href="project2.html" style="display:block;color:inherit;text-decoration:none;">
         <div class="port-thumb pt-2"><i class="bi bi-grid-3x3"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 02</div>
           <div class="port-title" data-en="Memory Game" data-fr="Jeu de mémoire">Memory Game</div>
-          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-desc"  data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
           <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
+
       <a class="port-card" href="project3.html" style="display:block;color:inherit;text-decoration:none;">
         <div class="port-thumb pt-3"><i class="bi bi-shop"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 03</div>
           <div class="port-title" data-en="E-Commerce Site" data-fr="Site de commerce électronique">E-Commerce Site</div>
-          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-desc"  data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
           <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
+
       <a class="port-card" href="project4.html" style="display:block;color:inherit;text-decoration:none;">
         <div class="port-thumb pt-4"><i class="bi bi-bar-chart-line-fill"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
         <div class="port-body">
           <div class="port-num">Design 04</div>
           <div class="port-title" data-en="Bilingual analytics website" data-fr="Site d'analytique bilingue">Bilingual analytics website</div>
-          <div class="port-desc" data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
+          <div class="port-desc"  data-en="Description coming soon" data-fr="Description à venir">Description coming soon</div>
           <div class="port-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
         </div>
       </a>
+
     </div>
   </div>
 </section>
@@ -708,15 +464,15 @@
     <form class="contact-form reveal" action="#" method="post">
       <div class="form-group">
         <label data-en="Name" data-fr="Nom">Name</label>
-        <input type="text" data-en-placeholder="Your name" data-fr-placeholder="Votre nom" placeholder="Your name"/>
+        <input type="text"  data-en-placeholder="Your name"       data-fr-placeholder="Votre nom"         placeholder="Your name">
       </div>
       <div class="form-group">
         <label data-en="Email" data-fr="Courriel">Email</label>
-        <input type="email" data-en-placeholder="your@email.com" data-fr-placeholder="votre@courriel.com" placeholder="your@email.com"/>
+        <input type="email" data-en-placeholder="your@email.com"  data-fr-placeholder="votre@courriel.com" placeholder="your@email.com">
       </div>
       <div class="form-group">
         <label data-en="Subject" data-fr="Objet">Subject</label>
-        <input type="text" data-en-placeholder="Subject" data-fr-placeholder="Objet" placeholder="Subject"/>
+        <input type="text"  data-en-placeholder="Subject"         data-fr-placeholder="Objet"              placeholder="Subject">
       </div>
       <div class="form-group">
         <label data-en="Message" data-fr="Message">Message</label>
@@ -729,6 +485,7 @@
     </form>
   </div>
 </section>
+
 </main>
 
 <!-- ══════════════════════ FOOTER ══════════════════════ -->
@@ -736,7 +493,7 @@
   <div class="container">
     <div class="footer-brand">
       <span>Aya El Hadouti.</span>
-      <img src="Uottawalogo.png" alt="uOttawa Logo" title="University of Ottawa" />
+      <img src="image/Uottawalogo.png" alt="uOttawa Logo" title="University of Ottawa">
     </div>
     <p style="font-size:.875rem;margin-bottom:1rem;" data-en="Computer Engineering" data-fr="Étudiante en génie informatique">Computer Engineering</p>
     <nav class="footer-nav">
@@ -749,81 +506,14 @@
     </nav>
     <div class="social-row">
       <a href="mailto:Aelha098@uottawa.ca" class="social-btn" title="Email"><i class="bi bi-envelope-fill"></i></a>
-      <a href="https://github.com/AYAelhadouti" target="_blank" rel="noopener" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>    </div>
-    <p class="footer-copy">© 2026 Aya El Hadouti · SEG3525 · All rights reserved </p>
+      <a href="https://github.com/AYAelhadouti" target="_blank" rel="noopener" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>
+    </div>
+    <p class="footer-copy">© 2026 Aya El Hadouti · SEG3525 · All rights reserved</p>
   </div>
 </footer>
 
-<script>
-/* ─── DARK MODE ─── */
-const darkBtn  = document.getElementById('darkBtn');
-const darkIcon = document.getElementById('darkIcon');
+<!-- Portfolio JS (deferred so DOM is ready) -->
+<script src="js/main.js" defer></script>
 
-function setDark(on) {
-  document.body.classList.toggle('dark', on);
-  darkIcon.className = on ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
-  localStorage.setItem('darkMode', on ? '1' : '0');
-}
-
-darkBtn.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
-if (localStorage.getItem('darkMode') === '1') setDark(true);
-
-/* ─── LANGUAGE TOGGLE ─── */
-const langBtn = document.getElementById('langBtn');
-let currentLang = localStorage.getItem('lang') || 'en';
-
-function applyLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-  langBtn.textContent = lang === 'en' ? 'FR' : 'EN';
-  document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
-
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const val = el.getAttribute('data-' + lang);
-    if (val !== null) el.innerHTML = val;
-  });
-
-  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-    el.placeholder = el.getAttribute('data-' + lang + '-placeholder') || el.placeholder;
-  });
-}
-
-langBtn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'fr' : 'en'));
-if (currentLang === 'fr') applyLang('fr');
-
-/* ─── MOBILE NAV ─── */
-const navToggle = document.getElementById('navToggle');
-const navLinks  = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', navLinks.classList.contains('open'));
-});
-
-/* ─── SKILL ACCORDION ─── */
-window.toggleSkill = function(header) { header.closest('.skill-group').classList.toggle('open'); };
-
-/* ─── QUALIFICATION TABS ─── */
-window.switchTab = function(id, el) {
-  document.querySelectorAll('.tl-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  el.classList.add('active');
-};
-
-/* ─── SCROLL REVEAL ─── */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-/* ─── ACTIVE NAV LINK ─── */
-const sections   = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-  navAnchors.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
-});
-</script>
 </body>
 </html>
