@@ -122,18 +122,37 @@
     </div>
     <div class="hiw-grid reveal">
 
-      <!-- Approach -->
-      <div class="hiw-card">
-        <div class="hiw-card-icon"><i class="bi bi-lightbulb-fill"></i></div>
-        <div class="hiw-card-title" data-en="Current Course" data-fr="Formation en cours">Current Course</div>
-        <ul class="approach-list">
-          <li data-en="I am taking SEG3525: Design and Analysis of User Interfaces at the University of Ottawa. I am learning visual communication principles, user-centered design and heuristic evaluations."
-              data-fr="Je suis le cours SEG3525: Conception et Analyse des Interfaces Usagers à l'Université d'Ottawa. J'apprends les principes de communication visuelle, le design centré sur l'usager et les évaluations heuristiques.">
-          </li>
-            <a href="https://catalogue.uottawa.ca/en/courses/seg/" target="_blank" rel="noopener noreferrer">
-            <strong><i class="bi bi-link-45deg"></i> SEG3525 Description</strong>
-            </a>
-        </ul>
+      <!-- Left column: Current Course + Tools & Stack -->
+      <div class="hiw-left-col">
+
+        <!-- Approach -->
+        <div class="hiw-card">
+          <div class="hiw-card-icon"><i class="bi bi-lightbulb-fill"></i></div>
+          <div class="hiw-card-title" data-en="Current Course" data-fr="Formation en cours">Current Course</div>
+          <ul class="approach-list" style="padding-bottom:2.3rem;">
+            <li data-en="I am taking SEG3525: Design and Analysis of User Interfaces at the University of Ottawa. I am learning visual communication principles, user-centered design and heuristic evaluations."
+                data-fr="Je suis le cours SEG3525: Conception et Analyse des Interfaces Usagers à l'Université d'Ottawa. J'apprends les principes de communication visuelle, le design centré sur l'usager et les évaluations heuristiques.">
+            </li>
+              <a href="https://catalogue.uottawa.ca/en/courses/seg/" target="_blank" rel="noopener noreferrer">
+              <strong><i class="bi bi-link-45deg"></i> SEG3525 Description</strong>
+              </a>
+          </ul>
+        </div>
+
+        <!-- Tools -->
+        <div class="hiw-card">
+          <div class="hiw-card-icon"><i class="bi bi-tools"></i></div>
+          <div class="hiw-card-title" data-en="Tools &amp; Stack" data-fr="Outils &amp; Stack">Tools &amp; Stack</div>
+          <div class="tools-wrap">
+            <span class="tool-chip"><i class="bi bi-github"></i>GitHub</span>
+            <span class="tool-chip"><i class="bi bi-vector-pen"></i>Figma</span>
+            <span class="tool-chip"><i class="bi bi-code-square"></i>VS Code</span>
+            <span class="tool-chip"><i class="bi bi-bootstrap-fill"></i>Bootstrap</span>
+            <span class="tool-chip"><i class="bi bi-activity"></i>Jira</span>
+            <span class="tool-chip"><i class="bi bi-git"></i>Git</span>
+          </div>
+        </div>
+
       </div>
 
       <!-- Workflow -->
@@ -155,7 +174,7 @@
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Wireframing:" data-fr="Maquettage:">Wireframing</strong>
               <span data-en="Create sketches and organize the interface structure using Figma"
-                    data-fr="Créer des esquisses et organiser la structure de l’interface avec Figma."> — low-fidelity sketches &amp; layout planning with Figma</span>
+                    data-fr="Créer des esquisses et organiser la structure de l'interface avec Figma."> — low-fidelity sketches &amp; layout planning with Figma</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
@@ -173,7 +192,7 @@
             <span style="font-size:.9rem;color:var(--text);">
               <strong style="color:var(--dark);" data-en="Evaluation:" data-fr="Évaluation:">Heuristic Evaluation</strong>
               <span data-en="Analyze the interface using heuristics to improve usability."
-                    data-fr="Analyser l’interface avec des heuristiques pour améliorer l’utilisabilité."> — applying Nielsen's 10 heuristics to identify usability issues</span>
+                    data-fr="Analyser l'interface avec des heuristiques pour améliorer l'utilisabilité."> — applying Nielsen's 10 heuristics to identify usability issues</span>
             </span>
           </div>
           <div style="width:2px;height:14px;background:var(--border);margin-left:12px;"></div>
@@ -185,20 +204,6 @@
                     data-fr="Recueillir les retours des utilisateurs et améliorer le design de façon itérative."> — usability tests, feedback analysis &amp; iterative design refinement</span>
             </span>
           </div>
-        </div>
-      </div>
-
-      <!-- Tools -->
-      <div class="hiw-card">
-        <div class="hiw-card-icon"><i class="bi bi-tools"></i></div>
-        <div class="hiw-card-title" data-en="Tools &amp; Stack" data-fr="Outils &amp; Stack">Tools &amp; Stack</div>
-        <div class="tools-wrap">
-          <span class="tool-chip"><i class="bi bi-github"></i>GitHub</span>
-          <span class="tool-chip"><i class="bi bi-vector-pen"></i>Figma</span>
-          <span class="tool-chip"><i class="bi bi-code-square"></i>VS Code</span>
-          <span class="tool-chip"><i class="bi bi-bootstrap-fill"></i>Bootstrap</span>
-          <span class="tool-chip"><i class="bi bi-activity"></i>Jira</span>
-          <span class="tool-chip"><i class="bi bi-git"></i>Git</span>
         </div>
       </div>
 
@@ -401,7 +406,10 @@
     <div class="portfolio-grid reveal">
 
       <a class="port-card" href="project1.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-1"><i class="bi bi-scissors"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
+        <div class="port-thumb" style="padding:0;overflow:hidden;background:none;">
+          <img src="image/Siteservice.jpg" alt="Service Website" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          <span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span>
+        </div>
         <div class="port-body">
           <div class="port-num">Design 01</div>
           <div class="port-title" data-en="Service Website" data-fr="Site de service">Service Website</div>
@@ -411,7 +419,10 @@
       </a>
 
       <a class="port-card" href="project2.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-2"><i class="bi bi-grid-3x3"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
+        <div class="port-thumb" style="padding:0;overflow:hidden;background:none;">
+          <img src="image/MemoryGame.jpg" alt="Memory Game" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          <span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span>
+        </div>
         <div class="port-body">
           <div class="port-num">Design 02</div>
           <div class="port-title" data-en="Memory Game" data-fr="Jeu de mémoire">Memory Game</div>
@@ -421,7 +432,10 @@
       </a>
 
       <a class="port-card" href="project3.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-3"><i class="bi bi-shop"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
+        <div class="port-thumb" style="padding:0;overflow:hidden;background:none;">
+          <img src="image/Ecommerce.png" alt="E-Commerce Site" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          <span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span>
+        </div>
         <div class="port-body">
           <div class="port-num">Design 03</div>
           <div class="port-title" data-en="E-Commerce Site" data-fr="Site de commerce électronique">E-Commerce Site</div>
@@ -431,7 +445,10 @@
       </a>
 
       <a class="port-card" href="project4.html" style="display:block;color:inherit;text-decoration:none;">
-        <div class="port-thumb pt-4"><i class="bi bi-bar-chart-line-fill"></i><span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span></div>
+        <div class="port-thumb" style="padding:0;overflow:hidden;background:none;">
+          <img src="image/Analytics.jpg" alt="Bilingual analytics website" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          <span class="soon-pill" data-en="Coming Soon" data-fr="À venir">Coming Soon</span>
+        </div>
         <div class="port-body">
           <div class="port-num">Design 04</div>
           <div class="port-title" data-en="Bilingual analytics website" data-fr="Site d'analytique bilingue">Bilingual analytics website</div>
@@ -502,7 +519,6 @@
   </div>
 </footer>
 
-<!-- Portfolio JS (deferred so DOM is ready) -->
 <script src="js/main.js" defer></script>
 
 </body>

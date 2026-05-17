@@ -316,8 +316,11 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 ══════════════════════════════════════════════════════════════════ */
 #how-i-work { background: var(--white); }
 
-.hiw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-@media (max-width: 900px) { .hiw-grid { grid-template-columns: 1fr 1fr; } }
+.hiw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; width: 100%; }
+.hiw-left-col { display: flex; flex-direction: column; gap: 2rem; }
+.hiw-left-col .hiw-card { flex: 1; }
+.hiw-grid > .hiw-card { display: flex; flex-direction: column; }
+@media (max-width: 900px) { .hiw-grid { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .hiw-grid { grid-template-columns: 1fr; } }
 
 .hiw-card {
