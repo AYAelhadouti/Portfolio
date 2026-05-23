@@ -55,6 +55,7 @@ a { color: var(--pink); text-decoration: none; transition: color .2s; }
 a:hover { color: var(--pink-md); }
 
 .container { max-width: 968px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+@media (max-width: 480px) { .container { padding: 0 1.25rem; } }
 section { padding: 5.5rem 0; }
 .bg-off { background: var(--off); }
 
@@ -295,7 +296,10 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 
 .about-text p { font-size: 1rem; color: var(--text); margin-bottom: 1.5rem; text-align: justify; }
 .about-stats { display: flex; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-@media (max-width: 768px) { .about-stats { justify-content: center; } }
+@media (max-width: 768px) {
+  .about-stats { justify-content: center; }
+  .about-text p { font-size: 0.95rem; text-align: left; word-break: break-word; overflow-wrap: break-word; hyphens: auto; padding: 0 0.25rem; }
+}
 .stat-num { font-size: 2rem; font-weight: 700; color: var(--dark); line-height: 1; }
 .stat-lbl { font-size: .875rem; color: var(--muted); }
 
