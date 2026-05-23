@@ -1,9 +1,6 @@
-/* ══════════════════════════════════════════════════════════════════
-   Aya El Hadouti -  Portfolio - Devoir 1
-   SEG3525
-   ══════════════════════════════════════════════════════════════════ */
+/* ──  Aya El Hadouti -  Portfolio - Devoir 1 - SEG3525 ── */
 
-/* ── DARK MODE ── */
+/* ── Dark Mode ── */
 const darkBtn  = document.getElementById('darkBtn');
 const darkIcon = document.getElementById('darkIcon');
 
@@ -17,7 +14,7 @@ darkBtn.addEventListener('click', () => setDark(!document.body.classList.contain
 if (localStorage.getItem('darkMode') === '1') setDark(true);
 
 
-/* ── LANGUAGE TOGGLE ── */
+/* ── Language Toggle ── */
 const langBtn = document.getElementById('langBtn');
 let currentLang = localStorage.getItem('lang') || 'en';
 
@@ -41,7 +38,7 @@ langBtn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'fr' : 
 if (currentLang === 'fr') applyLang('fr');
 
 
-/* ── MOBILE NAV ── */
+/* ── Mobile Navbar ── */
 const navToggle = document.getElementById('navToggle');
 const navLinks  = document.getElementById('navLinks');
 
@@ -51,13 +48,13 @@ navToggle.addEventListener('click', () => {
 });
 
 
-/* ── SKILL ACCORDION ── */
+/* ── Skill Accord ── */
 window.toggleSkill = function(header) {
   header.closest('.skill-group').classList.toggle('open');
 };
 
 
-/* ── QUALIFICATION TABS ── */
+/* ── Qualifications Tabs ── */
 window.switchTab = function(id, el) {
   document.querySelectorAll('.tl-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
@@ -66,7 +63,7 @@ window.switchTab = function(id, el) {
 };
 
 
-/* ── SCROLL REVEAL ── */
+/* ── Scroll Reveal ── */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -79,7 +76,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-/* ── ACTIVE NAV LINK ── */
+/* ── Active Nav Link ── */
 const sections   = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav-links a');
 
