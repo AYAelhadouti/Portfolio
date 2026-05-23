@@ -1,9 +1,6 @@
-/* ══════════════════════════════════════════════════════════════════
-   Aya El Hadouti -  Portfolio - Devoir 1
-   SEG3525
-   ══════════════════════════════════════════════════════════════════ */
+/* ──  Aya El Hadouti -  Portfolio - Devoir 1 - SEG3525 ── */
 
-/* ── LIGHT THEME (default) ── */
+/* ── Light theme ( par default) ── */
 :root {
   --pink:    #dc267f;
   --pink-lt: #fce8f3;
@@ -21,7 +18,7 @@
   --footer-bg:#2b2d42;
 }
 
-/* ── DARK THEME ── */
+/* ── Dark theme ── */
 body.dark {
   --white:    #12111a;
   --off:      #1c1b27;
@@ -36,7 +33,7 @@ body.dark {
   --footer-bg:#0e0d17;
 }
 
-/* ── RESET ── */
+/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
@@ -60,17 +57,12 @@ section { padding: 5.5rem 0; }
 .bg-off { background: var(--off); }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   SECTION HEADER
-══════════════════════════════════════════════════════════════════ */
+/* ── Header Section ── */
 .sec-head { text-align: center; margin-bottom: 3.5rem; }
 .sec-head h2 { font-size: 2.5rem; font-weight: 700; color: var(--dark); margin-bottom: .35rem; }
 .sec-head p  { font-size: 1rem; color: var(--muted); }
 
-
-/* ══════════════════════════════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════════════════════════════ */
+/* ── Navbar ── */
 .navbar {
   background: var(--nav-bg);
   padding: 1.1rem 0;
@@ -182,9 +174,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   BUTTONS
-══════════════════════════════════════════════════════════════════ */
+/* ── Boutons ── */
 .btn-pink {
   display: inline-block;
   background: var(--pink);
@@ -215,9 +205,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 .btn-outline-pink:hover { background: var(--pink); color: #fff; }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   HERO
-══════════════════════════════════════════════════════════════════ */
+/* ── Hero Section ── */
 #home {
   min-height: calc(100vh - 65px);
   display: flex;
@@ -260,9 +248,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   ABOUT
-══════════════════════════════════════════════════════════════════ */
+/* ── About Section ── */
 .about-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
 
 @media (max-width: 768px) {
@@ -315,9 +301,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 .contact-chip i { color: var(--pink); }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   HOW I WORK
-══════════════════════════════════════════════════════════════════ */
+/* ── How I Work Section ── */
 #how-i-work { background: var(--white); }
 
 .hiw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; width: 100%; }
@@ -419,9 +403,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 .tool-chip i { color: var(--pink); font-size: .85rem; }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   SKILLS
-══════════════════════════════════════════════════════════════════ */
+/* ── Skills Section ── */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 4rem; }
 @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
 
@@ -459,9 +441,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   QUALIFICATIONS TIMELINE
-══════════════════════════════════════════════════════════════════ */
+/* ── Qualifications Timeline ── */
 .tl-tabs { display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; }
 .tl-tab {
   font-size: 1rem;
@@ -526,9 +506,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   PORTFOLIO
-══════════════════════════════════════════════════════════════════ */
+/* ── Portfolio Section ── */
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 @media (max-width: 640px) { .portfolio-grid { grid-template-columns: 1fr; } }
 
@@ -569,9 +547,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 .ptag { background: var(--pink-lt); color: var(--pink); font-size: .7rem; font-weight: 600; padding: .18rem .7rem; border-radius: 20px; }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   CONTACT
-══════════════════════════════════════════════════════════════════ */
+/* ── Contact Section ── */
 #contact { background: var(--off); }
 .contact-form { max-width: 540px; margin: 0 auto; }
 .form-group { margin-bottom: 1.2rem; }
@@ -594,9 +570,7 @@ body.dark .dark-toggle i { transform: rotate(180deg); }
 .contact-form .btn-pink { width: 100%; text-align: center; margin-top: .5rem; }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════════════════════════════ */
+/* ── Footer Section ── */
 footer {
   background: var(--footer-bg);
   color: rgba(255,255,255,.65);
@@ -638,9 +612,7 @@ footer {
 .footer-copy { font-size: .75rem; color: rgba(255,255,255,.3); }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   REVEAL ANIMATIONS
-══════════════════════════════════════════════════════════════════ */
+/* ── Reveal Animations ── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 .fade-a { opacity: 0; animation: fadeUp .6s .10s ease forwards; }

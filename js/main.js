@@ -16,7 +16,7 @@ if (localStorage.getItem('darkMode') === '1') setDark(true);
 
 /* ── Language Toggle ── */
 const langBtn = document.getElementById('langBtn');
-let currentLang = localStorage.getItem('lang') || 'en';
+let currentLang = localStorage.getItem('lang') || 'fr';
 
 function applyLang(lang) {
   currentLang = lang;
@@ -35,7 +35,7 @@ function applyLang(lang) {
 }
 
 langBtn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'fr' : 'en'));
-if (currentLang === 'fr') applyLang('fr');
+applyLang(currentLang);
 
 
 /* ── Mobile Navbar ── */
