@@ -4,6 +4,7 @@ export default function Footer({ go }) {
   return (
     <footer className="ft">
       <div className="ft-logo">ÉLARA</div>
+      <div className="ft-tagline">Le sanctuaire de la quiétude</div>
       <div className="ft-contact">
         <div className="ft-contact-item">
           <i className="bi bi-telephone"></i>
@@ -15,11 +16,11 @@ export default function Footer({ go }) {
         </div>
         <div className="ft-contact-item">
           <i className="bi bi-geo-alt"></i>
-          <span>128 Lane, ON M5A 3C4</span>
+          <span>128 Distillery Lane, Ottawa, ON M5A 3C4</span>
         </div>
       </div>
       <p className="ft-copy">© 2026 ÉLARA Wellness</p>
-      <p className="ft-credit">Conçu par Aya El Hadouti - SEG3525 Devoir 2</p>
+      <p className="ft-credit">Conçu par Aya El Hadouti — SEG3525 — Devoir 2</p>
     </footer>
   );
 }

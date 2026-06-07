@@ -49,7 +49,7 @@ export default function PageReservation({ go, reservation, setReservation, confi
     <div ref={ref}>
       <div className="p3-wrap">
         <div className="rv">
-          <h1 className="loc-h1">Votre Sanctuaire<br />à Ottawa</h1>
+          <h1 className="loc-h1">Votre Sanctuaire à Ottawa</h1>
           <p className="loc-desc">Une immersion souterraine au cœur de la ville. L'équilibre parfait entre la pierre brutale et la chaleur ambrée.</p>
           <ul className="info-list">
             <li className="info-row">

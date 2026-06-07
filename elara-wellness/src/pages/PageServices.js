@@ -8,7 +8,7 @@ const SERVICES = {
     { name: 'Massage Intensité Profonde', desc: "60 min de massage profond avec des techniques intensives focalisées sur les zones de tension pour soulager et libérer les muscles.", price: '300$', per: 'par personne', img: 'image/image17.png' },
   ],
   duo: [
-    { name: "Escape Together 60'", desc: "60 min de massage relaxant corps entier en salle privée pour deux, bains thermaux et jus de fruits ensemble.", price: '580$', per: 'par couple', img: 'image/duo2.png', badge: 'En Duo', badgeCls: 'svc-tag-couple', delay: '.0s' },
+    { name: "Escape Together 60'", desc: "60 min de massage relaxant corps entier en salle privée pour deux, bains thermaux et jus de fruits ensemble.", price: '580$', per: 'par couple', img: 'image/duo2.png', badge: 'En Duo', badgeCls: 'svc-tag-couple' },
     { name: 'Bains Évasion Couple', desc: "90 min de bains thermaux à différentes températures conçus pour deux, avec deux jus rafraîchissants pour une relaxation totale à deux.", price: '330$', per: 'par couple', img: 'image/duo1.png', badge: 'En Duo', badgeCls: 'svc-tag-couple', delay: '.14s' },
   ],
   ritual: [

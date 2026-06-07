@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 export default function PageDecouverte({ go, reserver }) {
@@ -10,8 +10,9 @@ export default function PageDecouverte({ go, reserver }) {
       <section className="p1-hero">
         <div className="p1-hero-bg" style={{ backgroundImage: `linear-gradient(to bottom, rgba(19,19,19,.15) 0%, rgba(19,19,19,.45) 65%, rgba(19,19,19,1) 100%), url(${process.env.PUBLIC_URL}/image/image10.png)` }}></div>
         <div className="p1-hero-inner">
-          <h1 className="p1-h1">L'Art du Soin<br />Thérapeutique</h1>
-          <p className="hero-sub">Un sanctuaire souterrain où chaque soin<br />est une cérémonie sensorielle hors du temps.</p>
+          <p className="eyebrow">L'Expérience Ultime</p>
+          <h1 className="p1-h1">L'Art du Soin Thérapeutique</h1>
+          <p className="hero-sub">Un sanctuaire souterrain où chaque soin est une cérémonie sensorielle hors du temps.</p>
         </div>
         <div className="hero-vline"></div>
       </section>
@@ -20,10 +21,10 @@ export default function PageDecouverte({ go, reserver }) {
       <section className="bldg">
         <div className="bldg-text rv">
           <p className="sec-lbl">Un Bâtiment Tissé d'Histoire</p>
-          <h2 className="bldg-h2">Architecture, Histoire&nbsp;&amp;<br />Art de Vivre</h2>
+          <h2 className="bldg-h2">Architecture, Histoire &amp; Art de Vivre</h2>
           <p className="bldg-body">ÉLARA Wellness prend vie dans un bâtiment historique d'architecture Classicisme édouardien, anciennement bureau et entrepôt de la maison d'édition Copp Clark, construit en 1912. Aujourd'hui, cet espace unique de 23&nbsp;000 pieds carrés entièrement consacré à l'art de la relaxation invite les visiteurs à s'immerger dans une expérience de bains thermaux.</p>
           <p className="bldg-body">Huit bains à différentes températures conçus pour soulager les tensions, améliorer la circulation et guider le corps et l'esprit vers une relaxation profonde, sauna sec, salle de vapeur, massages apaisants et rituels exclusifs soigneusement élaborés pour restaurer l'équilibre et élever le bien-être global, corps et âme.</p>
-          <button className="bldg-link btn-ol" onClick={() => go('p2')}>Voir les Expériences</button>
+          <button className="bldg-link btn-ol" onClick={() => go('p2')}>Voir les Expériences →</button>
         </div>
         <div className="bldg-video rv" style={{ transitionDelay: '.18s' }}>
           <div className="bldg-video-wrap">
@@ -36,11 +37,11 @@ export default function PageDecouverte({ go, reserver }) {
       </section>
       <div className="bldg-divider"></div>
 
-      {/* DEEP TISSUE FOCUS */}
+      {/* DEEP TISSUE */}
       <section className="dt">
         <div className="dt-text rv">
           <p className="sec-lbl">Focus Thérapeutique</p>
-          <h2 className="dt-h2">Massage en Profondeur<br />(Deep Tissue)</h2>
+          <h2 className="dt-h2">Massage en Profondeur (Deep Tissue)</h2>
           <p className="dt-body">Une technique rigoureuse ciblant les tensions musculaires profondes pour une régénération totale. Nos praticiens utilisent une pression ferme et des mouvements lents pour atteindre les couches de fascia et de muscles les plus ancrées.</p>
           <ul className="dt-list">
             <li>Récupération Athlétique</li>
@@ -67,7 +68,7 @@ export default function PageDecouverte({ go, reserver }) {
             <div className="ap-pillar-icon">
               <i className="bi bi-person-arms-up" style={{ fontSize: '14px', lineHeight: 1 }}></i>
             </div>
-            <h3 className="ap-pillar-h">Architecture<br />Sensorielle</h3>
+            <h3 className="ap-pillar-h">Architecture Sensorielle</h3>
             <p className="ap-pillar-p">Chaque espace est conçu pour stimuler la déconnexion nerveuse, de la température de l'air aux fréquences sonores hertziennes. Un environnement pensé jusque dans ses moindres détails pour libérer corps et esprit.</p>
             <span className="ap-pillar-tag">Expérience Immersive</span>
           </div>

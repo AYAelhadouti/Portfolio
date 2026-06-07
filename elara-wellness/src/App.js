@@ -33,13 +33,11 @@ export default function App() {
   return (
     <>
       <Nav page={page} go={go} reserver={reserver} />
-
       {page === 'p1' && <PageDecouverte go={go} reserver={reserver} />}
       {page === 'p5' && <PageTherapeutes go={go} reserver={reserver} />}
       {page === 'p2' && <PageServices go={go} reserver={reserver} />}
       {page === 'p3' && <PageReservation go={go} reservation={reservation} setReservation={setReservation} confirmer={confirmer} />}
       {page === 'p4' && <PageConfirmation go={go} reservation={reservation} />}
-
       <Footer go={go} />
     </>
   );
