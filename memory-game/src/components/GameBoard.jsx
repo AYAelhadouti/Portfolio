@@ -1,61 +1,118 @@
-import React from 'react';
+// Was: <div id="screen-game"> + HUD markup + game-area in the original HTML
 import Card from './Card';
-import { LEVELS, THEMES } from '../data/themes';
+import { THEMES, LEVELS } from '../data/themes';
+
+// Tile pixel sizes per grid size — was: .g4 .tile { width:80px } etc. in CSS
+const TILE_SIZE = { 4: 80, 5: 68, 6: 58 };
 
 export default function GameBoard({
-  levelIdx, themeIdx, path, moves, visibleSteps,
-  onCellClick, phase, // 'memo' | 'recall'
+  levelKey, themeKey, cfg,
+  path, playerPath, phase, showIndex,
+  wrongCount, timeLeft,
+  bubble, witchAngry,
+  badTile, okTile,
+  onTileClick, formatTime,
 }) {
-  const lvl = LEVELS[levelIdx];
-  const theme = THEMES[themeIdx];
-  const size = lvl.grid;
-
-  const getCellState = (r, c) => {
-    const pathIdx = path.findIndex(([pr, pc]) => pr === r && pc === c);
-    const isOnPath = pathIdx !== -1;
-
-    if (phase === 'memo') {
-      if (isOnPath && pathIdx < visibleSteps) return 'path';
-      return 'idle';
-    }
-
-    // recall phase
-    const move = moves.find(m => m.r === r && m.c === c);
-    if (move) return move.correct ? 'good' : 'bad';
-    return 'idle';
-  };
-
-  const gridStyle = {
-    display: 'grid',
-    gridTemplateColumns: `repeat(${size}, 1fr)`,
-    gap: 3,
-    background: '#0a0a14',
-    padding: 4,
-    border: '2px solid #2d3561',
-    borderRadius: 4,
-    width: '100%',
-    maxWidth: size === 4 ? 260 : size === 5 ? 290 : 300,
-    margin: '0 auto',
-  };
+  const theme    = THEMES[themeKey];
+  const tileSize = TILE_SIZE[cfg.grid];
+  const total    = cfg.grid * cfg.grid;
 
   return (
-    <div style={gridStyle}>
-      {Array.from({ length: size }, (_, r) =>
-        Array.from({ length: size }, (_, c) => {
-          const isHero = r === path[0]?.[0] && c === path[0]?.[1];
-          const isExit = r === path[path.length - 1]?.[0] && c === path[path.length - 1]?.[1];
-          return (
-            <Card
-              key={`${r}-${c}`}
-              state={getCellState(r, c)}
-              isHero={isHero}
-              isExit={isExit}
-              floorEmoji={theme.floorEmoji}
-              onClick={() => onCellClick(r, c)}
-            />
-          );
-        })
-      )}
+    <div style={{
+      width: '100vw', height: '100vh', position: 'relative',
+      backgroundImage: `url(${theme.bg})`,
+      backgroundSize: 'cover', backgroundPosition: 'center',
+    }}>
+      {/* Dark overlay — was: .bg::after */}
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(5,10,30,0.48)' }} />
+
+      {/* ── HUD ── (was: <div class="hud">) */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '10px 24px', zIndex: 10,
+        background: 'rgba(5,12,35,0.75)', backdropFilter: 'blur(4px)',
+        borderBottom: '1px solid rgba(80,120,220,0.5)',
+      }}>
+        <span style={{ fontFamily: "'Press Start 2P'", fontSize: 11, color: '#f5c518' }}>
+          NIVEAU : {LEVELS[levelKey].label}
+        </span>
+
+        <div style={{ display: 'flex', gap: 20 }}>
+          <HudStat icon="⏱" value={formatTime(timeLeft)} />
+          <HudStat icon="🎯" value={`${playerPath.length}/${path.length}`} />
+          <HudStat icon="✗"  value={`${wrongCount}/${cfg.maxWrong}`} />
+        </div>
+      </div>
+
+      {/* ── Game area ── (was: <div class="game-area">) */}
+      <div style={{
+        position: 'absolute', top: 56, left: 0, right: 0, bottom: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        gap: 28, zIndex: 5,
+      }}>
+        {/* Grid (was: <div id="game-grid">) */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${cfg.grid}, 1fr)`,
+          gap: 4,
+        }}>
+          {Array.from({ length: total }, (_, i) => {
+            // A tile is highlighted if it's the CURRENT tile being revealed
+            const isShowing = phase === 'show' && showIndex < path.length && path[showIndex] === i;
+            return (
+              <Card
+                key={i}
+                tileIndex={i}
+                themeKey={themeKey}
+                isShowing={isShowing}
+                isOk={okTile === i}
+                isBad={badTile === i}
+                size={tileSize}
+                onClick={onTileClick}
+              />
+            );
+          })}
+        </div>
+
+        {/* Side panel — witch + speech bubble (was: <div class="side">) */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          gap: 14, minWidth: 270, maxWidth: 290,
+        }}>
+          {/* Speech bubble (was: <div class="bubble">) */}
+          <div style={{
+            background: 'rgba(10,20,50,0.90)',
+            border: '2px solid rgba(80,120,220,0.5)',
+            borderRadius: 12, padding: '14px 16px',
+            fontSize: 20, lineHeight: 1.45,
+            width: '100%', minHeight: 84, color: '#e8f4ff',
+          }}>
+            <span>{bubble.icon}</span>
+            <span style={{ marginLeft: 8 }}>{bubble.text}</span>
+          </div>
+
+          {/* Witch sprite (was: <div class="witch-sprite">) */}
+          <div style={{
+            width: 180, height: 270,
+            backgroundImage: `url(${witchAngry ? theme.witchAngry : theme.witchNeutral})`,
+            backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom',
+            filter: 'drop-shadow(0 0 12px rgba(120,0,200,.5))',
+            animation: 'float 3s ease-in-out infinite',
+            transition: 'background-image .25s',
+          }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Was: the .hstat elements in the HUD
+function HudStat({ icon, value }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: "'Press Start 2P'", fontSize: 10 }}>
+      <span style={{ color: '#8ba4d0' }}>{icon}</span>
+      <span style={{ color: '#f5c518' }}>{value}</span>
     </div>
   );
 }

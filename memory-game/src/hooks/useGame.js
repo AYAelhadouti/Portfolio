@@ -1,137 +1,185 @@
-import { useState, useCallback, useRef } from 'react';
+// Was: all the global G = { ... } state + every function in the original <script>
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { LEVELS } from '../data/themes';
 
-function generatePath(size, length) {
-  const dirs = [[0,1],[1,0],[0,-1],[-1,0]];
-  let path = [];
-  let r = 0, c = 0;
-  path.push([r, c]);
-  let attempts = 0;
-  while (path.length < length && attempts < 3000) {
-    attempts++;
-    const shuffled = dirs.slice().sort(() => Math.random() - 0.5);
-    let moved = false;
-    for (const [dr, dc] of shuffled) {
-      const nr = r + dr, nc = c + dc;
-      if (nr >= 0 && nr < size && nc >= 0 && nc < size &&
-          !path.some(([pr, pc]) => pr === nr && pc === nc)) {
-        r = nr; c = nc;
-        path.push([r, c]);
-        moved = true;
-        break;
-      }
-    }
-    if (!moved) break;
+// Was: function buildPath(size, len) { ... }
+function buildPath(size, len) {
+  const pool = Array.from({ length: size * size }, (_, i) => i);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  if (path.length < length) return generatePath(size, length);
-  return path;
+  return pool.slice(0, len);
 }
 
 export function useGame() {
-  const [screen, setScreen] = useState('config');
-  const [levelIdx, setLevelIdx] = useState(0);
-  const [themeIdx, setThemeIdx] = useState(0);
-  const [path, setPath] = useState([]);
-  const [lives, setLives] = useState(3);
-  const [moves, setMoves] = useState([]);
-  const [memoProgress, setMemoProgress] = useState(1);
-  const [visibleSteps, setVisibleSteps] = useState(0);
-  const [resultData, setResultData] = useState(null);
+  // ── Screens (was: showScreen / screen-title / screen-game / screen-gameover)
+  const [screen, setScreen]     = useState('config'); // 'config' | 'game' | 'gameover'
 
-  const recallStart = useRef(null);
-  const memoIntervalRef = useRef(null);
-  const stepTimerRef = useRef(null);
+  // ── Config (was: G.level, G.theme)
+  const [levelKey, setLevelKey] = useState('facile');
+  const [themeKey, setThemeKey] = useState('foret');
 
-  const selectLevel = useCallback((idx) => setLevelIdx(idx), []);
-  const selectTheme = useCallback((idx) => setThemeIdx(idx), []);
+  // ── Game state (was: G.path, G.playerPath, G.phase, etc.)
+  const [path,        setPath]        = useState([]);
+  const [playerPath,  setPlayerPath]  = useState([]);
+  const [phase,       setPhase]       = useState('idle');  // 'show' | 'play' | 'done'
+  const [showIndex,   setShowIndex]   = useState(-1);      // which path tile is lit up
+  const [wrongCount,  setWrongCount]  = useState(0);
+  const [timeLeft,    setTimeLeft]    = useState(60);
+  const [elapsed,     setElapsed]     = useState(0);
 
+  // ── UI state (was: setBubble / setWitch calls)
+  const [bubble,      setBubble]      = useState({ icon: '?', text: 'Prêt ?' });
+  const [witchAngry,  setWitchAngry]  = useState(false);
+  const [badTile,     setBadTile]     = useState(null);   // index, flashes red
+  const [okTile,      setOkTile]      = useState(null);   // index, flashes green
+
+  // ── Result
+  const [gameResult,  setGameResult]  = useState(null);   // 'victory' | 'gameover'
+
+  const timerRef = useRef(null);
+  const cfg = LEVELS[levelKey];
+
+  // ── SHOW PATH ANIMATION (was: function showPath() with setInterval)
+  // Advances showIndex every 700ms; when done waits 600ms then starts play
+  useEffect(() => {
+    if (phase !== 'show' || showIndex < 0) return;
+
+    if (showIndex >= path.length) {
+      // All tiles revealed → switch to play after short pause
+      const t = setTimeout(() => {
+        setPhase('play');
+        setShowIndex(-1);
+        setBubble({ icon: '▶', text: 'À toi ! Reproduis le chemin.' });
+      }, 600);
+      return () => clearTimeout(t);
+    }
+
+    // Highlight next tile for 700ms
+    const t = setTimeout(() => setShowIndex(i => i + 1), 700);
+    return () => clearTimeout(t);
+  }, [phase, showIndex, path.length]);
+
+  // ── TIMER (was: function startGTimer() / clearGTimer())
+  useEffect(() => {
+    if (phase !== 'play') return;
+
+    timerRef.current = setInterval(() => {
+      setElapsed(e => e + 1);
+      setTimeLeft(t => Math.max(0, t - 1));
+    }, 1000);
+
+    return () => clearInterval(timerRef.current);
+  }, [phase]);
+
+  // ── TIME OUT (was: inside startGTimer's callback)
+  useEffect(() => {
+    if (phase !== 'play' || timeLeft > 0) return;
+    clearInterval(timerRef.current);
+    setPhase('done');
+    setBubble({ icon: '⏰', text: "Temps écoulé ! La sorcière t'a eu !" });
+    setWitchAngry(true);
+    setGameResult('gameover');
+    const t = setTimeout(() => setScreen('gameover'), 1200);
+    return () => clearTimeout(t);
+  }, [timeLeft, phase]);
+
+  // ── START GAME (was: function newGame() + showPath())
   const startGame = useCallback(() => {
-    const lvl = LEVELS[levelIdx];
-    const newPath = generatePath(lvl.grid, lvl.pathLen);
+    clearInterval(timerRef.current);
+    const newPath = buildPath(cfg.grid, cfg.pathLen);
     setPath(newPath);
-    setMoves([]);
-    setLives(lvl.lives);
-    setVisibleSteps(0);
-    setMemoProgress(1);
-    setScreen('memo');
+    setPlayerPath([]);
+    setWrongCount(0);
+    setElapsed(0);
+    setTimeLeft(cfg.timeLimit);
+    setBubble({ icon: '👁', text: 'Mémorise le chemin !' });
+    setWitchAngry(false);
+    setBadTile(null);
+    setOkTile(null);
+    setGameResult(null);
+    setPhase('show');
+    setShowIndex(0);
+    setScreen('game');
+  }, [cfg]);
 
-    const stepDelay = (lvl.memoTime * 1000) / (lvl.pathLen + 2);
-    let step = 0;
-    const revealNext = () => {
-      step++;
-      setVisibleSteps(step);
-      if (step < lvl.pathLen) stepTimerRef.current = setTimeout(revealNext, stepDelay);
-    };
-    stepTimerRef.current = setTimeout(revealNext, 400);
+  // ── TILE CLICK (was: function onTileClick(tile) { ... })
+  const handleTileClick = useCallback((tileIndex) => {
+    if (phase !== 'play') return;
 
-    const totalMs = lvl.memoTime * 1000;
-    const startTime = Date.now();
-    memoIntervalRef.current = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const remaining = Math.max(0, totalMs - elapsed);
-      setMemoProgress(remaining / totalMs);
-      if (remaining <= 0) {
-        clearInterval(memoIntervalRef.current);
-        clearTimeout(stepTimerRef.current);
-        setVisibleSteps(lvl.pathLen);
-        setTimeout(() => {
-          recallStart.current = Date.now();
-          setMoves([]);
-          setScreen('recall');
-        }, 300);
+    const expected = path[playerPath.length];
+
+    if (tileIndex === expected) {
+      // ✓ Correct tile
+      const newPlayer = [...playerPath, tileIndex];
+      setPlayerPath(newPlayer);
+      setOkTile(tileIndex);
+      setTimeout(() => setOkTile(null), 400);
+
+      if (newPlayer.length === path.length) {
+        clearInterval(timerRef.current);
+        setPhase('done');
+        setBubble({ icon: '★', text: 'Bravo ! Tu as trouvé le chemin !' });
+        setGameResult('victory');
+        setTimeout(() => setScreen('gameover'), 1000);
+      } else {
+        setBubble({ icon: '✓', text: `Continue ! (${newPlayer.length}/${path.length})` });
       }
-    }, 100);
-  }, [levelIdx]);
+    } else {
+      // ✗ Wrong tile
+      const newWrong = wrongCount + 1;
+      setWrongCount(newWrong);
+      setBadTile(tileIndex);
+      setTimeout(() => setBadTile(null), 650);
 
-  const handleCellClick = useCallback((r, c) => {
-    setMoves(prev => {
-      const moveIdx = prev.length;
-      if (moveIdx >= path.length) return prev;
-      const expected = path[moveIdx];
-      const correct = expected[0] === r && expected[1] === c;
-      const next = [...prev, { r, c, correct }];
-
-      if (correct && next.length === path.length) {
-        const elapsed = Math.round((Date.now() - recallStart.current) / 1000);
-        const lvl = LEVELS[levelIdx];
-        const score = Math.max(0, 1000 + (lives * 200) - elapsed * 2 + lvl.pathLen * 50);
-        const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
-        const secs = String(elapsed % 60).padStart(2, '0');
-        setTimeout(() => {
-          setResultData({ won: true, levelName: lvl.name, pathCorrect: next.length, pathTotal: path.length, time: mins+':'+secs, score });
-          setScreen('result');
-        }, 600);
-      } else if (!correct) {
-        const newLives = lives - 1;
-        setLives(newLives);
-        if (newLives <= 0) {
-          const elapsed = Math.round((Date.now() - recallStart.current) / 1000);
-          const lvl = LEVELS[levelIdx];
-          const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
-          const secs = String(elapsed % 60).padStart(2, '0');
-          const correct2 = next.filter(m => m.correct).length;
-          setTimeout(() => {
-            setResultData({ won: false, levelName: lvl.name, pathCorrect: correct2, pathTotal: path.length, time: mins+':'+secs, score: Math.max(0, correct2 * 40) });
-            setScreen('result');
-          }, 600);
-          return next;
-        }
-        setTimeout(() => setMoves(p => p.filter((_, i) => i !== moveIdx)), 700);
+      const left = cfg.maxWrong - newWrong;
+      if (left <= 0) {
+        clearInterval(timerRef.current);
+        setPhase('done');
+        setBubble({ icon: '✗', text: "La sorcière t'a rattrapé !" });
+        setWitchAngry(true);
+        setGameResult('gameover');
+        setTimeout(() => setScreen('gameover'), 1200);
+      } else {
+        setBubble({
+          icon: '!',
+          text: `Mauvais chemin ! (${left} chance${left > 1 ? 's' : ''} restante${left > 1 ? 's' : ''})`,
+        });
+        setWitchAngry(true);
+        setTimeout(() => setWitchAngry(false), 1600);
       }
-      return next;
-    });
-  }, [path, lives, levelIdx]);
+    }
+  }, [phase, path, playerPath, wrongCount, cfg]);
 
-  const goToConfig = useCallback(() => {
-    clearInterval(memoIntervalRef.current);
-    clearTimeout(stepTimerRef.current);
-    setScreen('config');
-  }, []);
+  // ── SCORE (was: computed in showVictory())
+  const score = gameResult === 'victory'
+    ? Math.max(0, Math.floor((cfg.timeLimit - elapsed) * 10 - wrongCount * 50))
+    : 0;
+
+  // ── FORMAT TIME (was: inline in updateHUD())
+  const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
 
   return {
-    screen, levelIdx, themeIdx, path, lives, moves,
-    memoProgress, visibleSteps, resultData,
-    selectLevel, selectTheme, startGame,
-    handleCellClick, goToConfig, replay: goToConfig,
+    // Config
+    screen, setScreen,
+    levelKey, setLevelKey,
+    themeKey, setThemeKey,
+    cfg,
+    // Game state
+    path, playerPath,
+    phase, showIndex,
+    wrongCount,
+    timeLeft, elapsed,
+    // UI
+    bubble, witchAngry,
+    badTile, okTile,
+    // Result
+    gameResult, score,
+    // Actions
+    startGame,
+    handleTileClick,
+    // Util
+    formatTime,
   };
 }

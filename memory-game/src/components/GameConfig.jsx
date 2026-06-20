@@ -1,80 +1,157 @@
-import React from 'react';
+// Was: <div id="screen-title"> in the original HTML
+import { useState } from 'react';
 import { LEVELS, THEMES } from '../data/themes';
 
-export default function GameConfig({ levelIdx, themeIdx, onSelectLevel, onSelectTheme, onStart }) {
-  const theme = THEMES[themeIdx];
+export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKey, onStart }) {
+  const theme = THEMES[themeKey];
 
   return (
-    <div style={s.wrapper}>
-      <img src={theme.bgImg} alt="" style={s.bg} />
-      <img src={theme.heroImg} alt="" style={s.heroLeft} />
-      <img src={theme.witchNeutral} alt="" style={s.witchRight} />
+    <div style={{
+      width: '100vw', height: '100vh', background: '#0d1b3e',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      position: 'relative', overflow: 'hidden',
+    }}>
+      {/* Characters — were <div class="title-chars"> + .char-hero + .char-witch */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0,
+        display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
+        pointerEvents: 'none',
+      }}>
+        <Sprite src={theme.hero}         style={{ marginLeft: 40, animationDelay: '0s' }} />
+        <Sprite src={theme.witchNeutral} style={{ marginRight: 40, animationDelay: '1.5s' }} />
+      </div>
 
-      <div style={s.panel}>
-        <div style={s.titleRow}>
-          <img src="/images/2.png" alt="" style={s.titleIcon} />
-          <div>
-            <div style={s.title}>GRILLE FANTOME</div>
-            <div style={s.subtitle}>LA FUITE DE LA SORCIERE</div>
+      {/* Config panel — was <div class="panel title-panel"> */}
+      <div style={{
+        background: 'rgba(10,20,50,0.90)', border: '2px solid rgba(80,120,220,0.5)',
+        borderRadius: 16, backdropFilter: 'blur(6px)',
+        boxShadow: '0 0 40px rgba(30,60,160,0.6), inset 0 0 20px rgba(0,0,20,0.4)',
+        padding: '36px 48px', textAlign: 'center', minWidth: 560,
+        position: 'relative', zIndex: 1,
+      }}>
+        {/* Title (was: <div class="gtitle"> + <div class="gsub">) */}
+        <div style={{
+          fontFamily: "'Press Start 2P'", fontSize: 22, color: '#f5c518',
+          textShadow: '0 0 20px rgba(245,197,24,.8), 3px 3px 0 #3a2a00',
+          marginBottom: 8, lineHeight: 1.5,
+        }}>
+          Le Chemin du Souvenir
+        </div>
+        <div style={{ fontSize: 18, color: '#8ba4d0', marginBottom: 32, letterSpacing: 2 }}>
+          Mémorise le chemin !
+        </div>
+
+        {/* Level picker (was: .choice-grp + .level-grid) */}
+        <Section label="NIVEAU">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+            {Object.entries(LEVELS).map(([key, cfg]) => (
+              <ChoiceBtn key={key} selected={levelKey === key} onClick={() => setLevelKey(key)}>
+                <strong style={{ display: 'block' }}>{cfg.label}</strong>
+                <span style={{ fontSize: 16, color: '#8ba4d0' }}>
+                  {cfg.grid}×{cfg.grid} · {cfg.pathLen} cases
+                </span>
+              </ChoiceBtn>
+            ))}
           </div>
-          <img src="/images/7.png" alt="" style={{ ...s.titleIcon, width: 30 }} />
-        </div>
+        </Section>
 
-        <div style={s.sectionTitle}>CHOISIS TON AVENTURE</div>
+        {/* Theme picker (was: .choice-grp + .theme-grid) */}
+        <Section label="THÈME">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+            {Object.entries(THEMES).map(([key, t]) => (
+              <ChoiceBtn key={key} selected={themeKey === key} onClick={() => setThemeKey(key)}>
+                <span style={{ fontSize: 36 }}>{t.icon}</span>
+                <span style={{ display: 'block', marginTop: 4 }}>{t.label}</span>
+              </ChoiceBtn>
+            ))}
+          </div>
+        </Section>
 
-        <div style={s.rowLabel}>NIVEAU</div>
-        <div style={s.cardRow}>
-          {LEVELS.map((lvl, i) => (
-            <button key={lvl.id} style={s.levelBtn(levelIdx === i)} onClick={() => onSelectLevel(i)}>
-              <span style={s.lvlName}>{lvl.name.split(' ')[0].toUpperCase()}</span>
-              <span style={s.lvlSize}>{lvl.label}</span>
-              <span style={s.lvlCases}>{lvl.cases}</span>
-            </button>
-          ))}
-        </div>
-
-        <div style={s.rowLabel}>THEME</div>
-        <div style={s.cardRow}>
-          {THEMES.map((th, i) => (
-            <button key={th.id} style={s.themeBtn(themeIdx === i)} onClick={() => onSelectTheme(i)}>
-              <img src={th.icon} alt={th.name} style={s.themeIcon} />
-              <span>{th.name.toUpperCase()}</span>
-            </button>
-          ))}
-        </div>
-
-        <button style={s.startBtn} onClick={onStart}>COMMENCER</button>
-
-        <div style={s.hint}>
-          <img src="/images/6.png" alt="" style={s.hintIcon} />
-          <span style={s.hintText}>Choisis ton niveau et ton theme pour commencer.</span>
-        </div>
+        {/* Start button (was: <button class="start-btn">) */}
+        <StartButton onClick={onStart}>▶ JOUER</StartButton>
       </div>
     </div>
   );
 }
 
-const s = {
-  wrapper: { position: 'relative', width: '100%', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', fontFamily: "'Press Start 2P', monospace" },
-  bg: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', imageRendering: 'pixelated', zIndex: 0 },
-  heroLeft: { position: 'absolute', left: 0, bottom: 0, height: '42%', imageRendering: 'pixelated', zIndex: 2, objectFit: 'contain' },
-  witchRight: { position: 'absolute', right: 0, bottom: 0, height: '50%', imageRendering: 'pixelated', zIndex: 2, objectFit: 'contain' },
-  panel: { position: 'relative', zIndex: 4, background: 'rgba(8,8,20,0.93)', border: '3px solid #3d4570', borderRadius: 6, padding: '20px 22px 18px', width: 340, maxWidth: '88vw', boxShadow: '0 10px 40px rgba(0,0,0,0.8)' },
-  titleRow: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16, borderBottom: '2px solid #2d3561', paddingBottom: 12 },
-  titleIcon: { width: 36, height: 36, objectFit: 'contain', imageRendering: 'pixelated' },
-  title: { fontSize: 11, fontWeight: 700, color: '#f5c842', textShadow: '2px 2px 0 #7a5c00', letterSpacing: 1, lineHeight: 1.4 },
-  subtitle: { fontSize: 6, color: '#8a8a9a', marginTop: 3 },
-  sectionTitle: { textAlign: 'center', fontSize: 7, color: '#f5c842', marginBottom: 10, letterSpacing: 1 },
-  rowLabel: { textAlign: 'center', fontSize: 6, color: '#8a8a9a', marginBottom: 6, letterSpacing: 1 },
-  cardRow: { display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 14 },
-  levelBtn: (sel) => ({ flex: 1, cursor: 'pointer', textAlign: 'center', lineHeight: 1.8, background: sel ? 'rgba(76,175,80,0.15)' : 'rgba(10,10,30,0.8)', border: `2px solid ${sel ? '#4caf50' : '#2d3561'}`, borderRadius: 4, color: sel ? '#7eff7e' : '#c8c8d8', fontFamily: "'Press Start 2P', monospace", fontSize: 6, padding: '10px 6px' }),
-  lvlName: { fontSize: 6, color: '#f5c842', display: 'block', marginBottom: 3 },
-  lvlSize: { fontSize: 10, display: 'block' },
-  lvlCases: { fontSize: 5.5, color: '#8a8a9a', display: 'block', marginTop: 2 },
-  themeBtn: (sel) => ({ flex: 1, cursor: 'pointer', padding: '8px 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, background: sel ? 'rgba(79,195,247,0.12)' : 'rgba(10,10,30,0.8)', border: `2px solid ${sel ? '#4fc3f7' : '#2d3561'}`, borderRadius: 4, color: sel ? '#4fc3f7' : '#c8c8d8', fontFamily: "'Press Start 2P', monospace", fontSize: 6 }),
-  themeIcon: { width: 36, height: 36, objectFit: 'contain', imageRendering: 'pixelated' },
-  startBtn: { width: '100%', background: 'linear-gradient(180deg,#4caf50,#388e3c)', border: '0', borderBottom: '4px solid #1b5e20', borderRadius: 4, color: '#fff', fontFamily: "'Press Start 2P', monospace", fontSize: 9, padding: '12px', cursor: 'pointer', letterSpacing: 2, marginBottom: 10 },
-  hint: { display: 'flex', alignItems: 'center', gap: 6, justifyContent: 'center' },
-  hintIcon: { width: 14, height: 14, imageRendering: 'pixelated', objectFit: 'contain' },
-  hintText: { fontSize: 5.5, color: '#8a8a9a', lineHeight: 1.6 },
-};
+// ── Sub-components ────────────────────────────────────────────────────────
+
+function Sprite({ src, style }) {
+  return (
+    <div style={{
+      width: 160, height: 220,
+      backgroundImage: `url(${src})`,
+      backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom',
+      filter: 'drop-shadow(0 0 10px rgba(60,80,255,0.4))',
+      animation: 'float 3s ease-in-out infinite',
+      ...style,
+    }} />
+  );
+}
+
+// Was: <div class="choice-grp"> with a .sec-lbl label
+function Section({ label, children }) {
+  return (
+    <div style={{
+      background: 'rgba(0,10,40,0.5)', border: '1px solid rgba(80,120,220,0.5)',
+      borderRadius: 12, padding: 16, marginBottom: 20,
+    }}>
+      <p style={{
+        fontFamily: "'Press Start 2P'", fontSize: 10, color: '#8ba4d0',
+        letterSpacing: 3, textTransform: 'uppercase',
+        marginBottom: 12, paddingBottom: 8,
+        borderBottom: '1px solid rgba(80,120,220,0.5)',
+      }}>
+        {label}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+// Was: <button class="cbtn [sel]">
+function ChoiceBtn({ selected, onClick, children }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: selected ? 'rgba(20,60,160,0.9)' : hovered ? 'rgba(40,80,180,0.7)' : 'rgba(20,40,100,0.7)',
+        border: `2px solid ${selected ? '#22c55e' : hovered ? '#3b82f6' : 'rgba(60,100,200,0.4)'}`,
+        boxShadow: selected ? '0 0 12px rgba(34,197,94,0.5)' : 'none',
+        borderRadius: 10, color: '#e8f4ff', fontFamily: "'VT323'", fontSize: 20,
+        cursor: 'pointer', padding: '12px 8px', textAlign: 'center', width: '100%',
+        transition: 'all .15s',
+        transform: hovered ? 'scale(1.04)' : 'scale(1)',
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+// Was: <button class="start-btn">
+function StartButton({ onClick, children }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: 'linear-gradient(135deg,#1d4ed8,#2563eb)',
+        border: '2px solid #60a5fa', borderRadius: 10,
+        color: 'white', fontFamily: "'Press Start 2P'", fontSize: 13,
+        padding: '14px 40px', cursor: 'pointer', letterSpacing: 2,
+        boxShadow: hovered ? '0 6px 28px rgba(37,99,235,.7)' : '0 4px 20px rgba(37,99,235,.5)',
+        marginTop: 8, width: '100%', transition: 'all .15s',
+        transform: hovered ? 'translateY(-2px)' : 'none',
+      }}
+    >
+      {children}
+    </button>
+  );
+}

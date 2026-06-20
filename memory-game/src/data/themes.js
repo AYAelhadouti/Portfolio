@@ -1,53 +1,47 @@
-export const THEMES = [
-  {
-    id: 'forest',
-    name: 'Foret',
-    icon: '/images/3.png',
-    bgImg: '/images/1.png',
-    floorImg: '/images/9.png',
-    pathImg: '/images/8.png',
-    exitImg: '/images/4.png',
-    heroImg: '/images/2.png',
-    witchAngry: '/images/11.png',
-    witchSurprised: '/images/12.png',
-    witchNeutral: '/images/7.png',
-    heroWin: '/images/17.png',
-    heroRun: '/images/14.png',
-  },
-  {
-    id: 'dungeon',
-    name: 'Donjon',
-    icon: '/images/4.png',
-    bgImg: '/images/16.png',
-    floorImg: '/images/9.png',
-    pathImg: '/images/8.png',
-    exitImg: '/images/4.png',
-    heroImg: '/images/2.png',
-    witchAngry: '/images/11.png',
-    witchSurprised: '/images/12.png',
-    witchNeutral: '/images/7.png',
-    heroWin: '/images/17.png',
-    heroRun: '/images/14.png',
-  },
-  {
-    id: 'castle',
-    name: 'Chateau',
-    icon: '/images/5.png',
-    bgImg: '/images/16.png',
-    floorImg: '/images/9.png',
-    pathImg: '/images/8.png',
-    exitImg: '/images/4.png',
-    heroImg: '/images/2.png',
-    witchAngry: '/images/11.png',
-    witchSurprised: '/images/12.png',
-    witchNeutral: '/images/7.png',
-    heroWin: '/images/17.png',
-    heroRun: '/images/14.png',
-  },
-];
+// ── LEVELS ────────────────────────────────────────────────────────────────
+// Was: var LEVELS = { ... } in the original HTML
+export const LEVELS = {
+  facile:    { label: 'Facile',    grid: 4, pathLen: 4,  timeLimit: 60,  maxWrong: 3 },
+  moyen:     { label: 'Moyen',     grid: 5, pathLen: 7,  timeLimit: 90,  maxWrong: 2 },
+  difficile: { label: 'Difficile', grid: 6, pathLen: 10, timeLimit: 120, maxWrong: 1 },
+};
 
-export const LEVELS = [
-  { id: 'beginner',     name: 'Debutant',       grid: 4, pathLen: 5,  memoTime: 3.5, lives: 3, label: '4x4', cases: '5 cases' },
-  { id: 'intermediate', name: 'Intermediaire',   grid: 5, pathLen: 8,  memoTime: 5,   lives: 3, label: '5x5', cases: '8 cases' },
-  { id: 'advanced',     name: 'Avance',          grid: 6, pathLen: 12, memoTime: 7,   lives: 2, label: '6x6', cases: '12 cases' },
-];
+// ── THEMES ────────────────────────────────────────────────────────────────
+// Was: var THEMES = { ... } in the original HTML
+// Images must be placed in public/images/<theme>/
+// witch_neutral.png, witch_angry.png, hero.png are shared across themes
+export const THEMES = {
+  foret: {
+    label: 'Forêt',
+    icon: '🌲',
+    bg:           '/images/foret/bg.jpg',
+    tile:         '/images/foret/tile.jpg',
+    tilePath:     '/images/foret/tile_path.jpg', // highlighted tile during path reveal
+    witchNeutral: '/images/witch_neutral.png',
+    witchAngry:   '/images/witch_angry.png',
+    hero:         '/images/hero.png',
+    fallback:     '#2d6a4f', // background color if image missing
+  },
+  fantastique: {
+    label: 'Fantastique',
+    icon: '✨',
+    bg:           '/images/fantastique/bg.jpg',
+    tile:         '/images/fantastique/tile.jpg',
+    tilePath:     '/images/fantastique/tile_path.jpg',
+    witchNeutral: '/images/witch_neutral.png',
+    witchAngry:   '/images/witch_angry.png',
+    hero:         '/images/hero.png',
+    fallback:     '#6b21a8',
+  },
+  ocean: {
+    label: 'Océan',
+    icon: '🌊',
+    bg:           '/images/ocean/bg.jpg',
+    tile:         '/images/ocean/tile.jpg',
+    tilePath:     '/images/ocean/tile_path.jpg',
+    witchNeutral: '/images/witch_neutral.png',
+    witchAngry:   '/images/witch_angry.png',
+    hero:         '/images/hero.png',
+    fallback:     '#0c4a6e',
+  },
+};

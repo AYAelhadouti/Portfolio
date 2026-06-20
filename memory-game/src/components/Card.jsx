@@ -1,60 +1,49 @@
-import React from 'react';
+// Was: each <div class="tile"> in #game-grid + its click handler
+import { THEMES } from '../data/themes';
 
-export default function Card({ state, onClick, floorEmoji, isHero, isExit }) {
-  const base = {
-    width: '100%',
-    aspectRatio: '1',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: state === 'idle' ? 'pointer' : 'default',
-    fontSize: '1.4rem',
-    border: '2px solid',
-    borderRadius: 2,
-    transition: 'all 0.15s',
-    position: 'relative',
-    userSelect: 'none',
-    imageRendering: 'pixelated',
-  };
+export default function Card({ tileIndex, themeKey, isShowing, isOk, isBad, size, onClick }) {
+  const theme = THEMES[themeKey];
 
-  const styles = {
-    idle: {
-      background: '#1a1a2e',
-      borderColor: isHero ? '#4fc3f7' : isExit ? '#f5c842' : '#2d3561',
-    },
-    path: {
-      background: '#1e3a10',
-      borderColor: '#f5c842',
-      boxShadow: '0 0 0 2px #f5c842 inset',
-      animation: 'pathPulse 0.7s ease-in-out infinite',
-    },
-    good: {
-      background: '#1a3a1a',
-      borderColor: '#4caf50',
-    },
-    bad: {
-      background: '#3a1a1a',
-      borderColor: '#e74c3c',
-    },
-    hover: {
-      background: '#22223a',
-      borderColor: '#2d3561',
-    },
-  };
+  // Visual state — mirrors the .path / .ok / .bad CSS classes from the original
+  let border    = '2px solid rgba(60,80,120,0.5)';
+  let boxShadow = 'none';
+  let animation = undefined;
+  let bgImage   = theme.tile;
 
-  const content = {
-    idle: isHero ? '🧑‍🦱' : isExit ? '🚪' : floorEmoji,
-    path: isHero ? '🧑‍🦱' : isExit ? '🚪' : floorEmoji,
-    good: '✅',
-    bad: '❌',
-  };
+  if (isShowing) {
+    border    = '2px solid #f5c518';
+    boxShadow = '0 0 12px rgba(245,197,24,.7)';
+    bgImage   = theme.tilePath || theme.tile; // highlighted tile during reveal
+  }
+  if (isOk) {
+    border    = '2px solid #22c55e';
+    boxShadow = '0 0 14px rgba(34,197,94,.8)';
+  }
+  if (isBad) {
+    border    = '2px solid #ef4444';
+    boxShadow = '0 0 14px rgba(239,68,68,.9)';
+    animation = 'shake 0.3s ease'; // defined in index.css
+  }
 
   return (
     <div
-      style={{ ...base, ...(styles[state] || styles.idle) }}
-      onClick={state === 'idle' ? onClick : undefined}
-    >
-      {content[state] ?? content.idle}
-    </div>
+      role="button"
+      aria-label={`Tuile ${tileIndex}`}
+      onClick={() => onClick(tileIndex)}
+      style={{
+        width: size,
+        height: size,
+        backgroundImage: `url(${bgImage})`,
+        backgroundColor: theme.fallback, // shown if image fails to load
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        borderRadius: 6,
+        cursor: 'pointer',
+        border,
+        boxShadow,
+        animation,
+        transition: 'box-shadow .12s',
+      }}
+    />
   );
 }
