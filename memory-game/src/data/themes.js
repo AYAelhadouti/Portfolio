@@ -1,5 +1,4 @@
 // ── LEVELS ────────────────────────────────────────────────────────────────
-// Was: var LEVELS = { ... } in the original HTML
 export const LEVELS = {
   facile:    { label: 'Facile',    grid: 4, pathLen: 4,  timeLimit: 60,  maxWrong: 3 },
   moyen:     { label: 'Moyen',     grid: 5, pathLen: 7,  timeLimit: 90,  maxWrong: 2 },
@@ -7,41 +6,40 @@ export const LEVELS = {
 };
 
 // ── THEMES ────────────────────────────────────────────────────────────────
-// Was: var THEMES = { ... } in the original HTML
-// Images must be placed in public/images/<theme>/
-// witch_neutral.png, witch_angry.png, hero.png are shared across themes
+// All images are placed flat in public/images/
+// Shared characters: persoprincipal.png (hero), witchnormal.png (neutral), crane.png (angry)
 export const THEMES = {
   foret: {
-    label: 'Forêt',
-    icon: '🌲',
-    bg:           '/images/foret/bg.jpg',
-    tile:         '/images/foret/tile.jpg',
-    tilePath:     '/images/foret/tile_path.jpg', // highlighted tile during path reveal
-    witchNeutral: '/images/witch_neutral.png',
-    witchAngry:   '/images/witch_angry.png',
-    hero:         '/images/hero.png',
-    fallback:     '#2d6a4f', // background color if image missing
+    label:        'Forêt',
+    icon:         '/images/foret.png',
+    bg:           '/images/backgroundofficiel.png',
+    tile:         '/images/foret.png',
+    tilePath:     '/images/greencube.png',
+    witchNeutral: '/images/witchnormal.png',
+    witchAngry:   '/images/crane.png',
+    hero:         '/images/persoprincipal.png',
+    fallback:     '#2d6a4f',
   },
   fantastique: {
-    label: 'Fantastique',
-    icon: '✨',
-    bg:           '/images/fantastique/bg.jpg',
-    tile:         '/images/fantastique/tile.jpg',
-    tilePath:     '/images/fantastique/tile_path.jpg',
-    witchNeutral: '/images/witch_neutral.png',
-    witchAngry:   '/images/witch_angry.png',
-    hero:         '/images/hero.png',
+    label:        'Fantastique',
+    icon:         '/images/chateau.png',
+    bg:           '/images/backgroundtonnere.png',
+    tile:         '/images/chateau.png',
+    tilePath:     '/images/greencube.png',
+    witchNeutral: '/images/witchnormal.png',
+    witchAngry:   '/images/crane.png',
+    hero:         '/images/persoprincipal.png',
     fallback:     '#6b21a8',
   },
   ocean: {
-    label: 'Océan',
-    icon: '🌊',
-    bg:           '/images/ocean/bg.jpg',
-    tile:         '/images/ocean/tile.jpg',
-    tilePath:     '/images/ocean/tile_path.jpg',
-    witchNeutral: '/images/witch_neutral.png',
-    witchAngry:   '/images/witch_angry.png',
-    hero:         '/images/hero.png',
+    label:        'Océan',
+    icon:         '/images/donjon.png',
+    bg:           '/images/backgroundtonnere.png',
+    tile:         '/images/donjon.png',
+    tilePath:     '/images/greencube.png',
+    witchNeutral: '/images/witchnormal.png',
+    witchAngry:   '/images/crane.png',
+    hero:         '/images/persoprincipal.png',
     fallback:     '#0c4a6e',
   },
 };

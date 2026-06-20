@@ -1,4 +1,3 @@
-// Was: the showScreen() function + window.addEventListener('load', boot)
 import { useGame } from './hooks/useGame';
 import GameConfig from './components/GameConfig';
 import GameBoard  from './components/GameBoard';
@@ -19,11 +18,23 @@ export default function App() {
 
   if (game.screen === 'game') {
     return (
-     <GameBoard
-     levelIdx={levelIdx} themeIdx={themeIdx} path={path}
-     moves={moves} visibleSteps={visibleSteps}
-     onCellClick={handleCellClick} phase={screen}
-     />
+      <GameBoard
+        levelKey={game.levelKey}
+        themeKey={game.themeKey}
+        cfg={game.cfg}
+        path={game.path}
+        playerPath={game.playerPath}
+        phase={game.phase}
+        showIndex={game.showIndex}
+        wrongCount={game.wrongCount}
+        timeLeft={game.timeLeft}
+        bubble={game.bubble}
+        witchAngry={game.witchAngry}
+        badTile={game.badTile}
+        okTile={game.okTile}
+        onTileClick={game.handleTileClick}
+        formatTime={game.formatTime}
+      />
     );
   }
 

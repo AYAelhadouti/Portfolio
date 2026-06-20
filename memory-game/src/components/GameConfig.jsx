@@ -12,25 +12,37 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
       alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
     }}>
-      {/* Characters — were <div class="title-chars"> + .char-hero + .char-witch */}
+      {/* Background image from selected theme */}
+      <img
+        src={theme.bg}
+        alt=""
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover', opacity: 0.35,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Characters — hero left, witch right */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
-        pointerEvents: 'none',
+        pointerEvents: 'none', zIndex: 1,
       }}>
-        <Sprite src={theme.hero}         style={{ marginLeft: 40, animationDelay: '0s' }} />
-        <Sprite src={theme.witchNeutral} style={{ marginRight: 40, animationDelay: '1.5s' }} />
+        <Sprite src={theme.hero}         style={{ marginLeft: 40 }} />
+        <Sprite src={theme.witchNeutral} style={{ marginRight: 40 }} />
       </div>
 
-      {/* Config panel — was <div class="panel title-panel"> */}
+      {/* Config panel */}
       <div style={{
         background: 'rgba(10,20,50,0.90)', border: '2px solid rgba(80,120,220,0.5)',
         borderRadius: 16, backdropFilter: 'blur(6px)',
         boxShadow: '0 0 40px rgba(30,60,160,0.6), inset 0 0 20px rgba(0,0,20,0.4)',
         padding: '36px 48px', textAlign: 'center', minWidth: 560,
-        position: 'relative', zIndex: 1,
+        position: 'relative', zIndex: 2,
       }}>
-        {/* Title (was: <div class="gtitle"> + <div class="gsub">) */}
+        {/* Title */}
         <div style={{
           fontFamily: "'Press Start 2P'", fontSize: 22, color: '#f5c518',
           textShadow: '0 0 20px rgba(245,197,24,.8), 3px 3px 0 #3a2a00',
@@ -42,7 +54,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
           Mémorise le chemin !
         </div>
 
-        {/* Level picker (was: .choice-grp + .level-grid) */}
+        {/* Level picker */}
         <Section label="NIVEAU">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
             {Object.entries(LEVELS).map(([key, cfg]) => (
@@ -56,19 +68,27 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
           </div>
         </Section>
 
-        {/* Theme picker (was: .choice-grp + .theme-grid) */}
+        {/* Theme picker — icon is now a PNG image */}
         <Section label="THÈME">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
             {Object.entries(THEMES).map(([key, t]) => (
               <ChoiceBtn key={key} selected={themeKey === key} onClick={() => setThemeKey(key)}>
-                <span style={{ fontSize: 36 }}>{t.icon}</span>
-                <span style={{ display: 'block', marginTop: 4 }}>{t.label}</span>
+                <img
+                  src={t.icon}
+                  alt={t.label}
+                  style={{
+                    width: 48, height: 48,
+                    objectFit: 'contain',
+                    display: 'block', margin: '0 auto 6px',
+                  }}
+                />
+                <span style={{ display: 'block' }}>{t.label}</span>
               </ChoiceBtn>
             ))}
           </div>
         </Section>
 
-        {/* Start button (was: <button class="start-btn">) */}
+        {/* Start button */}
         <StartButton onClick={onStart}>▶ JOUER</StartButton>
       </div>
     </div>
@@ -90,7 +110,6 @@ function Sprite({ src, style }) {
   );
 }
 
-// Was: <div class="choice-grp"> with a .sec-lbl label
 function Section({ label, children }) {
   return (
     <div style={{
@@ -110,7 +129,6 @@ function Section({ label, children }) {
   );
 }
 
-// Was: <button class="cbtn [sel]">
 function ChoiceBtn({ selected, onClick, children }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -133,7 +151,6 @@ function ChoiceBtn({ selected, onClick, children }) {
   );
 }
 
-// Was: <button class="start-btn">
 function StartButton({ onClick, children }) {
   const [hovered, setHovered] = useState(false);
   return (

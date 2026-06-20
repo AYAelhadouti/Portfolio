@@ -2,7 +2,6 @@
 import Card from './Card';
 import { THEMES, LEVELS } from '../data/themes';
 
-// Tile pixel sizes per grid size — was: .g4 .tile { width:80px } etc. in CSS
 const TILE_SIZE = { 4: 80, 5: 68, 6: 58 };
 
 export default function GameBoard({
@@ -23,10 +22,10 @@ export default function GameBoard({
       backgroundImage: `url(${theme.bg})`,
       backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
-      {/* Dark overlay — was: .bg::after */}
+      {/* Dark overlay */}
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(5,10,30,0.48)' }} />
 
-      {/* ── HUD ── (was: <div class="hud">) */}
+      {/* ── HUD ── */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -39,26 +38,29 @@ export default function GameBoard({
         </span>
 
         <div style={{ display: 'flex', gap: 20 }}>
-          <HudStat icon="⏱" value={formatTime(timeLeft)} />
+          {/* Timer — uses clocklogo.png instead of emoji */}
+          <HudStat
+            icon={<img src="/images/clocklogo.png" alt="timer" style={{ width: 18, height: 18, objectFit: 'contain', verticalAlign: 'middle' }} />}
+            value={formatTime(timeLeft)}
+          />
           <HudStat icon="🎯" value={`${playerPath.length}/${path.length}`} />
           <HudStat icon="✗"  value={`${wrongCount}/${cfg.maxWrong}`} />
         </div>
       </div>
 
-      {/* ── Game area ── (was: <div class="game-area">) */}
+      {/* ── Game area ── */}
       <div style={{
         position: 'absolute', top: 56, left: 0, right: 0, bottom: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         gap: 28, zIndex: 5,
       }}>
-        {/* Grid (was: <div id="game-grid">) */}
+        {/* Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${cfg.grid}, 1fr)`,
           gap: 4,
         }}>
           {Array.from({ length: total }, (_, i) => {
-            // A tile is highlighted if it's the CURRENT tile being revealed
             const isShowing = phase === 'show' && showIndex < path.length && path[showIndex] === i;
             return (
               <Card
@@ -75,12 +77,12 @@ export default function GameBoard({
           })}
         </div>
 
-        {/* Side panel — witch + speech bubble (was: <div class="side">) */}
+        {/* Side panel — witch + speech bubble */}
         <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center',
           gap: 14, minWidth: 270, maxWidth: 290,
         }}>
-          {/* Speech bubble (was: <div class="bubble">) */}
+          {/* Speech bubble */}
           <div style={{
             background: 'rgba(10,20,50,0.90)',
             border: '2px solid rgba(80,120,220,0.5)',
@@ -92,7 +94,7 @@ export default function GameBoard({
             <span style={{ marginLeft: 8 }}>{bubble.text}</span>
           </div>
 
-          {/* Witch sprite (was: <div class="witch-sprite">) */}
+          {/* Witch sprite — switches between neutral and angry PNG */}
           <div style={{
             width: 180, height: 270,
             backgroundImage: `url(${witchAngry ? theme.witchAngry : theme.witchNeutral})`,
@@ -107,7 +109,6 @@ export default function GameBoard({
   );
 }
 
-// Was: the .hstat elements in the HUD
 function HudStat({ icon, value }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: "'Press Start 2P'", fontSize: 10 }}>
