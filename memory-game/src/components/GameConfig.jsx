@@ -1,4 +1,3 @@
-// Was: <div id="screen-title"> in the original HTML
 import { useState } from 'react';
 import { LEVELS, THEMES } from '../data/themes';
 
@@ -12,7 +11,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
       alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
     }}>
-      {/* Background image from selected theme */}
+      {/* Background*/}
       <img
         src={theme.bg}
         alt=""
@@ -24,7 +23,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
         }}
       />
 
-      {/* Characters — hero left, witch right */}
+      {/* Characters*/}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
@@ -68,7 +67,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
           </div>
         </Section>
 
-        {/* Theme picker — icon is now a PNG image */}
+        {/* Theme picker */}
         <Section label="THÈME">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
             {Object.entries(THEMES).map(([key, t]) => (
@@ -94,8 +93,6 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
     </div>
   );
 }
-
-// ── Sub-components ────────────────────────────────────────────────────────
 
 function Sprite({ src, style }) {
   return (

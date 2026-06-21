@@ -1,8 +1,6 @@
-// Was: all the global G = { ... } state + every function in the original <script>
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { LEVELS } from '../data/themes';
 
-// Was: function buildPath(size, len) { ... }
 function buildPath(size, len) {
   const pool = Array.from({ length: size * size }, (_, i) => i);
   for (let i = pool.length - 1; i > 0; i--) {
@@ -13,35 +11,29 @@ function buildPath(size, len) {
 }
 
 export function useGame() {
-  // ── Screens (was: showScreen / screen-title / screen-game / screen-gameover)
-  const [screen, setScreen]     = useState('config'); // 'config' | 'game' | 'gameover'
+  const [screen, setScreen]     = useState('config'); 
 
-  // ── Config (was: G.level, G.theme)
   const [levelKey, setLevelKey] = useState('facile');
   const [themeKey, setThemeKey] = useState('foret');
 
-  // ── Game state (was: G.path, G.playerPath, G.phase, etc.)
   const [path,        setPath]        = useState([]);
   const [playerPath,  setPlayerPath]  = useState([]);
-  const [phase,       setPhase]       = useState('idle');  // 'show' | 'play' | 'done'
-  const [showIndex,   setShowIndex]   = useState(-1);      // which path tile is lit up
+  const [phase,       setPhase]       = useState('idle');  
+  const [showIndex,   setShowIndex]   = useState(-1);      
   const [wrongCount,  setWrongCount]  = useState(0);
   const [timeLeft,    setTimeLeft]    = useState(60);
   const [elapsed,     setElapsed]     = useState(0);
 
-  // ── UI state (was: setBubble / setWitch calls)
   const [bubble,      setBubble]      = useState({ icon: '?', text: 'Prêt ?' });
   const [witchAngry,  setWitchAngry]  = useState(false);
-  const [badTile,     setBadTile]     = useState(null);   // index, flashes red
-  const [okTile,      setOkTile]      = useState(null);   // index, flashes green
+  const [badTile,     setBadTile]     = useState(null);   
+  const [okTile,      setOkTile]      = useState(null);   
 
-  // ── Result
-  const [gameResult,  setGameResult]  = useState(null);   // 'victory' | 'gameover'
+  const [gameResult,  setGameResult]  = useState(null);   
 
   const timerRef = useRef(null);
   const cfg = LEVELS[levelKey];
 
-  // ── SHOW PATH ANIMATION (was: function showPath() with setInterval)
   useEffect(() => {
     if (phase !== 'show' || showIndex < 0) return;
 
@@ -58,7 +50,6 @@ export function useGame() {
     return () => clearTimeout(t);
   }, [phase, showIndex, path.length]);
 
-  // ── TIMER (was: function startGTimer() / clearGTimer())
   useEffect(() => {
     if (phase !== 'play') return;
 
@@ -70,7 +61,6 @@ export function useGame() {
     return () => clearInterval(timerRef.current);
   }, [phase]);
 
-  // ── TIME OUT — step 1: detect timeout and set game over state
   useEffect(() => {
     if (phase !== 'play' || timeLeft > 0) return;
     clearInterval(timerRef.current);
@@ -80,14 +70,12 @@ export function useGame() {
     setGameResult('gameover');
   }, [timeLeft, phase]);
 
-  // ── TIME OUT — step 2: wait 5 seconds then switch screen
   useEffect(() => {
     if (gameResult !== 'gameover' || screen !== 'game') return;
     const t = setTimeout(() => setScreen('gameover'), 5000);
     return () => clearTimeout(t);
   }, [gameResult, screen]);
 
-  // ── START GAME (was: function newGame() + showPath())
   const startGame = useCallback(() => {
     clearInterval(timerRef.current);
     const newPath = buildPath(cfg.grid, cfg.pathLen);
@@ -106,14 +94,12 @@ export function useGame() {
     setScreen('game');
   }, [cfg]);
 
-  // ── TILE CLICK (was: function onTileClick(tile) { ... })
   const handleTileClick = useCallback((tileIndex) => {
     if (phase !== 'play') return;
 
     const expected = path[playerPath.length];
 
     if (tileIndex === expected) {
-      // ✓ Correct tile
       const newPlayer = [...playerPath, tileIndex];
       setPlayerPath(newPlayer);
       setOkTile(tileIndex);
@@ -129,7 +115,6 @@ export function useGame() {
         setBubble({ icon: '/images/flechecorrect.png', text: `Continue ! (${newPlayer.length}/${path.length})` });
       }
     } else {
-      // ✗ Wrong tile
       const newWrong = wrongCount + 1;
       setWrongCount(newWrong);
       setBadTile(tileIndex);
@@ -154,34 +139,26 @@ export function useGame() {
     }
   }, [phase, path, playerPath, wrongCount, cfg]);
 
-  // ── SCORE (was: computed in showVictory())
   const score = gameResult === 'victory'
     ? Math.max(0, Math.floor((cfg.timeLimit - elapsed) * 10 - wrongCount * 50))
     : 0;
 
-  // ── FORMAT TIME (was: inline in updateHUD())
   const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
 
   return {
-    // Config
     screen, setScreen,
     levelKey, setLevelKey,
     themeKey, setThemeKey,
     cfg,
-    // Game state
     path, playerPath,
     phase, showIndex,
     wrongCount,
     timeLeft, elapsed,
-    // UI
     bubble, witchAngry,
     badTile, okTile,
-    // Result
     gameResult, score,
-    // Actions
     startGame,
     handleTileClick,
-    // Util
     formatTime,
   };
 }

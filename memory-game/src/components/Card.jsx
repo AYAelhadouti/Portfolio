@@ -1,10 +1,8 @@
-// Was: each <div class="tile"> in #game-grid + its click handler
 import { THEMES } from '../data/themes';
 
 export default function Card({ tileIndex, themeKey, isShowing, isOk, isBad, size, onClick }) {
   const theme = THEMES[themeKey];
 
-  // Visual state — mirrors the .path / .ok / .bad CSS classes from the original
   let border    = '2px solid rgba(60,80,120,0.5)';
   let boxShadow = 'none';
   let animation = undefined;
@@ -13,7 +11,7 @@ export default function Card({ tileIndex, themeKey, isShowing, isOk, isBad, size
   if (isShowing) {
     border    = '2px solid #f5c518';
     boxShadow = '0 0 12px rgba(245,197,24,.7)';
-    bgImage   = theme.tilePath || theme.tile; // highlighted tile during reveal
+    bgImage   = theme.tilePath || theme.tile; 
   }
   if (isOk) {
   bgImage   = '/images/greencube.png';
@@ -36,7 +34,7 @@ export default function Card({ tileIndex, themeKey, isShowing, isOk, isBad, size
         width: size,
         height: size,
         backgroundImage: `url(${bgImage})`,
-        backgroundColor: theme.fallback, // shown if image fails to load
+        backgroundColor: theme.fallback, 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         borderRadius: 6,

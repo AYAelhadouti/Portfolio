@@ -1,4 +1,3 @@
-// Was: both #screen-victory and #screen-gameover collapsed into one component
 import { useState } from 'react';
 import { LEVELS, THEMES } from '../data/themes';
 
@@ -17,7 +16,7 @@ export default function GameOver({
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
     }}>
-      {/* Fixed end-game background */}
+      {/* end-game background */}
       <img
         src="/images/backgroundfinjeu.png"
         alt=""
@@ -29,7 +28,7 @@ export default function GameOver({
         }}
       />
 
-      {/* Victory: bouncing hero */}
+      {/* Victory*/}
       {victory && (
         <div style={{
           position: 'absolute', left: 80, bottom: 20,
@@ -42,7 +41,7 @@ export default function GameOver({
         }} />
       )}
 
-      {/* Game over: floating angry witch */}
+      {/* Game over */}
       {!victory && (
         <div style={{
           position: 'absolute', right: 60, bottom: 20,

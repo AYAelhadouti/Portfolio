@@ -11,7 +11,7 @@ const STORY2_PARTS = [
 const STORY2 = STORY2_PARTS.map(p => p.text).join('');
 
 export default function Intro({ onDone }) {
-  const [phase, setPhase] = useState('loading'); // 'loading' | 'story1' | 'story2'
+  const [phase, setPhase] = useState('loading');
   const [progress, setProgress] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [charIndex, setCharIndex] = useState(0);
@@ -19,7 +19,7 @@ export default function Intro({ onDone }) {
   const currentStory = phase === 'story1' ? STORY1 : STORY2;
   const storyDone = charIndex >= currentStory.length;
 
-  // ── Loading bar: fills over 3 seconds
+
   useEffect(() => {
     if (phase !== 'loading') return;
     const start = Date.now();
@@ -36,7 +36,7 @@ export default function Intro({ onDone }) {
     return () => clearInterval(interval);
   }, [phase]);
 
-  // ── Typewriter with typing sound
+  
   useEffect(() => {
     if (phase !== 'story1' && phase !== 'story2') return;
     if (charIndex >= currentStory.length) return;
@@ -47,14 +47,14 @@ export default function Intro({ onDone }) {
     return () => clearTimeout(t);
   }, [phase, charIndex, currentStory]);
 
-  // ── Go to story2
+ 
   const goToStory2 = () => {
     setDisplayed('');
     setCharIndex(0);
     setPhase('story2');
   };
 
-  // ── Render story2 with yellow highlight
+
   const renderStory2 = () => {
     let remaining = displayed;
     return STORY2_PARTS.map((part, i) => {
@@ -76,7 +76,7 @@ export default function Intro({ onDone }) {
       alignItems: 'center', justifyContent: 'center',
     }}>
 
-      {/* ── LOADING SCREEN ── */}
+      {/* LOADING SCREEN */}
       {phase === 'loading' && (
         <div style={{ textAlign: 'center', width: 420 }}>
           <div style={{
@@ -111,7 +111,7 @@ export default function Intro({ onDone }) {
         </div>
       )}
 
-      {/* ── STORY 1 SCREEN ── */}
+      {/* STORY 1 SCREEN */}
       {phase === 'story1' && (
         <div style={{ maxWidth: 620, padding: '0 40px', textAlign: 'left' }}>
           <div style={{
@@ -131,7 +131,7 @@ export default function Intro({ onDone }) {
         </div>
       )}
 
-      {/* ── STORY 2 SCREEN ── */}
+      {/* STORY 2 SCREEN */}
       {phase === 'story2' && (
         <div style={{ maxWidth: 620, padding: '0 40px', textAlign: 'left' }}>
           <div style={{

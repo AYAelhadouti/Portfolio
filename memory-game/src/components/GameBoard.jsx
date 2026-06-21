@@ -1,4 +1,3 @@
-// Was: <div id="screen-game"> + HUD markup + game-area in the original HTML
 import Card from './Card';
 import { THEMES, LEVELS } from '../data/themes';
 
@@ -102,7 +101,7 @@ export default function GameBoard({
             <span style={{ marginLeft: 8 }}>{bubble.text}</span>
           </div>
 
-          {/* Witch sprite — switches between neutral and angry PNG */}
+          {/* Witch sprite*/}
           <div style={{
             width: 430, height: 380,
             backgroundImage: `url(${witchAngry ? theme.witchAngry : theme.witchNeutral})`,

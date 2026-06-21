@@ -1,13 +1,9 @@
-// ── LEVELS ────────────────────────────────────────────────────────────────
 export const LEVELS = {
   facile:    { label: 'Facile',    grid: 4, pathLen: 4,  timeLimit: 60,  maxWrong: 3 },
   moyen:     { label: 'Moyen',     grid: 5, pathLen: 7,  timeLimit: 90,  maxWrong: 2 },
   difficile: { label: 'Difficile', grid: 6, pathLen: 10, timeLimit: 120, maxWrong: 1 },
 };
 
-// ── THEMES ────────────────────────────────────────────────────────────────
-// All images are placed flat in public/images/
-// Shared characters: persoprincipal.png (hero), witchnormal.png (neutral), sorciereencolere.png (angry)
 export const THEMES = {
   foret: {
     label:        'Forêt',

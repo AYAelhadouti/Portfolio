@@ -1,7 +1,5 @@
-/* Fonts — was in <link> in the original <head> */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
 
-/* Reset — was: *, *::before, *::after { ... } */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body, #root {
@@ -13,28 +11,23 @@ html, body, #root {
   user-select: none;
 }
 
-/* Keyframes — MUST live in CSS, can't be done with inline styles */
 
-/* Was: @keyframes fl — used by hero + witch on title screen */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-12px); }
 }
 
-/* Was: @keyframes shake — used by .bad tile on wrong click */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25%       { transform: translateX(-5px); }
   75%       { transform: translateX(5px); }
 }
 
-/* Was: @keyframes bounce — used by hero sprite on victory screen */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-16px); }
 }
 
-/* Was: @keyframes pglow — used by "FÉLICITATIONS" text */
 @keyframes pglow {
   0%, 100% { filter: drop-shadow(0 0 8px  rgba(245,197,24,.6)); }
   50%       { filter: drop-shadow(0 0 22px rgba(245,197,24,1)); }
