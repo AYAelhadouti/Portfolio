@@ -39,7 +39,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
         background: 'rgba(10,20,50,0.90)', border: '2px solid rgba(80,120,220,0.5)',
         borderRadius: 16, backdropFilter: 'blur(6px)',
         boxShadow: '0 0 40px rgba(30,60,160,0.6), inset 0 0 20px rgba(0,0,20,0.4)',
-        padding: '36px 48px', textAlign: 'center', minWidth: 560,
+        padding: '36px 24px', textAlign: 'center', minWidth: 320,
         position: 'relative', zIndex: 2,
       }}>
         {/* Title */}
@@ -56,7 +56,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
 
         {/* Level picker */}
         <Section label="NIVEAU">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
             {Object.entries(LEVELS).map(([key, cfg]) => (
               <ChoiceBtn key={key} selected={levelKey === key} onClick={() => setLevelKey(key)}>
                 <strong style={{ display: 'block' }}>{cfg.label}</strong>
@@ -70,14 +70,14 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
 
         {/* Theme picker — icon is now a PNG image */}
         <Section label="THÈME">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
             {Object.entries(THEMES).map(([key, t]) => (
               <ChoiceBtn key={key} selected={themeKey === key} onClick={() => setThemeKey(key)}>
                 <img
                   src={t.icon}
                   alt={t.label}
                   style={{
-                    width: 48, height: 48,
+                    width: 45, height: 45,
                     objectFit: 'contain',
                     display: 'block', margin: '0 auto 6px',
                   }}
@@ -89,7 +89,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
         </Section>
 
         {/* Start button */}
-        <StartButton onClick={onStart}>▶ JOUER</StartButton>
+        <StartButton onClick={onStart}>JOUER</StartButton>
       </div>
     </div>
   );
@@ -100,7 +100,7 @@ export default function GameConfig({ levelKey, setLevelKey, themeKey, setThemeKe
 function Sprite({ src, style }) {
   return (
     <div style={{
-      width: 160, height: 220,
+      width: 420, height: 660,
       backgroundImage: `url(${src})`,
       backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom',
       filter: 'drop-shadow(0 0 10px rgba(60,80,255,0.4))',
@@ -141,7 +141,7 @@ function ChoiceBtn({ selected, onClick, children }) {
         border: `2px solid ${selected ? '#22c55e' : hovered ? '#3b82f6' : 'rgba(60,100,200,0.4)'}`,
         boxShadow: selected ? '0 0 12px rgba(34,197,94,0.5)' : 'none',
         borderRadius: 10, color: '#e8f4ff', fontFamily: "'VT323'", fontSize: 20,
-        cursor: 'pointer', padding: '12px 8px', textAlign: 'center', width: '100%',
+        cursor: 'pointer', padding: '4px 3px', textAlign: 'center', width: '100%',
         transition: 'all .15s',
         transform: hovered ? 'scale(1.04)' : 'scale(1)',
       }}
@@ -166,6 +166,7 @@ function StartButton({ onClick, children }) {
         boxShadow: hovered ? '0 6px 28px rgba(37,99,235,.7)' : '0 4px 20px rgba(37,99,235,.5)',
         marginTop: 8, width: '100%', transition: 'all .15s',
         transform: hovered ? 'translateY(-2px)' : 'none',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
       {children}

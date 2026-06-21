@@ -42,21 +42,18 @@ export function useGame() {
   const cfg = LEVELS[levelKey];
 
   // ── SHOW PATH ANIMATION (was: function showPath() with setInterval)
-  // Advances showIndex every 700ms; when done waits 600ms then starts play
   useEffect(() => {
     if (phase !== 'show' || showIndex < 0) return;
 
     if (showIndex >= path.length) {
-      // All tiles revealed → switch to play after short pause
       const t = setTimeout(() => {
         setPhase('play');
         setShowIndex(-1);
-        setBubble({ icon: '▶', text: 'À toi ! Reproduis le chemin.' });
+        setBubble({ icon: '/images/mouse.png', text: 'À toi ! Reproduis le chemin.' });
       }, 600);
       return () => clearTimeout(t);
     }
 
-    // Highlight next tile for 700ms
     const t = setTimeout(() => setShowIndex(i => i + 1), 700);
     return () => clearTimeout(t);
   }, [phase, showIndex, path.length]);
@@ -73,17 +70,22 @@ export function useGame() {
     return () => clearInterval(timerRef.current);
   }, [phase]);
 
-  // ── TIME OUT (was: inside startGTimer's callback)
+  // ── TIME OUT — step 1: detect timeout and set game over state
   useEffect(() => {
     if (phase !== 'play' || timeLeft > 0) return;
     clearInterval(timerRef.current);
     setPhase('done');
-    setBubble({ icon: '⏰', text: "Temps écoulé ! La sorcière t'a eu !" });
+    setBubble({ icon: '/images/clocklogo.png', text: "Temps écoulé ! La sorcière t'a eu !" });
     setWitchAngry(true);
     setGameResult('gameover');
-    const t = setTimeout(() => setScreen('gameover'), 1200);
-    return () => clearTimeout(t);
   }, [timeLeft, phase]);
+
+  // ── TIME OUT — step 2: wait 5 seconds then switch screen
+  useEffect(() => {
+    if (gameResult !== 'gameover' || screen !== 'game') return;
+    const t = setTimeout(() => setScreen('gameover'), 5000);
+    return () => clearTimeout(t);
+  }, [gameResult, screen]);
 
   // ── START GAME (was: function newGame() + showPath())
   const startGame = useCallback(() => {
@@ -120,11 +122,11 @@ export function useGame() {
       if (newPlayer.length === path.length) {
         clearInterval(timerRef.current);
         setPhase('done');
-        setBubble({ icon: '★', text: 'Bravo ! Tu as trouvé le chemin !' });
+        setBubble({ icon: '/images/trophee.png', text: 'Bravo ! Tu as trouvé le chemin !' });
         setGameResult('victory');
         setTimeout(() => setScreen('gameover'), 1000);
       } else {
-        setBubble({ icon: '✓', text: `Continue ! (${newPlayer.length}/${path.length})` });
+        setBubble({ icon: '/images/flechecorrect.png', text: `Continue ! (${newPlayer.length}/${path.length})` });
       }
     } else {
       // ✗ Wrong tile
@@ -137,13 +139,13 @@ export function useGame() {
       if (left <= 0) {
         clearInterval(timerRef.current);
         setPhase('done');
-        setBubble({ icon: '✗', text: "La sorcière t'a rattrapé !" });
+        setBubble({ icon: '/images/brokenheart.png', text: "La sorcière t'a rattrapé !" });
         setWitchAngry(true);
         setGameResult('gameover');
         setTimeout(() => setScreen('gameover'), 1200);
       } else {
         setBubble({
-          icon: '!',
+          icon: '/images/crane.png',
           text: `Mauvais chemin ! (${left} chance${left > 1 ? 's' : ''} restante${left > 1 ? 's' : ''})`,
         });
         setWitchAngry(true);

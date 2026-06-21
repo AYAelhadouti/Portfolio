@@ -15,14 +15,26 @@ export default function GameOver({
     <div style={{
       width: '100vw', height: '100vh', background: '#0d1b3e',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      position: 'relative',
+      position: 'relative', overflow: 'hidden',
     }}>
-      {/* Victory: bouncing hero (was: <div class="hero-win">) */}
+      {/* Fixed end-game background */}
+      <img
+        src="/images/backgroundfinjeu.png"
+        alt=""
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover', opacity: 0.35,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Victory: bouncing hero */}
       {victory && (
         <div style={{
-          position: 'absolute', left: 60, bottom: 20,
-          width: 150, height: 200,
-          backgroundImage: `url(${theme.hero})`,
+          position: 'absolute', left: 80, bottom: 20,
+          width: 300, height: 350,
+          backgroundImage: `url(/images/personnagefinreussi.png)`,
           backgroundSize: 'contain', backgroundRepeat: 'no-repeat',
           filter: 'drop-shadow(0 0 14px rgba(255,200,0,.5))',
           animation: 'bounce 0.8s ease infinite',
@@ -30,68 +42,65 @@ export default function GameOver({
         }} />
       )}
 
-      {/* Game over: floating angry witch (was: <div class="witch-go">) */}
+      {/* Game over: floating angry witch */}
       {!victory && (
         <div style={{
           position: 'absolute', right: 60, bottom: 20,
           width: 160, height: 220,
-          backgroundImage: `url(${theme.witchAngry})`,
+          backgroundImage: `url(/images/crane.png)`,
           backgroundSize: 'contain', backgroundRepeat: 'no-repeat',
           animation: 'float 2s ease-in-out infinite',
           zIndex: 2,
         }} />
       )}
 
-      {/* Result panel (was: <div class="vpanel"> or <div class="gopanel">) */}
+      {/* Result panel */}
       <div style={{
         background: 'rgba(10,20,50,0.90)', border: '2px solid rgba(80,120,220,0.5)',
         borderRadius: 16, backdropFilter: 'blur(6px)',
         boxShadow: '0 0 40px rgba(30,60,160,0.6)',
-        padding: '32px 48px', textAlign: 'center', minWidth: 460,
+        padding: '19px 32px 32px', textAlign: 'center', minWidth: 460,
         position: 'relative', zIndex: 3,
       }}>
         {victory ? (
-          // Was: <div class="felic-img"> with pglow animation
-          <div style={{
-            fontFamily: "'Press Start 2P'", fontSize: 18, color: '#f5c518',
-            textShadow: '0 0 20px rgba(245,197,24,.8)',
-            marginBottom: 22, animation: 'pglow 1.5s ease infinite',
-          }}>
-            ★ FÉLICITATIONS ★
-          </div>
+          <img
+            src="/images/barfelicitations.png"
+            alt="Felicitations"
+            style={{
+              display: 'block', margin: '0 auto -35px',
+              width: '100%', maxWidth: '100%', height: 200,
+              objectFit: 'cover', objectPosition: 'center',
+              animation: 'pglow 1.5s ease infinite',
+            }}
+          />
         ) : (
-          // Was: <div class="gotitle">
           <>
             <div style={{
-              fontFamily: "'Press Start 2P'", fontSize: 18, color: '#ef4444',
+              fontFamily: "'Press Start 2P'", fontSize: 15, color: '#ef4444',
               textShadow: '0 0 20px rgba(239,68,68,.8), 3px 3px 0 #3a0000',
-              marginBottom: 12, lineHeight: 1.6,
+              marginBottom: 15, lineHeight: 1,
             }}>
               GAME OVER
             </div>
-            <p style={{ fontSize: 22, color: '#8ba4d0', marginBottom: 24 }}>
-              La sorcière t'a rattrapé !
+            <p style={{ fontSize: 22, color: '#8ba4d0', marginBottom: 20 }}>
+              La sorciere t'a rattrape !
             </p>
           </>
         )}
 
-        {/* Stats (was: <div class="vstat"> rows) */}
         <Stat label="Niveau"  value={cfg.label} />
         <Stat label="Temps"   value={formatTime(elapsed)} />
         <Stat label="Erreurs" value={`${wrongCount} / ${cfg.maxWrong}`} />
         {victory && <Stat label="Score" value={`${score} pts`} highlight />}
 
-        {/* Action buttons (was: <div class="act-btns"> + .abtn) */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 20 }}>
-          <ActionBtn onClick={onReplay}>🔄 REJOUER</ActionBtn>
-          <ActionBtn onClick={onMenu} secondary>🏠 MENU</ActionBtn>
+          <ActionBtn onClick={onReplay}>REJOUER</ActionBtn>
+          <ActionBtn onClick={onMenu} secondary>MENU</ActionBtn>
         </div>
       </div>
     </div>
   );
 }
-
-// ── Sub-components ────────────────────────────────────────────────────────
 
 function Stat({ label, value, highlight }) {
   return (

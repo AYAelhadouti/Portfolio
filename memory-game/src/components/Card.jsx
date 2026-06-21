@@ -16,13 +16,15 @@ export default function Card({ tileIndex, themeKey, isShowing, isOk, isBad, size
     bgImage   = theme.tilePath || theme.tile; // highlighted tile during reveal
   }
   if (isOk) {
-    border    = '2px solid #22c55e';
-    boxShadow = '0 0 14px rgba(34,197,94,.8)';
+  bgImage   = '/images/greencube.png';
+  border    = '2px solid #22c55e';
+  boxShadow = '0 0 14px rgba(34,197,94,.8)';
   }
   if (isBad) {
-    border    = '2px solid #ef4444';
-    boxShadow = '0 0 14px rgba(239,68,68,.9)';
-    animation = 'shake 0.3s ease'; // defined in index.css
+  bgImage   = '/images/caserougeerreur.png';
+  border    = '2px solid #ef4444';
+  boxShadow = '0 0 14px rgba(239,68,68,.9)';
+  animation = 'shake 0.3s ease';
   }
 
   return (

@@ -38,13 +38,18 @@ export default function GameBoard({
         </span>
 
         <div style={{ display: 'flex', gap: 20 }}>
-          {/* Timer — uses clocklogo.png instead of emoji */}
           <HudStat
-            icon={<img src="/images/clocklogo.png" alt="timer" style={{ width: 18, height: 18, objectFit: 'contain', verticalAlign: 'middle' }} />}
+            icon={<img src="/images/clocklogo.png" alt="timer" style={{ width:25, height: 25, objectFit: 'contain', verticalAlign: 'middle' }} />}
             value={formatTime(timeLeft)}
           />
-          <HudStat icon="🎯" value={`${playerPath.length}/${path.length}`} />
-          <HudStat icon="✗"  value={`${wrongCount}/${cfg.maxWrong}`} />
+          <HudStat
+            icon={<img src="/images/target.png" alt="target" style={{ width: 25, height: 25, objectFit: 'contain', verticalAlign: 'middle' }} />}
+            value={`${playerPath.length}/${path.length}`}
+          />
+          <HudStat
+            icon={<img src="/images/brokenheart.png" alt="errors" style={{ width: 25, height: 25, objectFit: 'contain', verticalAlign: 'middle' }} />}
+            value={`${wrongCount}/${cfg.maxWrong}`}
+          />
         </div>
       </div>
 
@@ -80,7 +85,7 @@ export default function GameBoard({
         {/* Side panel — witch + speech bubble */}
         <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center',
-          gap: 14, minWidth: 270, maxWidth: 290,
+          gap: 14, minWidth: 340, maxWidth: 400,
         }}>
           {/* Speech bubble */}
           <div style={{
@@ -90,13 +95,16 @@ export default function GameBoard({
             fontSize: 20, lineHeight: 1.45,
             width: '100%', minHeight: 84, color: '#e8f4ff',
           }}>
-            <span>{bubble.icon}</span>
+            {bubble.icon.endsWith('.png')
+  ? <img src={bubble.icon} alt="icon" style={{ width: 50, height: 50, objectFit: 'contain', verticalAlign: 'middle' }} />
+  : <span>{bubble.icon}</span>
+}
             <span style={{ marginLeft: 8 }}>{bubble.text}</span>
           </div>
 
           {/* Witch sprite — switches between neutral and angry PNG */}
           <div style={{
-            width: 180, height: 270,
+            width: 430, height: 380,
             backgroundImage: `url(${witchAngry ? theme.witchAngry : theme.witchNeutral})`,
             backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom',
             filter: 'drop-shadow(0 0 12px rgba(120,0,200,.5))',
