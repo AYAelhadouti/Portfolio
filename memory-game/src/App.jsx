@@ -1,10 +1,18 @@
+import { useState } from 'react';
 import { useGame } from './hooks/useGame';
+import Intro      from './components/Intro';
 import GameConfig from './components/GameConfig';
 import GameBoard  from './components/GameBoard';
 import GameOver   from './components/GameOver';
 
 export default function App() {
   const game = useGame();
+  const [introShown, setIntroShown] = useState(false);
+
+  // Show intro first, then hand off to game screens
+  if (!introShown) {
+    return <Intro onDone={() => setIntroShown(true)} />;
+  }
 
   if (game.screen === 'config') {
     return (
