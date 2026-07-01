@@ -3,12 +3,7 @@ import { PRODUITS } from "../data/produits";
 import { formatPrix } from "../utils/filtrage";
 
 const FEATURED_IDS = [2, 3, 6];
-const IMAGE_URLS = {
-  yacht1: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=400&q=80",
-  yacht2: "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=400&q=80",
-  yacht3: "https://images.unsplash.com/photo-1520854221256-17d7dc783f55?w=400&q=80",
-  yacht6: "https://images.unsplash.com/photo-1577644659649-1a2ca57baf2b?w=400&q=80",
-};
+
 
 export default function HomePage({ onNavigate, onAddToCart }) {
   const featured = PRODUITS.filter((p) => FEATURED_IDS.includes(p.id));

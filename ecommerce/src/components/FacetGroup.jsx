@@ -1,25 +1,60 @@
-// src/components/FacetPanel.jsx
-import FacetGroup from "./FacetGroup";
-
-export default function FacetPanel({ config, filtres, onToggle, onRange, onRadio, onClear }) {
+export default function FacetGroup({ facette, valeurActive, onToggle, onRange, onRadio }) {
   return (
-    <aside className="facet-panel">
-      <div className="facet-panel-header">
-        <h2>Filtres</h2>
-        <button className="btn-clear" onClick={onClear}>
-          Effacer tout
-        </button>
-      </div>
-      {config.map((facette) => (
-        <FacetGroup
-          key={facette.id}
-          facette={facette}
-          valeurActive={filtres[facette.id]}
-          onToggle={onToggle}
-          onRange={onRange}
-          onRadio={onRadio}
-        />
-      ))}
-    </aside>
+    <div className="facet-group">
+      <h3 className="facet-group-label">{facette.label}</h3>
+
+      {facette.type === "checkbox" && (
+        <ul className="facet-options">
+          {facette.options.map((opt) => (
+            <li key={opt}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={valeurActive.includes(opt)}
+                  onChange={() => onToggle(facette.id, opt)}
+                />
+                {opt}
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {facette.type === "radio" && (
+        <ul className="facet-options">
+          {facette.options.map((opt) => (
+            <li key={opt}>
+              <label>
+                <input
+                  type="radio"
+                  name={`facet_${facette.id}`}
+                  checked={valeurActive === opt}
+                  onChange={() => onRadio(facette.id, opt)}
+                />
+                {opt}+
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {facette.type === "range" && (
+        <div className="range-group">
+          <input
+            type="range"
+            min={facette.min}
+            max={facette.max}
+            step={facette.step}
+            value={valeurActive}
+            onChange={(e) => onRange(facette.id, Number(e.target.value))}
+          />
+          <span className="range-value">
+            Max : {Number(valeurActive).toLocaleString("fr-CA", {
+              style: "currency", currency: "CAD", maximumFractionDigits: 0,
+            })}
+          </span>
+        </div>
+      )}
+    </div>
   );
 }

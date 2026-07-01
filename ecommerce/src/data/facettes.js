@@ -1,47 +1,48 @@
-// src/data/facettes.js
 export const CONFIG_FACETTES = [
   {
     id: "categorie",
     label: "Catégorie",
     type: "checkbox",
-    options: ["Voilier", "Yacht à moteur", "Catamaran", "Superyacht"],
+    options: ["Voilier", "Motoryacht", "Catamaran", "Mega-Yacht"],
   },
   {
     id: "marque",
     label: "Marque",
     type: "checkbox",
-    options: ["Bénéteau", "Sunseeker", "Lagoon", "Jeanneau", "Bavaria", "Ferretti", "Riviera", "Leopard", "Prestige", "Fountaine Pajot"],
+    options: ["Beneteau", "Prestige", "Jeanneau", "Sea Ray", "Sessa",
+              "Leopard", "Bavaria", "Sunseeker", "Lexus", "F. Pajot",
+              "H-Rassy", "Azimut"],
   },
   {
     id: "condition",
-    label: "Condition",
+    label: "État",
     type: "checkbox",
     options: ["Neuf", "Occasion"],
   },
   {
     id: "moteur",
-    label: "Motorisation",
+    label: "Propulsion",
     type: "checkbox",
-    options: ["Inboard", "Hors-bord"],
+    options: ["Inbord", "Hors-bord", "Hybride"],
   },
   {
     id: "couleur",
     label: "Couleur",
     type: "checkbox",
-    options: ["Blanc", "Bleu", "Noir"],
+    options: ["Blanc", "Bleu", "Gris", "Noir"],
   },
   {
     id: "cabines",
     label: "Cabines minimum",
     type: "radio",
-    options: [0, 2, 3, 4, 5],
+    options: [2, 3, 4, 5],
   },
   {
     id: "prix",
-    label: "Prix maximum",
+    label: "Prix maximum ($)",
     type: "range",
     min: 0,
-    max: 2000000,
+    max: 4000000,
     step: 50000,
   },
 ];

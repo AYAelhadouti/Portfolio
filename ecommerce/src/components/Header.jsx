@@ -1,32 +1,34 @@
-// src/components/Header.jsx
-export default function Header({ page, onNavigate, cartCount }) {
+export default function Header({ page, onNavigate, cartCount, scrolled }) {
   return (
-    <nav className="navbar">
-      <div className="brand" onClick={() => onNavigate("home")}>
-        ⚓ AZUR YACHTS
+    <nav className={`header${scrolled ? " scrolled" : ""}`}>
+      <div className="header-brand" onClick={() => onNavigate("home")}>
+        <img src="./img/logo.png" alt="Azur Yachts" style={{height:"36px", width:"auto"}} />
+        AZUR <span>YACHTS</span>
       </div>
-      <ul className="nav-links">
+
+      <ul className="header-nav">
         <li>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }}
-             className={page === "home" ? "active" : ""}>
+          <a href="#" className={page === "home" ? "active" : ""}
+            onClick={(e) => { e.preventDefault(); onNavigate("home"); }}>
             Accueil
           </a>
         </li>
         <li>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("search"); }}
-             className={page === "search" ? "active" : ""}>
+          <a href="#" className={page === "search" ? "active" : ""}
+            onClick={(e) => { e.preventDefault(); onNavigate("search"); }}>
             Catalogue
           </a>
         </li>
         <li>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("survey"); }}
-             className={page === "survey" ? "active" : ""}>
-            Votre Avis
+          <a href="#" className={page === "contact" ? "active" : ""}
+            onClick={(e) => { e.preventDefault(); onNavigate("contact"); }}>
+            Nous Contacter
           </a>
         </li>
       </ul>
-      <button className="cart-btn" onClick={onCartOpen}>
-        🛒 Panier
+
+      <button className="cart-btn" onClick={() => onNavigate("cart")}>
+        <i className="bi bi-cart3"></i> Panier
         {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
       </button>
     </nav>

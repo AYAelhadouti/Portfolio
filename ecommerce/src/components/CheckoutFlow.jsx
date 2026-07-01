@@ -1,223 +1,193 @@
-// src/components/CheckoutFlow.jsx
 import { useState } from "react";
-import { formatPrix } from "../utils/filtrage";
 
-export default function CheckoutFlow({ cart, onNavigate, onClearCart }) {
+const STEPS = ["Panier", "Informations", "Paiement", "Confirmation"];
+
+function fmt(n) {
+  return n.toLocaleString("fr-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
+}
+
+function Stepper({ current }) {
+  return (
+    <div className="stepper">
+      {STEPS.map((name, i) => {
+        const stepNum = i + 1;
+        const isDone = stepNum < current;
+        const isActive = stepNum === current;
+        return (
+          <div key={name} className={`step ${isDone ? "done" : ""} ${isActive ? "active" : ""}`}>
+            <div className="step-circle">
+              {isDone ? <i className="bi bi-check-lg"></i> : stepNum}
+            </div>
+            <div className="step-name">{name}</div>
+            {i < STEPS.length - 1 && <div className="step-line" />}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function CheckoutFlow({ cart, onNavigate }) {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({ prenom: "", nom: "", email: "", tel: "", adresse: "" });
-  const [orderNum] = useState("AZ" + Math.floor(Math.random() * 900000 + 100000));
+  const [formData, setFormData] = useState({
+    prenom: "", nom: "", email: "", telephone: "", adresse: "",
+  });
 
-  const total = cart.reduce((s, c) => s + c.prix * c.qty, 0);
+  const total = cart.reduce((sum, item) => sum + item.prix * item.qty, 0);
+  const handleField = (e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const steps = [
-    { id: 1, label: "Panier" },
-    { id: 2, label: "Informations" },
-    { id: 3, label: "Paiement" },
-    { id: 4, label: "Confirmation" },
-  ];
-
-  const handleNext = () => {
-    if (step === 2 && (!form.prenom || !form.email)) {
+  const validateStep2 = () => {
+    if (!formData.prenom || !formData.email) {
       alert("Veuillez remplir au moins votre prénom et courriel.");
       return;
     }
-    if (step === 4) {
-      onClearCart();
-    }
-    setStep((s) => s + 1);
-    window.scrollTo(0, 0);
+    setStep(3);
   };
 
-  if (cart.length === 0 && step < 4) {
-    return (
-      <div className="checkout-page">
-        <h2>Votre panier est vide</h2>
-        <button className="btn btn-primary" onClick={() => onNavigate("search")}>
-          Retourner au catalogue
+  if (step === 1) return (
+    <>
+      <Stepper current={1} />
+      <div className="checkout-section">
+        <h3><i className="bi bi-bag"></i> Récapitulatif du panier</h3>
+        {cart.length === 0
+          ? <p className="empty-cart">Votre panier est vide.</p>
+          : <>
+              <ul className="summary-list">
+                {cart.map((item) => (
+                  <li key={item.id}><span>{item.nom}</span><span>{fmt(item.prix)}</span></li>
+                ))}
+              </ul>
+              <div className="summary-total"><span>Total</span><span>{fmt(total)}</span></div>
+            </>
+        }
+      </div>
+      <div className="step-actions">
+        <button className="btn btn-outline-dark" onClick={() => onNavigate("search")}>
+          <i className="bi bi-arrow-left"></i> Continuer les achats
+        </button>
+        <button className="btn btn-primary" onClick={() => setStep(2)} disabled={cart.length === 0}>
+          Continuer <i className="bi bi-arrow-right"></i>
         </button>
       </div>
-    );
-  }
+    </>
+  );
 
-  return (
-    <div className="checkout-page">
-      <h2>Commande</h2>
-
-      {/* Stepper */}
-      <div className="stepper">
-        {steps.map((s) => (
-          <div
-            key={s.id}
-            className={`step ${step > s.id ? "done" : ""} ${step === s.id ? "active" : ""}`}
-          >
-            <div className="step-circle">{step > s.id ? "✓" : s.id}</div>
-            <div className="step-name">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Step 1 — Cart summary */}
-      {step === 1 && (
-        <div className="checkout-section">
-          <h3>🛒 Récapitulatif du panier</h3>
-          <ul className="cart-summary-list">
-            {cart.map((c) => (
-              <li key={c.id}>
-                <span>{c.nom}</span>
-                <span>{formatPrix(c.prix)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="cart-total">
-            <span>Total</span>
-            <span>{formatPrix(total)}</span>
-          </div>
-          <div className="step-actions">
-            <button className="btn btn-outline" onClick={() => onNavigate("search")}>
-              ← Continuer les achats
-            </button>
-            <button className="btn btn-primary" onClick={handleNext}>
-              Continuer →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 2 — Personal info */}
-      {step === 2 && (
-        <div className="checkout-section">
-          <h3>👤 Vos informations</h3>
-          <div className="form-row">
-            <div className="form-group">
-              <label>Prénom</label>
-              <input
-                type="text"
-                placeholder="Jean"
-                value={form.prenom}
-                onChange={(e) => setForm({ ...form, prenom: e.target.value })}
-              />
-            </div>
-            <div className="form-group">
-              <label>Nom</label>
-              <input
-                type="text"
-                placeholder="Dupont"
-                value={form.nom}
-                onChange={(e) => setForm({ ...form, nom: e.target.value })}
-              />
-            </div>
+  if (step === 2) return (
+    <>
+      <Stepper current={2} />
+      <div className="checkout-section">
+        <h3><i className="bi bi-person"></i> Vos informations</h3>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Prénom *</label>
+            <input name="prenom" type="text" value={formData.prenom} onChange={handleField} placeholder="Jean" />
           </div>
           <div className="form-group">
-            <label>Courriel</label>
-            <input
-              type="email"
-              placeholder="jean@exemple.com"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
+            <label>Nom</label>
+            <input name="nom" type="text" value={formData.nom} onChange={handleField} placeholder="Dupont" />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Courriel *</label>
+            <input name="email" type="email" value={formData.email} onChange={handleField} placeholder="jean@exemple.com" />
           </div>
           <div className="form-group">
             <label>Téléphone</label>
-            <input
-              type="tel"
-              placeholder="+1 (514) 000-0000"
-              value={form.tel}
-              onChange={(e) => setForm({ ...form, tel: e.target.value })}
-            />
+            <input name="telephone" type="tel" value={formData.telephone} onChange={handleField} placeholder="+1 (514) 000-0000" />
           </div>
+        </div>
+        <div className="form-row full">
           <div className="form-group">
             <label>Adresse</label>
-            <input
-              type="text"
-              placeholder="123 Rue du Port, Montréal, QC"
-              value={form.adresse}
-              onChange={(e) => setForm({ ...form, adresse: e.target.value })}
-            />
-          </div>
-          <div className="step-actions">
-            <button className="btn btn-outline" onClick={() => setStep((s) => s - 1)}>
-              ← Retour
-            </button>
-            <button className="btn btn-primary" onClick={handleNext}>
-              Continuer →
-            </button>
+            <input name="adresse" type="text" value={formData.adresse} onChange={handleField} placeholder="123 Rue du Port, Montréal, QC" />
           </div>
         </div>
-      )}
+      </div>
+      <div className="step-actions">
+        <button className="btn btn-outline-dark" onClick={() => setStep(1)}>
+          <i className="bi bi-arrow-left"></i> Retour
+        </button>
+        <button className="btn btn-primary" onClick={validateStep2}>
+          Continuer <i className="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </>
+  );
 
-      {/* Step 3 — Payment */}
-      {step === 3 && (
-        <>
-          <div className="checkout-section">
-            <h3>💳 Informations de paiement</h3>
-            <div className="form-group">
-              <label>Numéro de carte</label>
-              <input type="text" placeholder="•••• •••• •••• ••••" maxLength={19} />
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label>Date d'expiration</label>
-                <input type="text" placeholder="MM/AA" maxLength={5} />
-              </div>
-              <div className="form-group">
-                <label>CVV</label>
-                <input type="text" placeholder="•••" maxLength={4} />
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Nom sur la carte</label>
-              <input type="text" placeholder="Jean Dupont" />
-            </div>
-            <div className="ssl-notice">🔒 Vos informations sont protégées par chiffrement SSL 256-bit.</div>
+  if (step === 3) return (
+    <>
+      <Stepper current={3} />
+      <div className="checkout-section">
+        <h3><i className="bi bi-credit-card"></i> Informations de paiement</h3>
+        <div className="form-row full">
+          <div className="form-group">
+            <label>Numéro de carte</label>
+            <input type="text" placeholder="•••• •••• •••• ••••" maxLength={19} />
           </div>
-          <div className="checkout-section">
-            <h3>Récapitulatif</h3>
-            <ul className="cart-summary-list">
-              {cart.map((c) => (
-                <li key={c.id}>
-                  <span>{c.nom}</span>
-                  <span>{formatPrix(c.prix)}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="cart-total">
-              <span>Total à payer</span>
-              <span>{formatPrix(total)}</span>
-            </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Expiration</label>
+            <input type="text" placeholder="MM/AA" maxLength={5} />
           </div>
-          <div className="step-actions">
-            <button className="btn btn-outline" onClick={() => setStep((s) => s - 1)}>
-              ← Retour
-            </button>
-            <button className="btn btn-primary" onClick={handleNext}>
-              Confirmer la commande ✓
-            </button>
+          <div className="form-group">
+            <label>CVV</label>
+            <input type="text" placeholder="•••" maxLength={4} />
           </div>
-        </>
-      )}
+        </div>
+        <div className="form-row full">
+          <div className="form-group">
+            <label>Nom sur la carte</label>
+            <input type="text" placeholder={`${formData.prenom} ${formData.nom}`} />
+          </div>
+        </div>
+        <div className="ssl-notice">
+          <i className="bi bi-shield-lock"></i> Vos informations sont protégées par chiffrement SSL 256-bit.
+        </div>
+      </div>
+      <div className="checkout-section">
+        <h3><i className="bi bi-receipt"></i> Récapitulatif</h3>
+        <ul className="summary-list">
+          {cart.map((item) => (
+            <li key={item.id}><span>{item.nom}</span><span>{fmt(item.prix)}</span></li>
+          ))}
+        </ul>
+        <div className="summary-total"><span>Total à payer</span><span>{fmt(total)}</span></div>
+      </div>
+      <div className="step-actions">
+        <button className="btn btn-outline-dark" onClick={() => setStep(2)}>
+          <i className="bi bi-arrow-left"></i> Retour
+        </button>
+        <button className="btn btn-primary" onClick={() => setStep(4)}>
+          Confirmer la commande <i className="bi bi-check-lg"></i>
+        </button>
+      </div>
+    </>
+  );
 
-      {/* Step 4 — Confirmation */}
-      {step === 4 && (
-        <div className="confirm-box">
-          <div className="check-icon">✅</div>
-          <h3>Commande confirmée !</h3>
-          <p>
-            Merci pour votre confiance ! Votre commande <strong>#{orderNum}</strong> a bien été
-            reçue. Vous recevrez une confirmation par courriel sous peu. Un conseiller Azur Yachts
-            vous contactera dans les 48 heures.
-          </p>
+  const orderNum = `AZ${Math.floor(Math.random() * 900000 + 100000)}`;
+  return (
+    <>
+      <Stepper current={4} />
+      <div className="confirm-box">
+        <div className="confirm-icon">
+          <i className="bi bi-patch-check" style={{fontSize:"3.5rem", color:"var(--green)"}}></i>
+        </div>
+        <h3>Commande confirmée !</h3>
+        <p>
+          Félicitations ! Votre commande <strong>#{orderNum}</strong> a bien été reçue.
+          Un conseiller Azur Yachts vous contactera dans les 48 heures pour finaliser votre acquisition.
+        </p>
+        <div className="confirm-actions">
           <button className="btn btn-primary" onClick={() => onNavigate("survey")}>
-            Partagez votre avis 🎯
+            <i className="bi bi-star"></i> Évaluer votre expérience
           </button>
-          <button
-            className="btn btn-outline"
-            style={{ marginLeft: "0.75rem" }}
-            onClick={() => onNavigate("home")}
-          >
-            Retour à l'accueil
+          <button className="btn btn-outline-dark" onClick={() => onNavigate("home")}>
+            <i className="bi bi-house"></i> Retour à l'accueil
           </button>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
