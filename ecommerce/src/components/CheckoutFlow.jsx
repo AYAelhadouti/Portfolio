@@ -27,20 +27,25 @@ function Stepper({ current }) {
   );
 }
 
-export default function CheckoutFlow({ cart, onNavigate }) {
+export default function CheckoutFlow({ cart, onNavigate, onOrderComplete }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     prenom: "", nom: "", email: "", telephone: "", adresse: "",
   });
+  const [payData, setPayData] = useState({
+    carte: "", expiration: "", cvv: "", nomCarte: "",
+  });
 
   const total = cart.reduce((sum, item) => sum + item.prix * item.qty, 0);
   const handleField = (e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handlePay = (e) => setPayData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const validateStep2 = () => {
     if (!formData.prenom || !formData.email) {
       alert("Veuillez remplir au moins votre prénom et courriel.");
       return;
     }
+    setPayData({ carte: "", expiration: "", cvv: "", nomCarte: "" });
     setStep(3);
   };
 
@@ -122,24 +127,44 @@ export default function CheckoutFlow({ cart, onNavigate }) {
         <h3><i className="bi bi-credit-card"></i> Informations de paiement</h3>
         <div className="form-row full">
           <div className="form-group">
-            <label>Numéro de carte</label>
-            <input type="text" placeholder="•••• •••• •••• ••••" maxLength={19} />
+            <label>Numéro de carte *</label>
+            <input
+              name="carte" type="text" value={payData.carte} placeholder="•••• •••• •••• ••••" maxLength={19}
+              onChange={(e) => {
+                const digits = e.target.value.replace(/\D/g, "").slice(0, 16);
+                const formatted = digits.replace(/(.{4})/g, "$1 ").trim();
+                setPayData((prev) => ({ ...prev, carte: formatted }));
+              }}
+            />
           </div>
         </div>
         <div className="form-row">
           <div className="form-group">
-            <label>Expiration</label>
-            <input type="text" placeholder="MM/AA" maxLength={5} />
+            <label>Expiration *</label>
+            <input
+              name="expiration" type="text" value={payData.expiration} placeholder="MM/AA" maxLength={5}
+              onChange={(e) => {
+                const digits = e.target.value.replace(/\D/g, "").slice(0, 4);
+                const formatted = digits.length > 2 ? digits.slice(0,2) + "/" + digits.slice(2) : digits;
+                setPayData((prev) => ({ ...prev, expiration: formatted }));
+              }}
+            />
           </div>
           <div className="form-group">
-            <label>CVV</label>
-            <input type="text" placeholder="•••" maxLength={4} />
+            <label>CVV *</label>
+            <input
+              name="cvv" type="text" value={payData.cvv} placeholder="•••" maxLength={4}
+              onChange={(e) => {
+                const digits = e.target.value.replace(/\D/g, "").slice(0, 4);
+                setPayData((prev) => ({ ...prev, cvv: digits }));
+              }}
+            />
           </div>
         </div>
         <div className="form-row full">
           <div className="form-group">
-            <label>Nom sur la carte</label>
-            <input type="text" placeholder={`${formData.prenom} ${formData.nom}`} />
+            <label>Nom sur la carte *</label>
+            <input name="nomCarte" type="text" value={payData.nomCarte} onChange={handlePay} placeholder="Nom Prénom" />
           </div>
         </div>
         <div className="ssl-notice">
@@ -159,7 +184,22 @@ export default function CheckoutFlow({ cart, onNavigate }) {
         <button className="btn btn-outline-dark" onClick={() => setStep(2)}>
           <i className="bi bi-arrow-left"></i> Retour
         </button>
-        <button className="btn btn-primary" onClick={() => setStep(4)}>
+        <button className="btn btn-primary" onClick={() => {
+          if (!payData.carte || payData.carte.replace(/\s/g,"").length < 16) {
+            alert("Veuillez entrer un numéro de carte valide (16 chiffres)."); return;
+          }
+          if (!payData.expiration || !/^\d{2}\/\d{2}$/.test(payData.expiration)) {
+            alert("Veuillez entrer une date d'expiration valide (MM/AA)."); return;
+          }
+          if (!payData.cvv || payData.cvv.length < 3) {
+            alert("Veuillez entrer un CVV valide (3 ou 4 chiffres)."); return;
+          }
+          if (!payData.nomCarte.trim()) {
+            alert("Veuillez entrer le nom tel qu'il apparaît sur la carte."); return;
+          }
+          setStep(4);
+          onOrderComplete();
+        }}>
           Confirmer la commande <i className="bi bi-check-lg"></i>
         </button>
       </div>

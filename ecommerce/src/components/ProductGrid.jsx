@@ -1,7 +1,7 @@
 import { filtrerProduits } from "../utils/filtrage";
 import ProductCard from "./ProductCard";
 
-export default function ProductGrid({ produits, filtres, onAddToCart }) {
+export default function ProductGrid({ produits, filtres, onAddToCart, galleries }) {
   const resultats = filtrerProduits(produits, filtres);
 
   return (
@@ -17,7 +17,12 @@ export default function ProductGrid({ produits, filtres, onAddToCart }) {
       ) : (
         <div className="grid">
           {resultats.map((p) => (
-            <ProductCard key={p.id} produit={p} onAddToCart={onAddToCart} />
+            <ProductCard
+              key={p.id}
+              produit={p}
+              onAddToCart={onAddToCart}
+              images={galleries ? galleries[p.id] : null}
+            />
           ))}
         </div>
       )}

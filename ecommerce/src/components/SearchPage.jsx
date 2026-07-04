@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PRODUITS } from "../data/produits";
+import { GALLERIES } from "../data/galleries";
 import { CONFIG_FACETTES } from "../data/facettes";
 import FacetPanel from "./FacetPanel";
 import ProductGrid from "./ProductGrid";
@@ -45,6 +46,7 @@ export default function SearchPage({ onAddToCart }) {
           produits={PRODUITS}
           filtres={filtres}
           onAddToCart={onAddToCart}
+          galleries={GALLERIES}
         />
       </div>
     </div>

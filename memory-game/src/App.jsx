@@ -9,7 +9,6 @@ export default function App() {
   const game = useGame();
   const [introShown, setIntroShown] = useState(false);
 
-  // Show intro first, then hand off to game screens
   if (!introShown) {
     return <Intro onDone={() => setIntroShown(true)} />;
   }

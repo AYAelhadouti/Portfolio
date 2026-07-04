@@ -1,20 +1,11 @@
 import { useState, useEffect } from "react";
 import { PRODUITS } from "./data/produits";
+import { GALLERIES } from "./data/galleries";
 import Header from "./components/Header";
 import SearchPage from "./components/SearchPage";
 import CheckoutFlow from "./components/CheckoutFlow";
 import SurveyPage from "./components/SurveyPage";
 import ContactPage from "./components/ContactPage";
-
-// Image galleries per featured yacht
-const GALLERIES = {
-  1: ["./img/bo1.png","./img/bo2.png","./img/bo3.png","./img/bo4.png","./img/bo5.png"],
-  2: ["./img/win1.png","./img/win2.png","./img/win3.png","./img/win4.png","./img/win5.png"],
-  3: ["./img/ser1.png","./img/ser2.png","./img/ser3.png","./img/ser4.png","./img/ser5.png"],
-  4: ["./img/so1.png","./img/so2.png","./img/so3.png","./img/so4.png","./img/so5.png"],
-  5: ["./img/opa1.png","./img/opa2.png","./img/opa3.png","./img/opa4.png","./img/opa5.png"],
-  6: ["./img/fra1.png","./img/fra2.png","./img/fra3.png","./img/fra4.png","./img/fra5.png"],
-};
 
 function FeaturedCard({ p, onNavigate, onAddToCart }) {
   const [imgIdx, setImgIdx] = useState(0);
@@ -33,26 +24,41 @@ function FeaturedCard({ p, onNavigate, onAddToCart }) {
   return (
     <div className="feat-card">
       <div className="feat-img-wrap">
+        {/* Main image */}
         <img src={images[imgIdx]} alt={p.nom} className="feat-img" />
-        {/* Arrows */}
+
+        {/* Fancy frosted-glass arrows */}
         <button className="feat-arrow feat-arrow-left" onClick={prev} aria-label="Image précédente">
-          <i className="bi bi-chevron-left"></i>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
         </button>
         <button className="feat-arrow feat-arrow-right" onClick={next} aria-label="Image suivante">
-          <i className="bi bi-chevron-right"></i>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
         </button>
-        {/* Dots */}
-        <div className="feat-dots">
-          {images.map((_, i) => (
-            <span
+
+        {/* Image counter badge */}
+        <div className="feat-counter">
+          <span className="feat-counter-cur">{imgIdx + 1}</span>
+          <span className="feat-counter-sep">/</span>
+          <span className="feat-counter-tot">{images.length}</span>
+        </div>
+
+        {/* Thumbnail strip */}
+        <div className="feat-thumbs">
+          {images.map((src, i) => (
+            <button
               key={i}
-              className={`feat-dot${i === imgIdx ? " active" : ""}`}
+              className={`feat-thumb${i === imgIdx ? " active" : ""}`}
               onClick={(e) => { e.stopPropagation(); setImgIdx(i); }}
-            />
+              aria-label={`Image ${i + 1}`}
+            >
+              <img src={src} alt={`${p.nom} ${i + 1}`} />
+            </button>
           ))}
         </div>
-        {/* Counter */}
-        <div className="feat-counter">{imgIdx + 1} / {images.length}</div>
       </div>
       <div className="feat-card-body">
         <div className="feat-tag">{p.categorie}</div>
@@ -61,9 +67,9 @@ function FeaturedCard({ p, onNavigate, onAddToCart }) {
         <p className="feat-meta">{p.longueur} · {p.annee} · {p.condition} · {p.cabines} cabines</p>
         <div style={{display:"flex", gap:".5rem", flexWrap:"wrap"}}>
           <button className="btn btn-dark" onClick={() => onNavigate("search")}>
-            <i className="bi bi-arrow-right"></i> Voir le catalogue
+             Voir le catalogue
           </button>
-          <button className="btn btn-primary" onClick={() => onAddToCart(p)}>
+          <button className="btn btn-primary" onClick={() => onAddToCart(p, images[imgIdx])}>
             <i className="bi bi-bag-plus"></i> Ajouter au panier
           </button>
         </div>
@@ -78,8 +84,8 @@ function HomePage({ onNavigate, onAddToCart }) {
   return (
     <div className="home-page">
       <div className="promo-banner">
-        <i className="bi bi-stars"></i>&nbsp;
-        Offre estivale — 5 % de remise avant le 31 juillet · Code : AZUR2026
+        
+        Offre estivale 5 % de remise avant le 31 juillet · Code : AZUR2026
       </div>
 
       <section className="hero">
@@ -90,7 +96,7 @@ function HomePage({ onNavigate, onAddToCart }) {
         <div className="hero-content">
           <div className="eyebrow">Collection Prestige 2026</div>
           <h1>Premier choix en yachts de luxe</h1>
-          <p>Découvrez notre sélection exclusive de yachts d'exception — voiliers, motoryachts et mega-yachts. Chaque embarcation, une promesse d'élégance.</p>
+          <p>Découvrez notre sélection exclusive de yachts d'exception entre voiliers, motoryachts et mega-yachts. Chaque embarcation, une promesse d'élégance.</p>
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={() => onNavigate("search")}>
               <i className="bi bi-compass"></i> Explorer le catalogue
@@ -100,7 +106,6 @@ function HomePage({ onNavigate, onAddToCart }) {
             </button>
           </div>
         </div>
-        <div className="hero-scroll">Défiler</div>
       </section>
 
       <div className="stats-bar">
@@ -136,7 +141,7 @@ function HomePage({ onNavigate, onAddToCart }) {
         </div>
         <div className="featured-cta">
           <button className="btn btn-outline-dark" onClick={() => onNavigate("search")}>
-            Voir tout le catalogue <i className="bi bi-arrow-right"></i>
+            Voir tout le catalogue 
           </button>
         </div>
       </section>
@@ -182,7 +187,7 @@ function CartSidebar({ cart, onClose, onRemove, onCheckout }) {
               <div className="cart-items">
                 {cart.map((item) => (
                   <div key={item.id} className="cart-item">
-                    <img src={item.image} alt={item.nom} />
+                    <img src={item.cartImage || item.image} alt={item.nom} />
                     <div className="cart-item-info">
                       <h4>{item.nom}</h4>
                       <p className="cart-item-price">{fmt(item.prix)}</p>
@@ -196,7 +201,7 @@ function CartSidebar({ cart, onClose, onRemove, onCheckout }) {
               <div className="cart-footer">
                 <div className="cart-total-bar"><span>Total estimé</span><span>{fmt(total)}</span></div>
                 <button className="btn btn-primary cart-checkout-btn" onClick={onCheckout}>
-                  Procéder au paiement <i className="bi bi-arrow-right"></i>
+                  Procéder au paiement
                 </button>
               </div>
             </>
@@ -225,11 +230,11 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
-  const addToCart = (produit) => {
+  const addToCart = (produit, currentImage) => {
     setCart((prev) => {
       const existing = prev.find((c) => c.id === produit.id);
       if (existing) return prev.map((c) => c.id === produit.id ? { ...c, qty: c.qty + 1 } : c);
-      return [...prev, { ...produit, qty: 1 }];
+      return [...prev, { ...produit, qty: 1, cartImage: currentImage || produit.image }];
     });
     setCartOpen(true);
   };
@@ -256,15 +261,16 @@ export default function App() {
         <div className="checkout-page">
           <h2>Finaliser votre commande</h2>
           <p>Veuillez vérifier votre sélection et compléter vos informations.</p>
-          <CheckoutFlow cart={cart} onNavigate={navigate} />
+          <CheckoutFlow cart={cart} onNavigate={navigate} onOrderComplete={() => setCart([])} />
         </div>
       )}
       {page === "survey"  && <SurveyPage onNavigate={navigate} />}
       {page === "contact" && <ContactPage onNavigate={navigate} />}
 
+      <div className="footer-separator" />
       <footer className="footer">
         <div className="footer-brand">
-          <img src="./img/logo.png" alt="Azur Yachts" style={{height:"28px", width:"auto", opacity:.85}} />
+          <img src="./img/logo.png" alt="Azur Yachts" style={{height:"58px", width:"auto", opacity:.85}} />
           Azur Yachts
         </div>
         <div className="footer-links">
@@ -272,7 +278,7 @@ export default function App() {
           <a href="#" onClick={(e) => { e.preventDefault(); navigate("search"); }}>Catalogue</a>
           <a href="#" onClick={(e) => { e.preventDefault(); navigate("contact"); }}>Nous Contacter</a>
         </div>
-        <span>© 2026 Azur Yachts — SEG3525</span>
+        <span>© 2026 Azur Yachts<br />Aya El Hadouti SEG 3525</span>
       </footer>
     </>
   );

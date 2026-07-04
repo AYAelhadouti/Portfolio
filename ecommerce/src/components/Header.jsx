@@ -2,7 +2,7 @@ export default function Header({ page, onNavigate, cartCount, scrolled }) {
   return (
     <nav className={`header${scrolled ? " scrolled" : ""}`}>
       <div className="header-brand" onClick={() => onNavigate("home")}>
-        <img src="./img/logo.png" alt="Azur Yachts" style={{height:"36px", width:"auto"}} />
+        <img src="./img/logo.png" alt="Azur Yachts" style={{height:"58px", width:"auto"}} />
         AZUR <span>YACHTS</span>
       </div>
 

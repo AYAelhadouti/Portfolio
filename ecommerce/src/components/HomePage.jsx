@@ -12,7 +12,7 @@ export default function HomePage({ onNavigate, onAddToCart }) {
     <div className="home-page">
       {/* Promo banner */}
       <div className="promo-banner">
-        🌊 Offre estivale — 5 % de remise sur toute réservation avant le 31 juillet ! Code{" "}
+        🌊 Offre estivale 5 % de remise sur toute réservation avant le 31 juillet ! Code{" "}
         <strong>AZUR2026</strong>
       </div>
 

@@ -37,7 +37,7 @@ export default function SurveyPage({ onNavigate }) {
           <h3>Merci pour votre retour !</h3>
           <p>Votre avis a bien été enregistré. Chaque commentaire nous aide à améliorer l'expérience Azur Yachts. À très bientôt en mer !</p>
           <button className="btn btn-dark" onClick={() => onNavigate("home")}>
-            <i className="bi bi-house"></i> Retour à l'accueil
+             Retour à l'accueil
           </button>
         </div>
       </div>

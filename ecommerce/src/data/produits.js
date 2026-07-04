@@ -1,4 +1,4 @@
-// src/data/produits.js  — Tutorial Bloc 3 (Slide 7)
+// src/data/produits.js
 
 export const PRODUITS = [
   {
@@ -13,7 +13,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 2,
     prix: 185000,
-    image: "./img/yacht1.png",
+    image: "./img/bo1.png",
     description: "Voilier élégant, grand confort cabine, idéal pour la croisière côtière.",
   },
   {
@@ -28,7 +28,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 3,
     prix: 490000,
-    image: "./img/yacht2.png",
+    image: "./img/win1.png",
     description: "Flybridge spacieux, salon panoramique, propulsion twin diesel.",
   },
   {
@@ -43,7 +43,7 @@ export const PRODUITS = [
     couleur: "Bleu",
     cabines: 4,
     prix: 310000,
-    image: "./img/yacht3.png",
+    image: "./img/ser1.png",
     description: "Performances hauturières, voilure fractionnée, très marin.",
   },
   {
@@ -58,7 +58,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 2,
     prix: 380000,
-    image: "./img/yacht4.png",
+    image: "./img/so1.png",
     description: "Open sport luxe, twin V8 Mercruiser, finitions premium.",
   },
   {
@@ -73,7 +73,7 @@ export const PRODUITS = [
     couleur: "Gris",
     cabines: 2,
     prix: 275000,
-    image: "./img/yacht1.png",
+    image: "./img/opa1.png",
     description: "Cruiser-coupé design italien, vaste cockpit.",
   },
   {
@@ -88,7 +88,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 4,
     prix: 520000,
-    image: "./img/yacht2.png",
+    image: "./img/fra1.png",
     description: "Multicoque de prestige, stabilité exceptionnelle, deux coques vives.",
   },
   {
@@ -103,7 +103,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 3,
     prix: 195000,
-    image: "./img/yacht3.png",
+    image: "./img/dec1.png",
     description: "Voilier familial robuste, volume habitable généreux, bien équipé.",
   },
   {
@@ -118,7 +118,7 @@ export const PRODUITS = [
     couleur: "Noir",
     cabines: 4,
     prix: 1850000,
-    image: "./img/yacht4.png",
+    image: "./img/hac1.png",
     description: "Superbe mega-yacht, intérieur bois teck, twin diesel 1400 ch.",
   },
   {
@@ -133,7 +133,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 5,
     prix: 3900000,
-    image: "./img/yacht1.png",
+    image: "./img/whe1.png",
     description: "Ultra-luxe signé Lexus, design yacht/automobile, silence absolu.",
   },
   {
@@ -148,7 +148,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 4,
     prix: 695000,
-    image: "./img/yacht2.png",
+    image: "./img/nad1.png",
     description: "Catamaran à voile haute-performance, pont bain de soleil XXL.",
   },
   {
@@ -163,7 +163,7 @@ export const PRODUITS = [
     couleur: "Bleu",
     cabines: 3,
     prix: 345000,
-    image: "./img/yacht3.png",
+    image: "./img/pla1.png",
     description: "Voilier hauturier suédois légendaire, traversée océanique idéale.",
   },
   {
@@ -178,7 +178,7 @@ export const PRODUITS = [
     couleur: "Blanc",
     cabines: 4,
     prix: 825000,
-    image: "./img/yacht4.png",
+    image: "./img/ben1.png",
     description: "Flybridge panoramique, cuisine full-équipée, jacuzzi de pont.",
   },
 ];
